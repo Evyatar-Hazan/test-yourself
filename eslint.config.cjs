@@ -4,6 +4,7 @@ const reactPlugin = require('eslint-plugin-react');
 const reactHooksPlugin = require('eslint-plugin-react-hooks');
 const jsxA11y = require('eslint-plugin-jsx-a11y');
 const importPlugin = require('eslint-plugin-import');
+const prettierPlugin = require('eslint-plugin-prettier');
 
 module.exports = [
   {
@@ -11,7 +12,7 @@ module.exports = [
       'node_modules',
       'dist',
       'build',
-      'eslint.config.cjs', // 👈 להתעלם מקובץ הקונפיג עצמו
+      'eslint.config.cjs',
     ],
   },
   js.configs.recommended,
@@ -22,6 +23,7 @@ module.exports = [
       'react-hooks': reactHooksPlugin,
       'jsx-a11y': jsxA11y,
       import: importPlugin,
+      prettier: prettierPlugin,
     },
     languageOptions: {
       parser: tseslint.parser,
@@ -45,6 +47,7 @@ module.exports = [
           alphabetize: { order: 'asc', caseInsensitive: true },
         },
       ],
+    'prettier/prettier': ['error'],
     },
   },
 ];
