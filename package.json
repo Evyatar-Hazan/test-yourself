@@ -23,13 +23,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "prepare": "husky install"
   },
   "browserslist": {
     "production": [
@@ -53,7 +48,17 @@
     "eslint-plugin-prettier": "^5.5.4",
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^5.2.0",
+    "husky": "^8.0.0",
+    "lint-staged": "^16.1.5",
     "prettier": "^3.6.2",
     "typescript-eslint": "^8.41.0"
-  }
+  },
+  "lint-staged": {
+  "*.{js,jsx,ts,tsx}": [
+    "yarn lint --fix",
+    "eslint . --ext .js,.jsx,.ts,.tsx --max-warnings=0",
+    "git add"
+  ]
+}
+
 }
