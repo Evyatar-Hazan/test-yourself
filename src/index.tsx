@@ -1,10 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import "./index.css";
+import { Provider } from "react-redux";
 import App from "./App";
 import { LanguageProvider } from "./hooks/useLanguage";
 import reportWebVitals from "./reportWebVitals";
+import { store } from "./store";
 import { AppThemeProvider } from "./theme/ThemeProvider";
+import "./index.css";
 // TODO: Ensure i18n is initialized before rendering for consistent first paint localization
 import "./i18n";
 
@@ -15,7 +17,9 @@ root.render(
   <React.StrictMode>
     <LanguageProvider>
       <AppThemeProvider>
-        <App />
+        <Provider store={store}>
+          <App />
+        </Provider>
       </AppThemeProvider>
     </LanguageProvider>
   </React.StrictMode>,

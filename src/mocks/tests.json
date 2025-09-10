@@ -1,0 +1,18 @@
+[
+  {
+    "id": "t1",
+    "ownerId": "u1",
+    "subject": "Math",
+    "score": 95,
+    "takenAt": "2024-02-01T12:00:00.000Z"
+  },
+  {
+    "id": "t2",
+    "ownerId": "u2",
+    "subject": "Physics",
+    "score": 87,
+    "takenAt": "2024-02-05T09:15:00.000Z"
+  }
+]
+
+

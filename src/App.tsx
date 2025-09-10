@@ -3,6 +3,7 @@ import "./App.css";
 // TODO: Prefer typed hook to avoid free-form keys
 import { useTranslationTyped } from "./hooks/useTranslationTyped";
 import logo from "./logo.svg";
+import Home from "./screens/Home/Home";
 
 function App() {
   const { t, i18n } = useTranslationTyped();
@@ -29,6 +30,9 @@ function App() {
           </button>
         </div>
       </header>
+      <main style={{ maxWidth: 960, margin: "0 auto", textAlign: "left" }}>
+        <Home />
+      </main>
     </div>
   );
 }

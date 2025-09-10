@@ -1,12 +1,18 @@
 // TODO: Ensure i18n loads and fallback works
 import { render, screen } from "@testing-library/react";
+import { Provider } from "react-redux";
 import App from "../App";
-import "../i18n";
 import i18n from "../i18n";
+import { store } from "../store";
+import "../i18n";
 
 describe("i18n", () => {
   it("renders welcome text in default (en)", () => {
-    render(<App />);
+    render(
+      <Provider store={store}>
+        <App />
+      </Provider>,
+    );
     expect(screen.getByText(/Welcome/i)).toBeInTheDocument();
   });
 

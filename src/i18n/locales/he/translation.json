@@ -2,7 +2,13 @@
   "welcome": "ברוך הבא",
   "app_title": "בחן את עצמך",
   "change_language": "החלפת שפה",
-  "home_greeting": "שלום עולם!"
+  "home_greeting": "שלום עולם!",
+  "home_title": "בית",
+  "home_loading": "(טוען...)",
+  "home_users_title": "משתמשים",
+  "home_posts_title": "פוסטים",
+  "home_tests_title": "מבחנים",
+  "home_comments_title": "תגובות"
 }
 
 

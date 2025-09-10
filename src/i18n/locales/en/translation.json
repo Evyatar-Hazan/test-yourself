@@ -2,7 +2,13 @@
   "welcome": "Welcome",
   "app_title": "Test Yourself",
   "change_language": "Change language",
-  "home_greeting": "Hello, world!"
+  "home_greeting": "Hello, world!",
+  "home_title": "Home",
+  "home_loading": "(loading...)",
+  "home_users_title": "Users",
+  "home_posts_title": "Posts",
+  "home_tests_title": "Tests",
+  "home_comments_title": "Comments"
 }
 
 
