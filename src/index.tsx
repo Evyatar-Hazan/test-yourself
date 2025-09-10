@@ -2,14 +2,19 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
+import { LanguageProvider } from "./hooks/useLanguage";
 import reportWebVitals from "./reportWebVitals";
+// TODO: Ensure i18n is initialized before rendering for consistent first paint localization
+import "./i18n";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement,
 );
 root.render(
   <React.StrictMode>
-    <App />
+    <LanguageProvider>
+      <App />
+    </LanguageProvider>
   </React.StrictMode>,
 );
 
