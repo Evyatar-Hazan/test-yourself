@@ -4,6 +4,7 @@ import "./index.css";
 import App from "./App";
 import { LanguageProvider } from "./hooks/useLanguage";
 import reportWebVitals from "./reportWebVitals";
+import { AppThemeProvider } from "./theme/ThemeProvider";
 // TODO: Ensure i18n is initialized before rendering for consistent first paint localization
 import "./i18n";
 
@@ -13,7 +14,9 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <LanguageProvider>
-      <App />
+      <AppThemeProvider>
+        <App />
+      </AppThemeProvider>
     </LanguageProvider>
   </React.StrictMode>,
 );

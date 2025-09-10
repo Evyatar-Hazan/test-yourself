@@ -1,4 +1,8 @@
+// For more info, see https://github.com/storybookjs/eslint-plugin-storybook#configuration-flat-config-format
+
+
 const js = require('@eslint/js');
+const storybook = require('eslint-plugin-storybook');
 const tseslint = require('typescript-eslint');
 const reactPlugin = require('eslint-plugin-react');
 const reactHooksPlugin = require('eslint-plugin-react-hooks');
@@ -18,6 +22,7 @@ module.exports = [
   },
   js.configs.recommended,
   ...tseslint.configs.recommended,
+  ...storybook.configs['flat/recommended'],
   {
     plugins: {
       react: reactPlugin,
@@ -26,6 +31,7 @@ module.exports = [
       import: importPlugin,
       prettier: prettierPlugin,
       i18next: i18nextPlugin,
+      storybook,
     },
     languageOptions: {
       parser: tseslint.parser,
@@ -59,6 +65,17 @@ module.exports = [
           ignoreAttributes: ['data-testid', 'to', 'href'],
         },
       ],
+    },
+  },
+  {
+    files: [
+      '.storybook/**/*.{js,jsx,ts,tsx}',
+      'src/**/*.stories.{js,jsx,ts,tsx}',
+      'src/stories/**/*.{js,jsx,ts,tsx}',
+    ],
+    rules: {
+      // Stories and SB config can contain literal strings for docs and demos
+      'i18next/no-literal-string': 'off',
     },
   },
 ];
