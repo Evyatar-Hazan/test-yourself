@@ -8,7 +8,13 @@
   "home_users_title": "Users",
   "home_posts_title": "Posts",
   "home_tests_title": "Tests",
-  "home_comments_title": "Comments"
+  "home_comments_title": "Comments",
+  "feed": "Feed",
+      "createTest": "Create Test",
+      "profile": "Profile",
+      "settings": "Settings",
+      "notifications": "Notifications",
+      "testDetail": "Test Detail"
 }
 
 
