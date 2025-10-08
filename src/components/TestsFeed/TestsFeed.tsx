@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { FeedGrid, TestCard } from "./TestsFeed.styles";
 import { fetchTests } from "../../features/tests/testsSlice";
 import usersData from "../../mocks/users.json";
@@ -15,14 +16,6 @@ const TestsFeed: React.FC = () => {
   );
   const loader = useRef<HTMLDivElement | null>(null);
 
-  // טעינה ראשונית
-  useEffect(() => {
-    if (tests.length === 0) {
-      dispatch(fetchTests({ page: 1 }));
-    }
-  }, [dispatch, tests.length]);
-
-  // טעינה אינסופית בגלילה
   useEffect(() => {
     if (!loader.current) return;
     const option = {
@@ -42,13 +35,19 @@ const TestsFeed: React.FC = () => {
     };
   }, [dispatch, hasMore, loading, page]);
 
+  const navigate = useNavigate();
+
   return (
     <>
       <FeedGrid>
         {tests.map((test) => {
           const user = usersData.find((u) => u.id === test.ownerId);
           return (
-            <TestCard key={test.id}>
+            <TestCard
+              key={test.id}
+              style={{ cursor: "pointer" }}
+              onClick={() => navigate(`/test/${test.id}`)}
+            >
               <div
                 style={{
                   display: "flex",

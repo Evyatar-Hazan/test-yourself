@@ -9,6 +9,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 // import BottomTabs from "../components/BottomTabs/BottomTabs";
 // import Drawer from "../components/Drawer/Drawer";
 import Header from "../components/Header/Header";
+import TestScreen from "../screens/Exam/TestScreen";
 import Home from "../screens/Home/Home";
 
 const Navigation: React.FC = () => {
@@ -30,12 +31,15 @@ const Navigation: React.FC = () => {
                 </>
               }
             />
-            {/* <Route path="/" element={<><Header title="Feed" /><Feed /><BottomTabs /></>} />
-            <Route path="/create" element={<><Header title="Create Test" /><CreateTest /><BottomTabs /></>} />
-            <Route path="/profile" element={<><Header title="Profile" /><Profile /><BottomTabs /></>} />
-            <Route path="/settings" element={<><Header title="Settings" /><SettingsPage /></>} />
-            <Route path="/notifications" element={<><Header title="Notifications" /><Notifications /></>} />
-            <Route path="/test/:id" element={<><Header title="Test Detail" showBack /><TestDetail /></>} /> */}
+            <Route
+              path="/test/:testId"
+              element={
+                <>
+                  <Header title="מבחן" showBack />
+                  <TestScreen />
+                </>
+              }
+            />
           </Routes>
         </div>
       </div>
