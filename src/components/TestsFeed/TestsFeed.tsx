@@ -58,7 +58,8 @@ const TestsFeed: React.FC = () => {
               >
                 {user && (
                   <img
-                    src={process.env.PUBLIC_URL + "/mocks/" + user.avatarUrl}
+                    // eslint-disable-next-line @typescript-eslint/no-require-imports
+                    src={require("../../mocks/" + user.avatarUrl)}
                     alt={user.name}
                     style={{
                       width: 32,
