@@ -21,6 +21,8 @@
   "tests_average_score": "ציון ממוצע",
   "home_no_more_tests": "אין עוד מבחנים",
   "score": "ציון",
+  "average_correct": "ממוצע פותרים נכונה",
+  "unknown_user": "יוצר לא ידוע",
   "test_taken_at": "נבחן בתאריך: {{date}}"
 }
 

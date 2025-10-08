@@ -15,12 +15,13 @@
       "settings": "Settings",
       "notifications": "Notifications",
       "testDetail": "Test Detail",
-
-  "tests_questions": "שאלות",
-  "tests_respondents": "משתתפים",
-  "tests_average_score": "ציון ממוצע",
+  "tests_questions": "Questions",
+  "tests_respondents": "Participants",
+  "tests_average_score": "Average score",
   "home_no_more_tests": "No more tests",
-  "score": "Score"
+  "score": "Score",
+  "average_correct": "Average Solvers Correct",
+  "unknown_user": "Unknown Creator"
 }
 
 

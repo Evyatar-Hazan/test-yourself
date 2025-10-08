@@ -7,7 +7,8 @@
     "takenAt": "2024-02-01T12:00:00.000Z",
     "questionsCount": 10,
     "respondentsCount": 15,
-    "averageScore": 88.4
+  "averageScore": 88.4,
+  "averageCorrect": 7.5
   },
   {
     "id": "t2",
@@ -17,7 +18,8 @@
     "takenAt": "2024-02-05T09:15:00.000Z",
     "questionsCount": 8,
     "respondentsCount": 20,
-    "averageScore": 82.5
+  "averageScore": 82.5,
+  "averageCorrect": 6.2
   },
   {
     "id": "t3",
@@ -27,7 +29,8 @@
     "takenAt": "2024-03-10T11:30:00.000Z",
     "questionsCount": 12,
     "respondentsCount": 18,
-    "averageScore": 85.7
+  "averageScore": 85.7,
+  "averageCorrect": 8.1
   },
   {
     "id": "t4",
@@ -37,7 +40,8 @@
     "takenAt": "2024-03-15T10:00:00.000Z",
     "questionsCount": 15,
     "respondentsCount": 25,
-    "averageScore": 79.3
+  "averageScore": 79.3,
+  "averageCorrect": 9.2
   },
   {
     "id": "t5",
@@ -47,7 +51,8 @@
     "takenAt": "2024-04-01T14:45:00.000Z",
     "questionsCount": 9,
     "respondentsCount": 12,
-    "averageScore": 84.1
+  "averageScore": 84.1,
+  "averageCorrect": 7.8
   },
   {
     "id": "t6",
@@ -57,7 +62,8 @@
     "takenAt": "2024-04-05T09:00:00.000Z",
     "questionsCount": 11,
     "respondentsCount": 19,
-    "averageScore": 87.3
+  "averageScore": 87.3,
+  "averageCorrect": 8.9
   },
   {
     "id": "t7",
@@ -67,7 +73,8 @@
     "takenAt": "2024-04-10T08:30:00.000Z",
     "questionsCount": 10,
     "respondentsCount": 14,
-    "averageScore": 81.6
+  "averageScore": 81.6,
+  "averageCorrect": 6.7
   },
   {
     "id": "t8",
@@ -77,6 +84,359 @@
     "takenAt": "2024-04-12T13:20:00.000Z",
     "questionsCount": 12,
     "respondentsCount": 22,
-    "averageScore": 92.5
+  "averageScore": 92.5,
+  "averageCorrect": 10.2
+  },
+  {
+    "id": "t9",
+    "ownerId": "u1",
+    "subject": "Art",
+    "score": 90,
+    "takenAt": "2024-04-15T10:00:00.000Z",
+    "questionsCount": 8,
+    "respondentsCount": 10,
+  "averageScore": 85.0,
+  "averageCorrect": 7.1
+  },
+  {
+    "id": "t10",
+    "ownerId": "u2",
+    "subject": "Music",
+    "score": 93,
+    "takenAt": "2024-04-18T09:00:00.000Z",
+    "questionsCount": 7,
+    "respondentsCount": 13,
+  "averageScore": 89.2,
+  "averageCorrect": 6.5
+  },
+  {
+    "id": "t11",
+    "ownerId": "u3",
+    "subject": "Philosophy",
+    "score": 88,
+    "takenAt": "2024-04-20T11:30:00.000Z",
+    "questionsCount": 9,
+    "respondentsCount": 15,
+  "averageScore": 84.7,
+  "averageCorrect": 7.9
+  },
+  {
+    "id": "t12",
+    "ownerId": "u4",
+    "subject": "Economics",
+    "score": 85,
+    "takenAt": "2024-04-22T14:45:00.000Z",
+    "questionsCount": 10,
+    "respondentsCount": 18,
+  "averageScore": 80.1,
+  "averageCorrect": 8.3
+  },
+  {
+    "id": "t13",
+    "ownerId": "u1",
+    "subject": "Law",
+    "score": 91,
+    "takenAt": "2024-04-25T12:00:00.000Z",
+    "questionsCount": 11,
+    "respondentsCount": 16,
+  "averageScore": 87.4,
+  "averageCorrect": 9.0
+  },
+  {
+    "id": "t14",
+    "ownerId": "u2",
+    "subject": "Medicine",
+    "score": 94,
+    "takenAt": "2024-04-28T09:15:00.000Z",
+    "questionsCount": 12,
+    "respondentsCount": 20,
+  "averageScore": 90.5,
+  "averageCorrect": 10.1
+  },
+  {
+    "id": "t15",
+    "ownerId": "u3",
+    "subject": "Engineering",
+    "score": 89,
+    "takenAt": "2024-05-01T11:30:00.000Z",
+    "questionsCount": 13,
+    "respondentsCount": 17,
+  "averageScore": 85.9,
+  "averageCorrect": 8.7
+  },
+  {
+    "id": "t16",
+    "ownerId": "u4",
+    "subject": "Architecture",
+    "score": 86,
+    "takenAt": "2024-05-04T10:00:00.000Z",
+    "questionsCount": 14,
+    "respondentsCount": 19,
+  "averageScore": 82.3,
+  "averageCorrect": 7.4
+  },
+  {
+    "id": "t17",
+    "ownerId": "u1",
+    "subject": "Astronomy",
+    "score": 92,
+    "takenAt": "2024-05-07T14:45:00.000Z",
+    "questionsCount": 15,
+    "respondentsCount": 21,
+  "averageScore": 88.1,
+  "averageCorrect": 9.5
+  },
+  {
+    "id": "t18",
+    "ownerId": "u2",
+    "subject": "Statistics",
+    "score": 90,
+    "takenAt": "2024-05-10T09:00:00.000Z",
+    "questionsCount": 16,
+    "respondentsCount": 23,
+  "averageScore": 86.7,
+  "averageCorrect": 8.2
+  },
+  {
+    "id": "t19",
+    "ownerId": "u3",
+    "subject": "Psychology",
+    "score": 87,
+    "takenAt": "2024-05-13T08:30:00.000Z",
+    "questionsCount": 17,
+    "respondentsCount": 25,
+  "averageScore": 83.6,
+  "averageCorrect": 7.6
+  },
+  {
+    "id": "t20",
+    "ownerId": "u4",
+    "subject": "Sociology",
+    "score": 93,
+    "takenAt": "2024-05-16T13:20:00.000Z",
+    "questionsCount": 18,
+    "respondentsCount": 27,
+  "averageScore": 89.5,
+  "averageCorrect": 9.8
+  },
+  {
+    "id": "t21",
+    "ownerId": "u1",
+    "subject": "Political Science",
+    "score": 88,
+    "takenAt": "2024-05-19T12:00:00.000Z",
+    "questionsCount": 19,
+    "respondentsCount": 29,
+  "averageScore": 84.4,
+  "averageCorrect": 8.4
+  },
+  {
+    "id": "t22",
+    "ownerId": "u2",
+    "subject": "Anthropology",
+    "score": 91,
+    "takenAt": "2024-05-22T09:15:00.000Z",
+    "questionsCount": 20,
+    "respondentsCount": 31,
+  "averageScore": 87.5,
+  "averageCorrect": 9.1
+  },
+  {
+    "id": "t23",
+    "ownerId": "u3",
+    "subject": "Linguistics",
+    "score": 85,
+    "takenAt": "2024-05-25T11:30:00.000Z",
+    "questionsCount": 21,
+    "respondentsCount": 33,
+  "averageScore": 81.7,
+  "averageCorrect": 7.3
+  },
+  {
+    "id": "t24",
+    "ownerId": "u4",
+    "subject": "Literature",
+    "score": 97,
+    "takenAt": "2024-05-28T10:00:00.000Z",
+    "questionsCount": 22,
+    "respondentsCount": 35,
+  "averageScore": 93.2,
+  "averageCorrect": 10.5
+  },
+  {
+    "id": "t25",
+    "ownerId": "u1",
+    "subject": "Theater",
+    "score": 89,
+    "takenAt": "2024-06-01T14:45:00.000Z",
+    "questionsCount": 23,
+    "respondentsCount": 37,
+  "averageScore": 85.9,
+  "averageCorrect": 8.6
+  },
+  {
+    "id": "t26",
+    "ownerId": "u2",
+    "subject": "Film",
+    "score": 92,
+    "takenAt": "2024-06-04T09:00:00.000Z",
+    "questionsCount": 24,
+    "respondentsCount": 39,
+  "averageScore": 88.3,
+  "averageCorrect": 9.3
+  },
+  {
+    "id": "t27",
+    "ownerId": "u3",
+    "subject": "Dance",
+    "score": 86,
+    "takenAt": "2024-06-07T08:30:00.000Z",
+    "questionsCount": 25,
+    "respondentsCount": 41,
+  "averageScore": 82.6,
+  "averageCorrect": 7.2
+  },
+  {
+    "id": "t28",
+    "ownerId": "u4",
+    "subject": "Design",
+    "score": 95,
+    "takenAt": "2024-06-10T13:20:00.000Z",
+    "questionsCount": 26,
+    "respondentsCount": 43,
+  "averageScore": 91.5,
+  "averageCorrect": 10.0
+  },
+  {
+    "id": "t29",
+    "ownerId": "u1",
+    "subject": "Education",
+    "score": 90,
+    "takenAt": "2024-06-13T12:00:00.000Z",
+    "questionsCount": 27,
+    "respondentsCount": 45,
+  "averageScore": 86.4,
+  "averageCorrect": 8.8
+  },
+  {
+    "id": "t30",
+    "ownerId": "u2",
+    "subject": "Geology",
+    "score": 93,
+    "takenAt": "2024-06-16T09:15:00.000Z",
+    "questionsCount": 28,
+    "respondentsCount": 47,
+  "averageScore": 89.5,
+  "averageCorrect": 9.7
+  },
+  {
+    "id": "t31",
+    "ownerId": "u3",
+    "subject": "Oceanography",
+    "score": 88,
+    "takenAt": "2024-06-19T11:30:00.000Z",
+    "questionsCount": 29,
+    "respondentsCount": 49,
+  "averageScore": 84.7,
+  "averageCorrect": 8.5
+  },
+  {
+    "id": "t32",
+    "ownerId": "u4",
+    "subject": "Meteorology",
+    "score": 85,
+    "takenAt": "2024-06-22T14:45:00.000Z",
+    "questionsCount": 30,
+    "respondentsCount": 51,
+  "averageScore": 80.1,
+  "averageCorrect": 7.0
+  },
+  {
+    "id": "t33",
+    "ownerId": "u1",
+    "subject": "Ecology",
+    "score": 91,
+    "takenAt": "2024-06-25T12:00:00.000Z",
+    "questionsCount": 31,
+    "respondentsCount": 53,
+  "averageScore": 87.4,
+  "averageCorrect": 9.2
+  },
+  {
+    "id": "t34",
+    "ownerId": "u2",
+    "subject": "Botany",
+    "score": 94,
+    "takenAt": "2024-06-28T09:15:00.000Z",
+    "questionsCount": 32,
+    "respondentsCount": 55,
+  "averageScore": 90.5,
+  "averageCorrect": 10.3
+  },
+  {
+    "id": "t35",
+    "ownerId": "u3",
+    "subject": "Zoology",
+    "score": 89,
+    "takenAt": "2024-07-01T11:30:00.000Z",
+    "questionsCount": 33,
+    "respondentsCount": 57,
+  "averageScore": 85.9,
+  "averageCorrect": 8.9
+  },
+  {
+    "id": "t36",
+    "ownerId": "u4",
+    "subject": "Microbiology",
+    "score": 86,
+    "takenAt": "2024-07-04T10:00:00.000Z",
+    "questionsCount": 34,
+    "respondentsCount": 59,
+  "averageScore": 82.3,
+  "averageCorrect": 7.7
+  },
+  {
+    "id": "t37",
+    "ownerId": "u1",
+    "subject": "Genetics",
+    "score": 92,
+    "takenAt": "2024-07-07T14:45:00.000Z",
+    "questionsCount": 35,
+    "respondentsCount": 61,
+  "averageScore": 88.1,
+  "averageCorrect": 9.4
+  },
+  {
+    "id": "t38",
+    "ownerId": "u2",
+    "subject": "Immunology",
+    "score": 90,
+    "takenAt": "2024-07-10T09:00:00.000Z",
+    "questionsCount": 36,
+    "respondentsCount": 63,
+  "averageScore": 86.7,
+  "averageCorrect": 8.1
+  },
+  {
+    "id": "t39",
+    "ownerId": "u3",
+    "subject": "Virology",
+    "score": 87,
+    "takenAt": "2024-07-13T08:30:00.000Z",
+    "questionsCount": 37,
+    "respondentsCount": 65,
+  "averageScore": 83.6,
+  "averageCorrect": 7.8
+  },
+  {
+    "id": "t40",
+    "ownerId": "u4",
+    "subject": "Pathology",
+    "score": 93,
+    "takenAt": "2024-07-16T13:20:00.000Z",
+    "questionsCount": 38,
+    "respondentsCount": 67,
+  "averageScore": 89.5,
+  "averageCorrect": 9.6
   }
 ]

@@ -10,6 +10,7 @@ export interface Test {
   questionsCount: number;
   respondentsCount: number;
   averageScore: number;
+  averageCorrect: number;
 }
 
 interface TestsState {
