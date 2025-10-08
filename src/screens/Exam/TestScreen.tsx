@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
+import { useTranslationTyped } from "../../hooks/useTranslationTyped";
 import tests from "../../mocks/tests.json";
 import { updateTestStatistics } from "../../utils/testStatistics";
 
@@ -24,6 +25,7 @@ interface TestResult {
 
 const TestScreen: React.FC = () => {
   const { testId } = useParams<{ testId: string }>();
+  const t = useTranslationTyped();
   const test: TestType | undefined = Array.isArray(tests)
     ? (tests as TestType[]).find((t) => t.id === testId)
     : undefined;
@@ -31,24 +33,6 @@ const TestScreen: React.FC = () => {
   const [userAnswers, setUserAnswers] = useState<Record<number, number>>({});
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [result, setResult] = useState<TestResult | null>(null);
-
-  // i18n (פשוט):
-  const notFoundText = "Test not found";
-  const questionsTitle = "Questions";
-  const submitButtonText = "שלח מבחן";
-  const resultTitle = "תוצאות המבחן";
-  const yourScoreText = "הציון שלך";
-  const correctAnswersText = "ענית נכון על";
-  const outOfText = "מתוך";
-  const questionsText = "שאלות";
-  const successRateText = "אחוז הצלחה";
-  const reviewAnswersText = "סקירת התשובות";
-  const correctAnswerText = "התשובה הנכונה";
-  const yourAnswerText = "התשובה שלך";
-  const notAnsweredText = "לא נענתה";
-  const correctText = "✓ נכון";
-  const wrongText = "✗ שגוי";
-  const answerAllQuestionsText = "אנא ענה על כל השאלות לפני שליחת המבחן";
 
   const handleAnswerChange = (
     questionIndex: number,
@@ -98,14 +82,14 @@ const TestScreen: React.FC = () => {
   const canSubmit = Object.keys(userAnswers).length === test?.questions.length;
 
   if (!test) {
-    return <div>{notFoundText}</div>;
+    return <div>{t.t("exam.not_found")}</div>;
   }
 
   if (isSubmitted && result) {
     return (
       <div style={{ maxWidth: 600, margin: "0 auto", padding: 24 }}>
         <h1>{test.subject}</h1>
-        <h2>{resultTitle}</h2>
+        <h2>{t.t("exam.test_results")}</h2>
         <div
           style={{
             padding: 20,
@@ -116,18 +100,18 @@ const TestScreen: React.FC = () => {
           }}
         >
           <h3>
-            {yourScoreText}: {result.score}/100
+            {t.t("exam.your_score")}: {result.score}/100
           </h3>
           <p>
-            {correctAnswersText} {result.correctAnswers} {outOfText}{" "}
-            {result.totalQuestions} {questionsText}
+            {t.t("exam.answered_correctly")} {result.correctAnswers}{" "}
+            {t.t("exam.out_of")} {result.totalQuestions} {t.t("exam.questions")}
           </p>
           <p>
-            {successRateText}: {result.percentage}%
+            {t.t("exam.success_rate")}: {result.percentage}%
           </p>
         </div>
 
-        <h3>{reviewAnswersText}:</h3>
+        <h3>{t.t("exam.review_answers")}:</h3>
         {test.questions.map((q, idx) => (
           <div
             key={idx}
@@ -145,14 +129,14 @@ const TestScreen: React.FC = () => {
             </div>
             <div style={{ marginTop: 8 }}>
               <p>
-                <strong>{correctAnswerText}:</strong>{" "}
+                <strong>{t.t("exam.correct_answer")}:</strong>{" "}
                 {q.options[q.correctIndex]}
               </p>
               <p>
-                <strong>{yourAnswerText}:</strong>{" "}
+                <strong>{t.t("exam.your_answer")}:</strong>{" "}
                 {userAnswers[idx] !== undefined
                   ? q.options[userAnswers[idx]]
-                  : notAnsweredText}
+                  : t.t("exam.not_answered")}
               </p>
               <div
                 style={{
@@ -160,7 +144,9 @@ const TestScreen: React.FC = () => {
                   fontWeight: "bold",
                 }}
               >
-                {userAnswers[idx] === q.correctIndex ? correctText : wrongText}
+                {userAnswers[idx] === q.correctIndex
+                  ? t.t("exam.correct")
+                  : t.t("exam.wrong")}
               </div>
             </div>
           </div>
@@ -172,7 +158,7 @@ const TestScreen: React.FC = () => {
   return (
     <div style={{ maxWidth: 600, margin: "0 auto", padding: 24 }}>
       <h1>{test.subject}</h1>
-      <h2>{questionsTitle}</h2>
+      <h2>{t.t("exam.questions_title")}</h2>
       {test.questions.map((q, idx) => (
         <div key={idx} style={{ marginBottom: 24 }}>
           <div style={{ fontWeight: "bold" }}>
@@ -212,11 +198,11 @@ const TestScreen: React.FC = () => {
             cursor: canSubmit ? "pointer" : "not-allowed",
           }}
         >
-          {submitButtonText}
+          {t.t("exam.submit")}
         </button>
         {!canSubmit && (
           <p style={{ color: "#666", marginTop: 8 }}>
-            {answerAllQuestionsText}
+            {t.t("exam.answer_all_questions")}
           </p>
         )}
       </div>

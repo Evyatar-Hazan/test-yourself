@@ -2,28 +2,60 @@
   "welcome": "ברוך הבא",
   "app_title": "בחן את עצמך",
   "change_language": "החלפת שפה",
-  "home_greeting": "שלום עולם!",
-  "home_title": "בית",
-  "home_loading": "(טוען...)",
-  "home_users_title": "משתמשים",
-  "home_posts_title": "פוסטים",
-  "home_tests_title": "מבחנים",
-  "home_comments_title": "תגובות",
-  "feed": "פיד",
-      "createTest": "צור מבחן",
-      "profile": "פרופיל",
-      "settings": "הגדרות",
-      "notifications": "התראות",
-      "testDetail": "פרטי מבחן",
-
-  "tests_questions": "שאלות",
-  "tests_respondents": "משתתפים",
-  "tests_average_score": "ציון ממוצע",
-  "home_no_more_tests": "אין עוד מבחנים",
-  "score": "ציון",
-  "average_correct": "ממוצע פותרים נכונה",
-  "unknown_user": "יוצר לא ידוע",
-  "test_taken_at": "נבחן בתאריך: {{date}}"
+  
+  "home": {
+    "greeting": "שלום עולם!",
+    "title": "בית",
+    "loading": "(טוען...)",
+    "users_title": "משתמשים",
+    "posts_title": "פוסטים",
+    "tests_title": "מבחנים",
+    "comments_title": "תגובות",
+    "no_more_tests": "אין עוד מבחנים"
+  },
+  
+  "navigation": {
+    "feed": "פיד",
+    "createTest": "צור מבחן",
+    "profile": "פרופיל",
+    "settings": "הגדרות",
+    "notifications": "התראות",
+    "testDetail": "פרטי מבחן"
+  },
+  
+  "tests": {
+    "questions": "שאלות",
+    "respondents": "משתתפים",
+    "average_score": "ציון ממוצע"
+  },
+  
+  "general": {
+    "score": "ציון",
+    "average_correct": "ממוצע פותרים נכונה",
+    "unknown_user": "יוצר לא ידוע",
+    "test_taken_at": "נבחן בתאריך: {{date}}"
+  },
+  
+  "exam": {
+    "test": "מבחן",
+    "test_results": "תוצאות המבחן",
+    "your_score": "הציון שלך",
+    "answered_correctly": "ענית נכון על",
+    "out_of": "מתוך",
+    "questions": "שאלות",
+    "success_rate": "אחוז הצלחה",
+    "review_answers": "סקירת התשובות",
+    "correct_answer": "התשובה הנכונה",
+    "your_answer": "התשובה שלך",
+    "not_answered": "לא נענתה",
+    "correct": "✓ נכון",
+    "wrong": "✗ שגוי",
+    "submit": "שלח מבחן",
+    "answer_all_questions": "אנא ענה על כל השאלות לפני שליחת המבחן",
+    "not_found": "מבחן לא נמצא",
+    "questions_title": "שאלות",
+    "back_to_home": "חזור לדף הבית"
+  }
 }
 
 

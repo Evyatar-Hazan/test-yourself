@@ -12,3 +12,18 @@ export const resources = {
 export type Resources = typeof resources;
 
 export type DefaultNamespace = "translation";
+
+// Helper type to create nested dot notation keys
+type NestedKeyOf<T> = T extends object
+  ? {
+      [K in keyof T]: K extends string
+        ? T[K] extends object
+          ? `${K}.${NestedKeyOf<T[K]>}`
+          : K
+        : never;
+    }[keyof T]
+  : never;
+
+export type TranslationKeys =
+  | keyof Resources["en"]["translation"]
+  | NestedKeyOf<Resources["en"]["translation"]>;

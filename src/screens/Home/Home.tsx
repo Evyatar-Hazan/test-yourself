@@ -6,7 +6,7 @@ const Home: React.FC = () => {
   const { t } = useTranslationTyped();
   return (
     <div style={{ padding: 16 }}>
-      <h1>{t("home_title")}</h1>
+      <h1>{t("home.title")}</h1>
       <TestsFeed />
     </div>
   );

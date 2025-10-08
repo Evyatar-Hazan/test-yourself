@@ -9,19 +9,19 @@ const Drawer: React.FC = () => {
     <nav style={{ width: 200, borderRight: "1px solid #ccc", padding: 20 }}>
       <ul style={{ listStyle: "none", padding: 0 }}>
         <li>
-          <Link to="/">{t("feed")}</Link>
+          <Link to="/">{t("navigation.feed")}</Link>
         </li>
         <li>
-          <Link to="/create">{t("createTest")}</Link>
+          <Link to="/create">{t("navigation.createTest")}</Link>
         </li>
         <li>
-          <Link to="/profile">{t("profile")}</Link>
+          <Link to="/profile">{t("navigation.profile")}</Link>
         </li>
         <li>
-          <Link to="/settings">{t("settings")}</Link>
+          <Link to="/settings">{t("navigation.settings")}</Link>
         </li>
         <li>
-          <Link to="/notifications">{t("notifications")}</Link>
+          <Link to="/notifications">{t("navigation.notifications")}</Link>
         </li>
       </ul>
     </nav>

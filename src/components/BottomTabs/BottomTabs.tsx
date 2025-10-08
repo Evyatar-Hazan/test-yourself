@@ -16,13 +16,13 @@ const BottomTabs: React.FC = () => {
       }}
     >
       <Link to="/">
-        <Home /> {t("feed")}
+        <Home /> {t("navigation.feed")}
       </Link>
       <Link to="/create">
-        <PlusCircle /> {t("createTest")}
+        <PlusCircle /> {t("navigation.createTest")}
       </Link>
       <Link to="/profile">
-        <User /> {t("profile")}
+        <User /> {t("navigation.profile")}
       </Link>
     </footer>
   );

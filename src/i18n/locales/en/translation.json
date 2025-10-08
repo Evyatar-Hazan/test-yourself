@@ -1,27 +1,59 @@
 {
   "welcome": "Welcome",
   "app_title": "Test Yourself",
-  "change_language": "Change language",
-  "home_greeting": "Hello, world!",
-  "home_title": "Home",
-  "home_loading": "(loading...)",
-  "home_users_title": "Users",
-  "home_posts_title": "Posts",
-  "home_tests_title": "Tests",
-  "home_comments_title": "Comments",
-  "feed": "Feed",
-      "createTest": "Create Test",
-      "profile": "Profile",
-      "settings": "Settings",
-      "notifications": "Notifications",
-      "testDetail": "Test Detail",
-  "tests_questions": "Questions",
-  "tests_respondents": "Participants",
-  "tests_average_score": "Average score",
-  "home_no_more_tests": "No more tests",
-  "score": "Score",
-  "average_correct": "Average Solvers Correct",
-  "unknown_user": "Unknown Creator"
+  "change_language": "Change Language",
+  
+  "home": {
+    "greeting": "Hello World!",
+    "title": "Home",
+    "loading": "(Loading...)",
+    "users_title": "Users",
+    "posts_title": "Posts",
+    "tests_title": "Tests",
+    "comments_title": "Comments",
+    "no_more_tests": "No more tests"
+  },
+  
+  "navigation": {
+    "feed": "Feed",
+    "createTest": "Create Test",
+    "profile": "Profile",
+    "settings": "Settings",
+    "notifications": "Notifications",
+    "testDetail": "Test Detail"
+  },
+  
+  "tests": {
+    "questions": "Questions",
+    "respondents": "Respondents",
+    "average_score": "Average Score"
+  },
+  
+  "general": {
+    "score": "Score",
+    "average_correct": "Average Correct",
+    "unknown_user": "Unknown User",
+    "test_taken_at": "Taken on: {{date}}"
+  },
+  
+  "exam": {
+    "test": "Test",
+    "test_results": "Test Results",
+    "your_score": "Your Score",
+    "answered_correctly": "You answered correctly",
+    "out_of": "out of",
+    "questions": "questions",
+    "success_rate": "Success Rate",
+    "review_answers": "Review Answers",
+    "correct_answer": "Correct Answer",
+    "your_answer": "Your Answer",
+    "not_answered": "Not Answered",
+    "correct": "✓ Correct",
+    "wrong": "✗ Wrong",
+    "submit": "Submit Test",
+    "answer_all_questions": "Please answer all questions before submitting the test",
+    "not_found": "Test not found",
+    "questions_title": "Questions",
+    "back_to_home": "Back to Home"
+  }
 }
-
-

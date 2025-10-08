@@ -79,7 +79,7 @@ const TestsFeed: React.FC = () => {
                   />
                 )}
                 <span style={{ fontWeight: 500 }}>
-                  {user ? user.name : t("unknown_user")}
+                  {user ? user.name : t("general.unknown_user")}
                 </span>
               </div>
               <h3>{test.subject}</h3>
@@ -93,8 +93,8 @@ const TestsFeed: React.FC = () => {
 
                   return (
                     <>
-                      {t("tests_average_score")}: {averageScore} |{" "}
-                      {t("tests_questions")}: {test.questionsCount} |{" "}
+                      {t("tests.average_score")}: {averageScore} |{" "}
+                      {t("tests.questions")}: {test.questionsCount} |{" "}
                       {"משתתפים"}: {respondentsCount}
                     </>
                   );
@@ -105,16 +105,16 @@ const TestsFeed: React.FC = () => {
                   const updatedStats = getTestStatistics(test.id);
                   const averageCorrect =
                     updatedStats?.averageCorrect || test.averageCorrect;
-                  return `${t("average_correct")}: ${averageCorrect}`;
+                  return `${t("general.average_correct")}: ${averageCorrect}`;
                 })()}
               </p>
             </TestCard>
           );
         })}
       </FeedGrid>
-      {loading && <p>{t("home_loading")}</p>}
+      {loading && <p>{t("home.loading")}</p>}
       <div ref={loader} />
-      {!hasMore && <p>{t("home_no_more_tests")}</p>}
+      {!hasMore && <p>{t("home.no_more_tests")}</p>}
     </>
   );
 };
