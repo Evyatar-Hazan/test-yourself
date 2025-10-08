@@ -29,6 +29,15 @@
     "average_score": "ציון ממוצע"
   },
   
+  "profile": {
+    "tests_taken": "מבחנים שנענו",
+    "average_score": "ציון ממוצע",
+    "tests_created": "מבחנים שנוצרו",
+    "created_tests": "מבחנים שיצרתי",
+    "no_created_tests": "לא נוצרו מבחנים עדיין",
+    "view_test": "צפה במבחן"
+  },
+  
   "general": {
     "score": "ציון",
     "average_correct": "ממוצע פותרים נכונה",

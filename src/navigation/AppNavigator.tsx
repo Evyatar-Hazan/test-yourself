@@ -2,7 +2,6 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 // import Feed from './pages/Feed';
 // import CreateTest from './pages/CreateTest';
-// import Profile from './pages/Profile';
 // import SettingsPage from './pages/Settings';
 // import Notifications from './pages/Notifications';
 // import TestDetail from './pages/TestDetail';
@@ -11,6 +10,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Header from "../components/Header/Header";
 import TestScreen from "../screens/Exam/TestScreen";
 import Home from "../screens/Home/Home";
+import Profile from "../screens/Profile/Profile";
 
 const Navigation: React.FC = () => {
   return (
@@ -28,6 +28,15 @@ const Navigation: React.FC = () => {
                   <Header title="Home" />
                   <Home />
                   {/* <BottomTabs /> */}
+                </>
+              }
+            />
+            <Route
+              path="/profile/:userId?"
+              element={
+                <>
+                  <Header title="פרופיל" showBack />
+                  <Profile />
                 </>
               }
             />

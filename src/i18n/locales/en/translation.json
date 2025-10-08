@@ -29,6 +29,15 @@
     "average_score": "Average Score"
   },
   
+  "profile": {
+    "tests_taken": "Tests Taken",
+    "average_score": "Average Score", 
+    "tests_created": "Tests Created",
+    "created_tests": "My Created Tests",
+    "no_created_tests": "No tests created yet",
+    "view_test": "View Test"
+  },
+  
   "general": {
     "score": "Score",
     "average_correct": "Average Correct",
