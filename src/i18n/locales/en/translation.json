@@ -14,7 +14,13 @@
       "profile": "Profile",
       "settings": "Settings",
       "notifications": "Notifications",
-      "testDetail": "Test Detail"
+      "testDetail": "Test Detail",
+
+  "tests_questions": "שאלות",
+  "tests_respondents": "משתתפים",
+  "tests_average_score": "ציון ממוצע",
+  "home_no_more_tests": "No more tests",
+  "score": "Score"
 }
 
 

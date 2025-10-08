@@ -21,6 +21,9 @@ export interface TestEntity {
   subject: string;
   score: number; // 0-100
   takenAt: string; // ISO string
+  questionsCount: number;
+  respondentsCount: number;
+  averageScore: number;
 }
 
 export interface Comment {

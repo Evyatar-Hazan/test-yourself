@@ -4,15 +4,79 @@
     "ownerId": "u1",
     "subject": "Math",
     "score": 95,
-    "takenAt": "2024-02-01T12:00:00.000Z"
+    "takenAt": "2024-02-01T12:00:00.000Z",
+    "questionsCount": 10,
+    "respondentsCount": 15,
+    "averageScore": 88.4
   },
   {
     "id": "t2",
     "ownerId": "u2",
     "subject": "Physics",
     "score": 87,
-    "takenAt": "2024-02-05T09:15:00.000Z"
+    "takenAt": "2024-02-05T09:15:00.000Z",
+    "questionsCount": 8,
+    "respondentsCount": 20,
+    "averageScore": 82.5
+  },
+  {
+    "id": "t3",
+    "ownerId": "u3",
+    "subject": "Chemistry",
+    "score": 91,
+    "takenAt": "2024-03-10T11:30:00.000Z",
+    "questionsCount": 12,
+    "respondentsCount": 18,
+    "averageScore": 85.7
+  },
+  {
+    "id": "t4",
+    "ownerId": "u1",
+    "subject": "Biology",
+    "score": 78,
+    "takenAt": "2024-03-15T10:00:00.000Z",
+    "questionsCount": 15,
+    "respondentsCount": 25,
+    "averageScore": 79.3
+  },
+  {
+    "id": "t5",
+    "ownerId": "u4",
+    "subject": "History",
+    "score": 88,
+    "takenAt": "2024-04-01T14:45:00.000Z",
+    "questionsCount": 9,
+    "respondentsCount": 12,
+    "averageScore": 84.1
+  },
+  {
+    "id": "t6",
+    "ownerId": "u2",
+    "subject": "English",
+    "score": 92,
+    "takenAt": "2024-04-05T09:00:00.000Z",
+    "questionsCount": 11,
+    "respondentsCount": 19,
+    "averageScore": 87.3
+  },
+  {
+    "id": "t7",
+    "ownerId": "u3",
+    "subject": "Geography",
+    "score": 85,
+    "takenAt": "2024-04-10T08:30:00.000Z",
+    "questionsCount": 10,
+    "respondentsCount": 14,
+    "averageScore": 81.6
+  },
+  {
+    "id": "t8",
+    "ownerId": "u4",
+    "subject": "Computer Science",
+    "score": 98,
+    "takenAt": "2024-04-12T13:20:00.000Z",
+    "questionsCount": 12,
+    "respondentsCount": 22,
+    "averageScore": 92.5
   }
 ]
-
-

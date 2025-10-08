@@ -6,8 +6,8 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 // import SettingsPage from './pages/Settings';
 // import Notifications from './pages/Notifications';
 // import TestDetail from './pages/TestDetail';
-import BottomTabs from "../components/BottomTabs/BottomTabs";
-import Drawer from "../components/Drawer/Drawer";
+// import BottomTabs from "../components/BottomTabs/BottomTabs";
+// import Drawer from "../components/Drawer/Drawer";
 import Header from "../components/Header/Header";
 import Home from "../screens/Home/Home";
 
@@ -17,7 +17,7 @@ const Navigation: React.FC = () => {
       <div
         style={{ display: "flex", minHeight: "100vh", flexDirection: "row" }}
       >
-        <Drawer />
+        {/* <Drawer /> */}
         <div style={{ flex: 1, display: "flex", flexDirection: "column" }}>
           <Routes>
             <Route
@@ -26,7 +26,7 @@ const Navigation: React.FC = () => {
                 <>
                   <Header title="Home" />
                   <Home />
-                  <BottomTabs />
+                  {/* <BottomTabs /> */}
                 </>
               }
             />
