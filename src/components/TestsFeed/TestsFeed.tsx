@@ -7,6 +7,7 @@ import { fetchTests } from "../../features/tests/testsSlice";
 import usersData from "../../mocks/users.json";
 import type { AppDispatch } from "../../store";
 import { RootState } from "../../store";
+import { getTestStatistics } from "../../utils/testStatistics";
 
 const TestsFeed: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -83,12 +84,29 @@ const TestsFeed: React.FC = () => {
               </div>
               <h3>{test.subject}</h3>
               <p>
-                {t("tests_average_score")}: {test.averageScore} |{" "}
-                {t("tests_questions")}: {test.questionsCount} | {t("score")}:{" "}
-                {test.score}
+                {(() => {
+                  const updatedStats = getTestStatistics(test.id);
+                  const averageScore =
+                    updatedStats?.averageScore || test.averageScore;
+                  const respondentsCount =
+                    updatedStats?.respondentsCount || test.respondentsCount;
+
+                  return (
+                    <>
+                      {t("tests_average_score")}: {averageScore} |{" "}
+                      {t("tests_questions")}: {test.questionsCount} |{" "}
+                      {"משתתפים"}: {respondentsCount}
+                    </>
+                  );
+                })()}
               </p>
               <p>
-                {t("average_correct")}: {test.averageCorrect}
+                {(() => {
+                  const updatedStats = getTestStatistics(test.id);
+                  const averageCorrect =
+                    updatedStats?.averageCorrect || test.averageCorrect;
+                  return `${t("average_correct")}: ${averageCorrect}`;
+                })()}
               </p>
             </TestCard>
           );

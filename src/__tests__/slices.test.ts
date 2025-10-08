@@ -30,9 +30,9 @@ describe("slices basic functionality", () => {
   });
 
   it("tests thunk loads mock data", async () => {
-    await store.dispatch(fetchTests());
+    await store.dispatch(fetchTests({ page: 1 }));
     const state = store.getState();
-    expect(state.tests.data.length).toBeGreaterThan(0);
+    expect(state.tests.tests.length).toBeGreaterThan(0);
   });
 
   it("comments thunk loads mock data", async () => {
