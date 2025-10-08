@@ -71,6 +71,21 @@ const TestsFeed: React.FC = () => {
                       marginRight: 8,
                       objectFit: "cover",
                       background: "#eee",
+                      cursor: "pointer",
+                      transition: "transform 0.2s, box-shadow 0.2s",
+                    }}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      navigate(`/profile/${user.id}`);
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.transform = "scale(1.1)";
+                      e.currentTarget.style.boxShadow =
+                        "0 2px 8px rgba(0,0,0,0.2)";
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.transform = "scale(1)";
+                      e.currentTarget.style.boxShadow = "none";
                     }}
                     onError={(e) => {
                       (e.currentTarget as HTMLImageElement).src =
@@ -78,7 +93,25 @@ const TestsFeed: React.FC = () => {
                     }}
                   />
                 )}
-                <span style={{ fontWeight: 500 }}>
+                <span
+                  style={{
+                    fontWeight: 500,
+                    cursor: "pointer",
+                    transition: "color 0.2s",
+                  }}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    if (user) {
+                      navigate(`/profile/${user.id}`);
+                    }
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.color = "#007bff";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.color = "inherit";
+                  }}
+                >
                   {user ? user.name : t("general.unknown_user")}
                 </span>
               </div>

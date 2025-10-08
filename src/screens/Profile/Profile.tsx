@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
+import { useParams, useNavigate } from "react-router-dom";
 
 import Button from "../../components/Button/Button";
 import { selectUsers } from "../../features/users/usersSlice";
@@ -12,15 +13,17 @@ import {
   getUserTests,
 } from "../../utils/userProfile";
 
-interface ProfileProps {
-  userId?: string; // אם לא מועבר, נראה פרופיל של המשתמש הנוכחי
-}
-
-const Profile: React.FC<ProfileProps> = ({ userId = "u1" }) => {
+const Profile: React.FC = () => {
   const { t } = useTranslationTyped();
+  const { userId } = useParams<{ userId?: string }>();
+  const navigate = useNavigate();
   const users = useSelector(selectUsers);
   const { tests } = useSelector((state: RootState) => state.tests);
   const [isMobile, setIsMobile] = useState(false);
+
+  // אם לא מועבר userId בURL, נשתמש במשתמש ברירת מחדל
+  const currentUserId = userId || "u1";
+  const isViewingOtherUser = userId && userId !== "u1";
 
   // Hook לזיהוי אם זה מובייל
   useEffect(() => {
@@ -35,11 +38,11 @@ const Profile: React.FC<ProfileProps> = ({ userId = "u1" }) => {
   }, []);
 
   // חיפוש המשתמש הנוכחי
-  const currentUser = findUserById(userId, users);
+  const currentUser = findUserById(currentUserId, users);
 
   // חישוב סטטיסטיקות המשתמש
-  const statistics = calculateUserStatistics(userId, tests);
-  const userCreatedTests = getUserTests(userId, tests, "created");
+  const statistics = calculateUserStatistics(currentUserId, tests);
+  const userCreatedTests = getUserTests(currentUserId, tests, "created");
 
   if (!currentUser) {
     return (
@@ -57,6 +60,39 @@ const Profile: React.FC<ProfileProps> = ({ userId = "u1" }) => {
         margin: "0 auto",
       }}
     >
+      {/* כפתור לחזרה לפרופיל האישי */}
+      {isViewingOtherUser && (
+        <div
+          style={{
+            marginBottom: "16px",
+            textAlign: "center",
+            padding: "12px",
+            backgroundColor: "#e3f2fd",
+            borderRadius: "8px",
+            border: "1px solid #2196f3",
+          }}
+        >
+          <p
+            style={{
+              margin: "0 0 8px 0",
+              fontSize: "14px",
+              color: "#1976d2",
+            }}
+          >
+            {currentUser
+              ? `צופה בפרופיל של ${currentUser.name}`
+              : "צופה בפרופיל של משתמש אחר"}
+          </p>
+          <Button
+            variant="primary"
+            size="sm"
+            onClick={() => navigate("/profile")}
+          >
+            {t("profile.my_profile")}
+          </Button>
+        </div>
+      )}
+
       {/* פרופיל הדר */}
       <div
         style={{
@@ -204,18 +240,48 @@ const Profile: React.FC<ProfileProps> = ({ userId = "u1" }) => {
                   borderRadius: "8px",
                   boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
                   gap: isMobile ? "16px" : "0",
+                  cursor: "pointer",
+                  transition: "transform 0.2s, box-shadow 0.2s",
+                }}
+                onClick={() => navigate(`/test/${test.id}`)}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = "translateY(-2px)";
+                  e.currentTarget.style.boxShadow =
+                    "0 4px 12px rgba(0,0,0,0.15)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = "translateY(0)";
+                  e.currentTarget.style.boxShadow = "0 2px 4px rgba(0,0,0,0.1)";
                 }}
               >
                 <div style={{ flex: 1 }}>
-                  <h4
+                  <div
                     style={{
-                      margin: "0 0 8px 0",
-                      fontSize: "18px",
-                      fontWeight: "600",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "space-between",
                     }}
                   >
-                    {test.subject}
-                  </h4>
+                    <h4
+                      style={{
+                        margin: "0 0 8px 0",
+                        fontSize: "18px",
+                        fontWeight: "600",
+                        color: "#2c3e50",
+                      }}
+                    >
+                      {test.subject}
+                    </h4>
+                    <span
+                      style={{
+                        fontSize: "20px",
+                        color: "#007bff",
+                        userSelect: "none",
+                      }}
+                    >
+                      ▶
+                    </span>
+                  </div>
                   <div style={{ fontSize: "14px", color: "#6c757d" }}>
                     <p style={{ margin: "4px 0" }}>
                       {t("tests.questions")}: {test.questionsCount}
@@ -235,8 +301,16 @@ const Profile: React.FC<ProfileProps> = ({ userId = "u1" }) => {
                     alignSelf: isMobile ? "stretch" : "auto",
                   }}
                 >
-                  <Button size="sm" variant="secondary" fullWidth={isMobile}>
-                    {t("profile.view_test")}
+                  <Button
+                    size="sm"
+                    variant="primary"
+                    fullWidth={isMobile}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      navigate(`/test/${test.id}`);
+                    }}
+                  >
+                    {t("profile.take_test")}
                   </Button>
                 </div>
               </div>

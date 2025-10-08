@@ -32,7 +32,16 @@ const Navigation: React.FC = () => {
               }
             />
             <Route
-              path="/profile/:userId?"
+              path="/profile"
+              element={
+                <>
+                  <Header title="פרופיל" showBack />
+                  <Profile />
+                </>
+              }
+            />
+            <Route
+              path="/profile/:userId"
               element={
                 <>
                   <Header title="פרופיל" showBack />

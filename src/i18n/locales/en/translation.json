@@ -35,7 +35,10 @@
     "tests_created": "Tests Created",
     "created_tests": "My Created Tests",
     "no_created_tests": "No tests created yet",
-    "view_test": "View Test"
+    "view_test": "View Test",
+    "my_profile": "My Profile",
+    "take_test": "Take Test",
+    "click_to_take": "Click to take the test"
   },
   
   "general": {
