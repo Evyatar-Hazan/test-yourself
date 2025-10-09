@@ -25,18 +25,34 @@ const Home: React.FC = () => {
         }}
       >
         <h1>{t("home.title")}</h1>
-        <Link
-          to="/profile"
-          style={{
-            padding: "8px 16px",
-            backgroundColor: "#007bff",
-            color: "white",
-            textDecoration: "none",
-            borderRadius: "4px",
-          }}
-        >
-          {t("navigation.profile")}
-        </Link>
+        <div style={{ display: "flex", gap: "8px" }}>
+          <Link
+            to="/create-test"
+            style={{
+              padding: "8px 16px",
+              backgroundColor: "#28a745",
+              color: "white",
+              textDecoration: "none",
+              borderRadius: "4px",
+              fontSize: "14px",
+            }}
+          >
+            {t("navigation.createTest")}
+          </Link>
+          <Link
+            to="/profile"
+            style={{
+              padding: "8px 16px",
+              backgroundColor: "#007bff",
+              color: "white",
+              textDecoration: "none",
+              borderRadius: "4px",
+              fontSize: "14px",
+            }}
+          >
+            {t("navigation.profile")}
+          </Link>
+        </div>
       </div>
       <TestsFeed />
     </div>

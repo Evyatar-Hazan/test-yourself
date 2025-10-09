@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { FeedGrid, TestCard } from "./TestsFeed.styles";
 import { fetchTests } from "../../features/tests/testsSlice";
-import usersData from "../../mocks/users.json";
+import { fetchUsers } from "../../features/users/usersSlice";
 import type { AppDispatch } from "../../store";
 import { RootState } from "../../store";
 import { getTestStatistics } from "../../utils/testStatistics";
@@ -15,7 +15,18 @@ const TestsFeed: React.FC = () => {
   const { tests, loading, page, hasMore } = useSelector(
     (state: RootState) => state.tests,
   );
+  const { data: users } = useSelector((state: RootState) => state.users);
   const loader = useRef<HTMLDivElement | null>(null);
+
+  // טעינה ראשונית של המבחנים והמשתמשים
+  useEffect(() => {
+    if (users.length === 0) {
+      dispatch(fetchUsers());
+    }
+    if (tests.length === 0 && !loading) {
+      dispatch(fetchTests({ page: 1 }));
+    }
+  }, [dispatch, tests.length, loading, users.length]);
 
   useEffect(() => {
     if (!loader.current) return;
@@ -42,7 +53,7 @@ const TestsFeed: React.FC = () => {
     <>
       <FeedGrid>
         {tests.map((test) => {
-          const user = usersData.find((u) => u.id === test.ownerId);
+          const user = users.find((u) => u.id === test.ownerId);
           return (
             <TestCard
               key={test.id}
@@ -58,11 +69,7 @@ const TestsFeed: React.FC = () => {
               >
                 {user && user.avatarUrl && (
                   <img
-                    src={
-                      user.avatarUrl.startsWith("http")
-                        ? user.avatarUrl
-                        : `${process.env.PUBLIC_URL}${user.avatarUrl}`
-                    }
+                    src={`http://localhost:3001/public${user.avatarUrl}`}
                     alt={user.name}
                     style={{
                       width: 32,
@@ -89,7 +96,7 @@ const TestsFeed: React.FC = () => {
                     }}
                     onError={(e) => {
                       (e.currentTarget as HTMLImageElement).src =
-                        `${process.env.PUBLIC_URL}/default-avatar.png`;
+                        `http://localhost:3001/public/avataras/default-avatar.png`;
                     }}
                   />
                 )}

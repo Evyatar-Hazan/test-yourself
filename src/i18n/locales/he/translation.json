@@ -67,6 +67,33 @@
     "not_found": "מבחן לא נמצא",
     "questions_title": "שאלות",
     "back_to_home": "חזור לדף הבית"
+  },
+
+  "createTest": {
+    "basicInfo": "פרטים בסיסיים",
+    "title": "כותרת המבחן",
+    "titlePlaceholder": "הכנס כותרת למבחן",
+    "subject": "נושא",
+    "subjectPlaceholder": "הכנס נושא למבחן (לדוגמה: מתמטיקה, היסטוריה)",
+    "description": "תיאור",
+    "descriptionPlaceholder": "הכנס תיאור אופציונלי למבחן",
+    "questions": "שאלות",
+    "addQuestion": "הוסף שאלה",
+    "questionNumber": "שאלה מספר",
+    "questionText": "טקסט השאלה",
+    "questionPlaceholder": "הכנס את השאלה כאן",
+    "options": "אפשרויות תשובה",
+    "optionPlaceholder": "אפשרות",
+    "remove": "הסר",
+    "cancel": "בטל",
+    "create": "צור מבחן",
+    "errors": {
+      "titleRequired": "כותרת המבחן נדרשת",
+      "subjectRequired": "נושא המבחן נדרש",
+      "questionRequired": "טקסט השאלה נדרש",
+      "minTwoOptions": "יש להכניס לפחות שתי אפשרויות תשובה",
+      "correctAnswerRequired": "יש לבחור תשובה נכונה"
+    }
   }
 }
 

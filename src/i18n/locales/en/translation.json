@@ -67,5 +67,32 @@
     "not_found": "Test not found",
     "questions_title": "Questions",
     "back_to_home": "Back to Home"
+  },
+
+  "createTest": {
+    "basicInfo": "Basic Information",
+    "title": "Test Title",
+    "titlePlaceholder": "Enter test title",
+    "subject": "Subject",
+    "subjectPlaceholder": "Enter test subject (e.g., Math, History)",
+    "description": "Description",
+    "descriptionPlaceholder": "Enter optional test description",
+    "questions": "Questions",
+    "addQuestion": "Add Question",
+    "questionNumber": "Question",
+    "questionText": "Question Text",
+    "questionPlaceholder": "Enter your question here",
+    "options": "Answer Options",
+    "optionPlaceholder": "Option",
+    "remove": "Remove",
+    "cancel": "Cancel",
+    "create": "Create Test",
+    "errors": {
+      "titleRequired": "Test title is required",
+      "subjectRequired": "Test subject is required",
+      "questionRequired": "Question text is required",
+      "minTwoOptions": "At least two answer options are required",
+      "correctAnswerRequired": "A correct answer must be selected"
+    }
   }
 }

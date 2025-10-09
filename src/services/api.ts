@@ -1,29 +1,33 @@
-import comments from "../mocks/comments.json";
-import posts from "../mocks/posts.json";
-import tests from "../mocks/tests.json";
-import users from "../mocks/users.json";
 import type { Comment, Post, TestEntity, User } from "../types";
+import {
+  getUsers,
+  getPosts,
+  getComments,
+  getPaginatedTests,
+} from "../utils/helpers";
 
 const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 export async function fetchUsers(): Promise<User[]> {
   await delay(300);
-  return users as User[];
+  return await getUsers();
 }
 
 export async function fetchPosts(): Promise<Post[]> {
   await delay(350);
-  return posts as Post[];
+  return await getPosts();
 }
 
 export async function fetchTests(): Promise<TestEntity[]> {
   await delay(400);
+  // מביא את כל המבחנים (עמוד 1 עם pageSize גדול)
+  const { tests } = await getPaginatedTests(1, 1000);
   return tests as TestEntity[];
 }
 
 export async function fetchComments(): Promise<Comment[]> {
   await delay(250);
-  return comments as Comment[];
+  return await getComments();
 }
 
 export const api = {

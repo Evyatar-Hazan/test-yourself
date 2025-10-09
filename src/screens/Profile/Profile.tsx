@@ -108,7 +108,7 @@ const Profile: React.FC = () => {
         }}
       >
         <img
-          src={`/${currentUser.avatarUrl}`}
+          src={`http://localhost:3001/public${currentUser.avatarUrl}`}
           alt={currentUser.name}
           style={{
             width: "80px",

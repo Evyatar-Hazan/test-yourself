@@ -8,6 +8,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 // import BottomTabs from "../components/BottomTabs/BottomTabs";
 // import Drawer from "../components/Drawer/Drawer";
 import Header from "../components/Header/Header";
+import CreateTest from "../screens/CreateTest/CreateTest";
 import TestScreen from "../screens/Exam/TestScreen";
 import Home from "../screens/Home/Home";
 import Profile from "../screens/Profile/Profile";
@@ -55,6 +56,15 @@ const Navigation: React.FC = () => {
                 <>
                   <Header title="מבחן" showBack />
                   <TestScreen />
+                </>
+              }
+            />
+            <Route
+              path="/create-test"
+              element={
+                <>
+                  <Header title="צור מבחן" showBack />
+                  <CreateTest />
                 </>
               }
             />

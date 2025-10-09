@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import {
   TestContainer,
@@ -30,7 +30,7 @@ import {
   ResultBadge,
 } from "./TestScreen.styles";
 import { useTranslationTyped } from "../../hooks/useTranslationTyped";
-import tests from "../../mocks/tests.json";
+import { getTestById } from "../../utils/helpers";
 import { updateTestStatistics } from "../../utils/testStatistics";
 
 interface Question {
@@ -55,13 +55,33 @@ interface TestResult {
 const TestScreen: React.FC = () => {
   const { testId } = useParams<{ testId: string }>();
   const t = useTranslationTyped();
-  const test: TestType | undefined = Array.isArray(tests)
-    ? (tests as TestType[]).find((t) => t.id === testId)
-    : undefined;
+  const [test, setTest] = useState<TestType | undefined>(undefined);
+  const [loading, setLoading] = useState(true);
 
   const [userAnswers, setUserAnswers] = useState<Record<number, number>>({});
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [result, setResult] = useState<TestResult | null>(null);
+
+  // טעינת המבחן
+  useEffect(() => {
+    const loadTest = async () => {
+      if (!testId) {
+        setLoading(false);
+        return;
+      }
+
+      try {
+        const foundTest = await getTestById(testId);
+        setTest(foundTest);
+      } catch (error) {
+        console.error("Error loading test:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadTest();
+  }, [testId]);
 
   const handleAnswerChange = (
     questionIndex: number,
@@ -109,6 +129,16 @@ const TestScreen: React.FC = () => {
   };
 
   const canSubmit = Object.keys(userAnswers).length === test?.questions.length;
+
+  if (loading) {
+    return (
+      <TestContainer>
+        <TestHeader>
+          <TestTitle>טוען מבחן...</TestTitle>
+        </TestHeader>
+      </TestContainer>
+    );
+  }
 
   if (!test) {
     return (
