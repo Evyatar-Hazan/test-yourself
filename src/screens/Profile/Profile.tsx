@@ -129,7 +129,7 @@ const Profile: React.FC = () => {
             {currentUser.name}
           </h2>
           <p style={{ margin: "0", color: "#6c757d", fontSize: "16px" }}>
-            @{currentUser.username}
+            {currentUser.email}
           </p>
         </div>
       </div>

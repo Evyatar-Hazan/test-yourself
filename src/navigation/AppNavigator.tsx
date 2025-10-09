@@ -13,6 +13,11 @@ import TestScreen from "../screens/Exam/TestScreen";
 import Home from "../screens/Home/Home";
 import Profile from "../screens/Profile/Profile";
 import TestDetailPage from "../screens/TestDetail/TestDetailPage";
+import Login from "../screens/Login/Login";
+import Signup from "../screens/Login/Signup";
+import VerifyEmail from "../screens/Login/VerifyEmail";
+import ForgotPassword from "../screens/Login/ForgotPassword";
+import ResetPassword from "../screens/Login/ResetPassword";
 
 const Navigation: React.FC = () => {
   return (
@@ -77,6 +82,11 @@ const Navigation: React.FC = () => {
                 </>
               }
             />
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/verify-email" element={<VerifyEmail />} />
+            <Route path="/forgot-password" element={<ForgotPassword />} />
+            <Route path="/reset-password" element={<ResetPassword />} />
           </Routes>
         </div>
       </div>
