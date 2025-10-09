@@ -12,6 +12,7 @@ import CreateTest from "../screens/CreateTest/CreateTest";
 import TestScreen from "../screens/Exam/TestScreen";
 import Home from "../screens/Home/Home";
 import Profile from "../screens/Profile/Profile";
+import TestDetailPage from "../screens/TestDetail/TestDetailPage";
 
 const Navigation: React.FC = () => {
   return (
@@ -51,11 +52,19 @@ const Navigation: React.FC = () => {
               }
             />
             <Route
-              path="/test/:testId"
+              path="/exam/:testId"
               element={
                 <>
                   <Header title="מבחן" showBack />
                   <TestScreen />
+                </>
+              }
+            />
+            <Route
+              path="/test/:testId"
+              element={
+                <>
+                  <TestDetailPage />
                 </>
               }
             />

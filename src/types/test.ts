@@ -15,6 +15,7 @@ export interface Test {
   averageScore: number;
   averageCorrect: number;
   questions: Question[];
+  likes?: string[];
 }
 
 export interface TestResult {
@@ -28,8 +29,18 @@ export interface TestStatistics {
   testId: string;
   scores: number[];
   averageScore: number;
-  respondentsCount: number;
-  averageCorrect: number;
+}
+
+export interface TestComment {
+  id: string;
+  testId: string;
+  authorId: string;
+  body: string;
+  createdAt: string;
+  updatedAt?: string;
+  likes: string[];
+  parentId: string | null;
+  replies: TestComment[];
 }
 
 export interface User {

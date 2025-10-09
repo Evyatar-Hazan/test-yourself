@@ -8,6 +8,7 @@ import { fetchUsers } from "../../features/users/usersSlice";
 import type { AppDispatch } from "../../store";
 import { RootState } from "../../store";
 import { getTestStatistics } from "../../utils/testStatistics";
+import TestInteractions from "../TestInteractions/TestInteractions";
 
 const TestsFeed: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -17,6 +18,8 @@ const TestsFeed: React.FC = () => {
   );
   const { data: users } = useSelector((state: RootState) => state.users);
   const loader = useRef<HTMLDivElement | null>(null);
+
+  const currentUserId = "u1"; // Hardcoded for demo
 
   // טעינה ראשונית של המבחנים והמשתמשים
   useEffect(() => {
@@ -148,6 +151,14 @@ const TestsFeed: React.FC = () => {
                   return `${t("general.average_correct")}: ${averageCorrect}`;
                 })()}
               </p>
+              
+              <TestInteractions
+                testId={test.id}
+                testLikes={test.likes}
+                currentUserId={currentUserId}
+                onNavigateToTest={() => navigate(`/test/${test.id}`)}
+                onNavigateToExam={() => navigate(`/exam/${test.id}`)}
+              />
             </TestCard>
           );
         })}

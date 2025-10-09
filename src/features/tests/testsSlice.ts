@@ -12,6 +12,7 @@ export interface Test {
   respondentsCount: number;
   averageScore: number;
   averageCorrect: number;
+  likes?: string[];
 }
 
 interface TestsState {
