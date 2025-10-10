@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
@@ -9,6 +8,7 @@ import {
   selectAuthError,
   clearError,
 } from "../../features/auth/authSlice";
+import { useTranslationTyped } from "../../hooks/useTranslationTyped";
 import { AuthService } from "../../services/authService";
 import { AppDispatch } from "../../store";
 
@@ -194,7 +194,7 @@ const Login: React.FC = () => {
   const navigate = useNavigate();
   const isLoading = useSelector(selectAuthLoading);
   const error = useSelector(selectAuthError);
-  const { t } = useTranslation();
+  const { t } = useTranslationTyped();
 
   const [formData, setFormData] = useState({
     email: "",

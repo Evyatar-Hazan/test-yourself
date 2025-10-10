@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import {
@@ -8,6 +7,7 @@ import {
   selectAuthError,
   clearError,
 } from "../../features/auth/authSlice";
+import { useTranslationTyped as useTranslation } from "../../hooks/useTranslationTyped";
 import { AppDispatch } from "../../store";
 
 const VerifyEmail: React.FC = () => {

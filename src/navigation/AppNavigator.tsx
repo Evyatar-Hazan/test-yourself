@@ -1,7 +1,7 @@
 import React from "react";
-import { useTranslation } from "react-i18next";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Header from "../components/Header/Header";
+import { useTranslationTyped } from "../hooks/useTranslationTyped";
 import CreateTest from "../screens/CreateTest/CreateTest";
 import TestScreen from "../screens/Exam/TestScreen";
 import Home from "../screens/Home/Home";
@@ -14,7 +14,7 @@ import Profile from "../screens/Profile/Profile";
 import TestDetailPage from "../screens/TestDetail/TestDetailPage";
 
 const Navigation: React.FC = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslationTyped();
   return (
     <Router>
       <div

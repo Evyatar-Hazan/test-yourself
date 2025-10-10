@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import Button from "../../components/Button/Button";
 import { confirmPasswordReset } from "../../features/auth/authSlice";
 import { useAuth } from "../../hooks/useAuth";
+import { useTranslationTyped } from "../../hooks/useTranslationTyped";
 import type { AppDispatch } from "../../store";
 
 const ResetPassword: React.FC = () => {
@@ -16,7 +16,7 @@ const ResetPassword: React.FC = () => {
   const { isLoading, error } = useAuth();
   const [searchParams] = useSearchParams();
   const token = searchParams.get("token");
-  const { t } = useTranslation();
+  const { t } = useTranslationTyped();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

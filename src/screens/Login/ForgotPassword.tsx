@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import Button from "../../components/Button/Button";
 import { requestPasswordReset } from "../../features/auth/authSlice";
 import { useAuth } from "../../hooks/useAuth";
+import { useTranslationTyped } from "../../hooks/useTranslationTyped";
 import type { AppDispatch } from "../../store";
 // removed duplicate useTranslation import
 
@@ -13,7 +13,7 @@ const ForgotPassword: React.FC = () => {
   const [emailSent, setEmailSent] = useState(false);
   const dispatch = useDispatch<AppDispatch>();
   const { isLoading, error } = useAuth();
-  const { t } = useTranslation();
+  const { t } = useTranslationTyped();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

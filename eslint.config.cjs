@@ -56,6 +56,20 @@ module.exports = [
         },
       ],
       'prettier/prettier': ['error'],
+      // Enforce using our typed translation hook instead of react-i18next directly
+      'no-restricted-imports': [
+        'error',
+        {
+          paths: [
+            {
+              name: 'react-i18next',
+              importNames: ['useTranslation'],
+              message:
+                'Use useTranslationTyped from src/hooks/useTranslationTyped instead of useTranslation from react-i18next.',
+            },
+          ],
+        },
+      ],
       // TODO: Enforce no raw text in JSX; prefer t() for user-facing strings
       'i18next/no-literal-string': [
         'warn',
@@ -76,6 +90,13 @@ module.exports = [
     rules: {
       // Stories and SB config can contain literal strings for docs and demos
       'i18next/no-literal-string': 'off',
+    },
+  },
+  {
+    files: ['src/hooks/useTranslationTyped.ts'],
+    rules: {
+      // Allow the wrapper itself to import from react-i18next
+      'no-restricted-imports': 'off',
     },
   },
 ];

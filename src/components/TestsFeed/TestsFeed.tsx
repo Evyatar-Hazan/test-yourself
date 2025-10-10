@@ -1,10 +1,10 @@
 import React, { useEffect, useRef } from "react";
-import { useTranslation } from "react-i18next";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { FeedGrid, TestCard } from "./TestsFeed.styles";
 import { fetchTests } from "../../features/tests/testsSlice";
 import { fetchUsers } from "../../features/users/usersSlice";
+import { useTranslationTyped } from "../../hooks/useTranslationTyped";
 import type { AppDispatch } from "../../store";
 import { RootState } from "../../store";
 import { getTestStatistics } from "../../utils/testStatistics";
@@ -12,7 +12,7 @@ import TestInteractions from "../TestInteractions/TestInteractions";
 
 const TestsFeed: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
-  const { t } = useTranslation();
+  const { t } = useTranslationTyped();
   const { tests, loading, page, hasMore } = useSelector(
     (state: RootState) => state.tests,
   );
