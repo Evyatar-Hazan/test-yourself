@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { useTranslationTyped } from "../../hooks/useTranslationTyped";
 import { TestComment } from "../../types/test";
 
 interface TestCommentsProps {
@@ -66,7 +67,7 @@ const ActionButton = styled.button<{ active?: boolean }>`
   border-radius: 4px;
   cursor: pointer;
   font-size: 12px;
-  
+
   &:hover {
     background: ${(props) => (props.active ? "#004499" : "#f0f8ff")};
   }
@@ -102,11 +103,11 @@ const SubmitButton = styled.button`
   padding: 8px 16px;
   border-radius: 4px;
   cursor: pointer;
-  
+
   &:hover {
     background: #004499;
   }
-  
+
   &:disabled {
     background: #ccc;
     cursor: not-allowed;
@@ -120,7 +121,7 @@ const CancelButton = styled.button`
   padding: 8px 16px;
   border-radius: 4px;
   cursor: pointer;
-  
+
   &:hover {
     background: #f5f5f5;
   }
@@ -155,7 +156,7 @@ const LikeButton = styled.button<{ liked: boolean }>`
   align-items: center;
   gap: 8px;
   margin: 0 auto;
-  
+
   &:hover {
     background: ${(props) => (props.liked ? "#ff5252" : "#fff5f5")};
   }
@@ -172,6 +173,7 @@ const TestComments: React.FC<TestCommentsProps> = ({
   onToggleTestLike,
   testLikes,
 }) => {
+  const { t } = useTranslationTyped();
   const [newComment, setNewComment] = useState("");
   const [replyingTo, setReplyingTo] = useState<string | null>(null);
   const [replyText, setReplyText] = useState("");
@@ -207,10 +209,13 @@ const TestComments: React.FC<TestCommentsProps> = ({
   };
 
   const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleString('he-IL');
+    return new Date(dateString).toLocaleString("he-IL");
   };
 
-  const renderComment = (comment: TestComment, level: number = 0): React.ReactElement => {
+  const renderComment = (
+    comment: TestComment,
+    level: number = 0,
+  ): React.ReactElement => {
     const isLikedByUser = comment.likes.includes(currentUserId);
     const isOwnComment = comment.authorId === currentUserId;
 
@@ -218,26 +223,28 @@ const TestComments: React.FC<TestCommentsProps> = ({
       <div key={comment.id}>
         <CommentItem level={level}>
           <CommentHeader>
-            <AuthorInfo>משתמש {comment.authorId}</AuthorInfo>
+            <AuthorInfo>
+              {t("comments.user_label", { id: comment.authorId })}
+            </AuthorInfo>
             <CommentTime>
               {formatDate(comment.createdAt)}
-              {comment.updatedAt && ' (עודכן)'}
+              {comment.updatedAt && t("comments.updated_suffix")}
             </CommentTime>
           </CommentHeader>
-          
+
           {editingComment === comment.id ? (
             <div>
               <TextArea
                 value={editText}
                 onChange={(e) => setEditText(e.target.value)}
-                placeholder="ערוך את התגובה..."
+                placeholder={t("comments.edit_placeholder")}
               />
               <FormActions>
                 <SubmitButton onClick={() => handleEditComment(comment.id)}>
-                  שמור
+                  {t("comments.save")}
                 </SubmitButton>
                 <CancelButton onClick={() => setEditingComment(null)}>
-                  ביטול
+                  {t("comments.cancel")}
                 </CancelButton>
               </FormActions>
             </div>
@@ -245,52 +252,56 @@ const TestComments: React.FC<TestCommentsProps> = ({
             <>
               <CommentBody>{comment.body}</CommentBody>
               <CommentActions>
-                <ActionButton 
+                <ActionButton
                   active={isLikedByUser}
-                  onClick={() => onToggleLike(testId, comment.id, currentUserId)}
+                  onClick={() =>
+                    onToggleLike(testId, comment.id, currentUserId)
+                  }
                 >
                   ♥ {comment.likes.length}
                 </ActionButton>
                 <ActionButton onClick={() => setReplyingTo(comment.id)}>
-                  הגב
+                  {t("comments.reply")}
                 </ActionButton>
                 {isOwnComment && (
                   <>
                     <ActionButton onClick={() => startEdit(comment)}>
-                      ערוך
+                      {t("comments.edit")}
                     </ActionButton>
-                    <ActionButton onClick={() => onDeleteComment(testId, comment.id)}>
-                      מחק
+                    <ActionButton
+                      onClick={() => onDeleteComment(testId, comment.id)}
+                    >
+                      {t("comments.delete")}
                     </ActionButton>
                   </>
                 )}
               </CommentActions>
             </>
           )}
-          
+
           {replyingTo === comment.id && (
             <ReplyForm>
               <TextArea
                 value={replyText}
                 onChange={(e) => setReplyText(e.target.value)}
-                placeholder="כתוב תגובה..."
+                placeholder={t("comments.main_placeholder")}
               />
               <FormActions>
-                <SubmitButton 
+                <SubmitButton
                   onClick={() => handleSubmitReply(comment.id)}
                   disabled={!replyText.trim()}
                 >
-                  שלח
+                  {t("interactions.send")}
                 </SubmitButton>
                 <CancelButton onClick={() => setReplyingTo(null)}>
-                  ביטול
+                  {t("interactions.cancel")}
                 </CancelButton>
               </FormActions>
             </ReplyForm>
           )}
         </CommentItem>
-        
-        {comment.replies.map(reply => renderComment(reply, level + 1))}
+
+        {comment.replies.map((reply) => renderComment(reply, level + 1))}
       </div>
     );
   };
@@ -300,36 +311,38 @@ const TestComments: React.FC<TestCommentsProps> = ({
   return (
     <CommentsContainer>
       <TestLikeSection>
-        <LikeButton 
+        <LikeButton
           liked={isTestLiked}
           onClick={() => onToggleTestLike(testId, currentUserId)}
         >
-          ♥ {isTestLiked ? 'אהבת' : 'אהוב'} ({testLikes.length})
+          ♥ {isTestLiked ? "אהבת" : "אהוב"} ({testLikes.length})
         </LikeButton>
       </TestLikeSection>
 
       <MainCommentForm>
-        <h3>כתוב תגובה</h3>
+        <h3>{t("comments.write_comment")}</h3>
         <TextArea
           value={newComment}
           onChange={(e) => setNewComment(e.target.value)}
-          placeholder="שתף את המחשבות שלך על המבחן..."
+          placeholder={t("comments.main_placeholder")}
         />
         <FormActions>
-          <SubmitButton 
+          <SubmitButton
             onClick={handleSubmitMainComment}
             disabled={!newComment.trim()}
           >
-            שלח תגובה
+            {t("comments.submit_comment")}
           </SubmitButton>
         </FormActions>
       </MainCommentForm>
 
       <div>
-        <h3>תגובות ({comments.length})</h3>
+        <h3>
+          {t("comments.title")} ({comments.length})
+        </h3>
         {comments.length === 0 ? (
-          <p style={{ textAlign: 'center', color: '#666', padding: '20px' }}>
-            אין עדיין תגובות. היה הראשון להגיב!
+          <p style={{ textAlign: "center", color: "#666", padding: "20px" }}>
+            {t("comments.no_comments")}
           </p>
         ) : (
           comments.map((comment) => renderComment(comment))

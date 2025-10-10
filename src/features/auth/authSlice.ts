@@ -1,14 +1,14 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { 
-  AuthState, 
-  LoginRequest, 
-  RegisterRequest, 
+import { AuthService } from "../../services/authService";
+import {
+  AuthState,
+  LoginRequest,
+  RegisterRequest,
   VerifyEmailRequest,
   ResetPasswordRequest,
   ResetPasswordConfirmRequest,
-  User 
+  User,
 } from "../../types";
-import { AuthService } from "../../services/authService";
 
 const initialState: AuthState = {
   user: AuthService.getUser(),
@@ -28,10 +28,10 @@ export const loginUser = createAsyncThunk(
       return response;
     } catch (error) {
       return rejectWithValue(
-        error instanceof Error ? error.message : "שגיאה בהתחברות"
+        error instanceof Error ? error.message : "שגיאה בהתחברות",
       );
     }
-  }
+  },
 );
 
 export const registerUser = createAsyncThunk(
@@ -42,10 +42,10 @@ export const registerUser = createAsyncThunk(
       return response;
     } catch (error) {
       return rejectWithValue(
-        error instanceof Error ? error.message : "שגיאה בהרשמה"
+        error instanceof Error ? error.message : "שגיאה בהרשמה",
       );
     }
-  }
+  },
 );
 
 export const verifyEmail = createAsyncThunk(
@@ -56,10 +56,10 @@ export const verifyEmail = createAsyncThunk(
       return response;
     } catch (error) {
       return rejectWithValue(
-        error instanceof Error ? error.message : "שגיאה באימות המייל"
+        error instanceof Error ? error.message : "שגיאה באימות המייל",
       );
     }
-  }
+  },
 );
 
 export const resetPassword = createAsyncThunk(
@@ -70,10 +70,10 @@ export const resetPassword = createAsyncThunk(
       return response;
     } catch (error) {
       return rejectWithValue(
-        error instanceof Error ? error.message : "שגיאה בבקשת איפוס סיסמה"
+        error instanceof Error ? error.message : "שגיאה בבקשת איפוס סיסמה",
       );
     }
-  }
+  },
 );
 
 export const confirmResetPassword = createAsyncThunk(
@@ -84,10 +84,10 @@ export const confirmResetPassword = createAsyncThunk(
       return response;
     } catch (error) {
       return rejectWithValue(
-        error instanceof Error ? error.message : "שגיאה באיפוס הסיסמה"
+        error instanceof Error ? error.message : "שגיאה באיפוס הסיסמה",
       );
     }
-  }
+  },
 );
 
 export const getCurrentUser = createAsyncThunk(
@@ -98,10 +98,10 @@ export const getCurrentUser = createAsyncThunk(
       return user;
     } catch (error) {
       return rejectWithValue(
-        error instanceof Error ? error.message : "שגיאה בטעינת מידע המשתמש"
+        error instanceof Error ? error.message : "שגיאה בטעינת מידע המשתמש",
       );
     }
-  }
+  },
 );
 
 export const refreshAuthToken = createAsyncThunk(
@@ -112,10 +112,10 @@ export const refreshAuthToken = createAsyncThunk(
       return response;
     } catch (error) {
       return rejectWithValue(
-        error instanceof Error ? error.message : "שגיאה ברענון ה-token"
+        error instanceof Error ? error.message : "שגיאה ברענון ה-token",
       );
     }
-  }
+  },
 );
 
 export const requestPasswordReset = createAsyncThunk(
@@ -126,10 +126,10 @@ export const requestPasswordReset = createAsyncThunk(
       return response;
     } catch (error) {
       return rejectWithValue(
-        error instanceof Error ? error.message : "שגיאה בבקשת איפוס סיסמה"
+        error instanceof Error ? error.message : "שגיאה בבקשת איפוס סיסמה",
       );
     }
-  }
+  },
 );
 
 export const confirmPasswordReset = createAsyncThunk(
@@ -140,10 +140,10 @@ export const confirmPasswordReset = createAsyncThunk(
       return response;
     } catch (error) {
       return rejectWithValue(
-        error instanceof Error ? error.message : "שגיאה באיפוס הסיסמה"
+        error instanceof Error ? error.message : "שגיאה באיפוס הסיסמה",
       );
     }
-  }
+  },
 );
 
 export const logoutUser = createAsyncThunk(
@@ -154,10 +154,10 @@ export const logoutUser = createAsyncThunk(
       return null;
     } catch (error) {
       return rejectWithValue(
-        error instanceof Error ? error.message : "שגיאה בהתנתקות"
+        error instanceof Error ? error.message : "שגיאה בהתנתקות",
       );
     }
-  }
+  },
 );
 
 const authSlice = createSlice({
@@ -170,7 +170,10 @@ const authSlice = createSlice({
     updateUser: (state, action: PayloadAction<User>) => {
       state.user = action.payload;
       if (state.user) {
-        localStorage.setItem(AuthService["USER_KEY"], JSON.stringify(state.user));
+        localStorage.setItem(
+          AuthService["USER_KEY"],
+          JSON.stringify(state.user),
+        );
       }
     },
     // עדכון מידע המשתמש מ-localStorage (לשימוש בעת טעינת האפליקציה)
@@ -343,6 +346,8 @@ export const authReducer = authSlice.reducer;
 // Selectors
 export const selectAuth = (state: { auth: AuthState }) => state.auth;
 export const selectUser = (state: { auth: AuthState }) => state.auth.user;
-export const selectIsAuthenticated = (state: { auth: AuthState }) => state.auth.isAuthenticated;
-export const selectAuthLoading = (state: { auth: AuthState }) => state.auth.isLoading;
+export const selectIsAuthenticated = (state: { auth: AuthState }) =>
+  state.auth.isAuthenticated;
+export const selectAuthLoading = (state: { auth: AuthState }) =>
+  state.auth.isLoading;
 export const selectAuthError = (state: { auth: AuthState }) => state.auth.error;

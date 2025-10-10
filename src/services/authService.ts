@@ -134,13 +134,16 @@ export class AuthService {
   static async confirmResetPassword(
     confirmData: ResetPasswordConfirmRequest,
   ): Promise<{ message: string }> {
-    const response = await fetch(`${API_BASE_URL}/auth/reset-password-confirm`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
+    const response = await fetch(
+      `${API_BASE_URL}/auth/reset-password-confirm`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(confirmData),
       },
-      body: JSON.stringify(confirmData),
-    });
+    );
 
     const data = await response.json();
 
@@ -233,7 +236,8 @@ export class AuthService {
 
   static isValidPassword(password: string): boolean {
     // לפחות 8 תווים, אות גדולה, אות קטנה, מספר
-    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d@$!%*?&]{8,}$/;
+    const passwordRegex =
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d@$!%*?&]{8,}$/;
     return passwordRegex.test(password);
   }
 
@@ -243,7 +247,9 @@ export class AuthService {
     return nameRegex.test(name.trim());
   }
 
-  static async requestPasswordReset(request: ResetPasswordRequest): Promise<{ message: string }> {
+  static async requestPasswordReset(
+    request: ResetPasswordRequest,
+  ): Promise<{ message: string }> {
     const response = await fetch(`${API_BASE_URL}/auth/forgot-password`, {
       method: "POST",
       headers: {
@@ -261,7 +267,9 @@ export class AuthService {
     return data;
   }
 
-  static async confirmPasswordReset(request: ResetPasswordConfirmRequest): Promise<{ message: string }> {
+  static async confirmPasswordReset(
+    request: ResetPasswordConfirmRequest,
+  ): Promise<{ message: string }> {
     const response = await fetch(`${API_BASE_URL}/auth/reset-password`, {
       method: "POST",
       headers: {

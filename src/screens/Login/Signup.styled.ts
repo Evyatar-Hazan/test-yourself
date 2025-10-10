@@ -72,14 +72,17 @@ export const Input = styled.input<{ error?: boolean }>`
   border: 2px solid ${(props) => (props.error ? "#e74c3c" : "#e1e8ed")};
   border-radius: 8px;
   font-size: 1rem;
-  transition: border-color 0.2s, box-shadow 0.2s;
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
   box-sizing: border-box;
 
   &:focus {
     outline: none;
     border-color: ${(props) => (props.error ? "#e74c3c" : "#28a745")};
-    box-shadow: 0 0 0 3px ${(props) =>
-      props.error ? "rgba(231, 76, 60, 0.1)" : "rgba(40, 167, 69, 0.1)"};
+    box-shadow: 0 0 0 3px
+      ${(props) =>
+        props.error ? "rgba(231, 76, 60, 0.1)" : "rgba(40, 167, 69, 0.1)"};
   }
 
   &:disabled {
@@ -130,7 +133,7 @@ export const AuthActions = styled.div`
     color: #28a745;
     text-decoration: none;
     font-weight: 500;
-    
+
     &:hover {
       text-decoration: underline;
     }

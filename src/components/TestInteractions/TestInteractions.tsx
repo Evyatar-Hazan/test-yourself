@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import { useTranslationTyped } from "../../hooks/useTranslationTyped";
 import {
   toggleTestLike,
   fetchTestComments,
@@ -121,6 +122,7 @@ const TestInteractions: React.FC<TestInteractionsProps> = ({
   onNavigateToTest,
   onNavigateToExam,
 }) => {
+  const { t } = useTranslationTyped();
   const [likes, setLikes] = useState<string[]>(testLikes);
   const [comments, setComments] = useState<TestComment[]>([]);
   const [showComments, setShowComments] = useState(false);
@@ -219,7 +221,7 @@ const TestInteractions: React.FC<TestInteractionsProps> = ({
             }}
           >
             <span>📝</span>
-            <span>בחן את עצמך</span>
+            <span>{t("interactions.take_test")}</span>
           </ActionButton>
         </ActionsGroup>
       </InteractionsContainer>
@@ -230,7 +232,7 @@ const TestInteractions: React.FC<TestInteractionsProps> = ({
             <CommentInput
               value={newComment}
               onChange={(e) => setNewComment(e.target.value)}
-              placeholder="כתוב תגובה..."
+              placeholder={t("interactions.comment_placeholder")}
               onClick={(e) => e.stopPropagation()}
             />
             <InputActions>
@@ -238,19 +240,23 @@ const TestInteractions: React.FC<TestInteractionsProps> = ({
                 disabled={!newComment.trim()}
                 onClick={handleAddComment}
               >
-                שלח
+                {t("interactions.send")}
               </SubmitButton>
-              <CancelButton onClick={handleCancel}>ביטול</CancelButton>
+              <CancelButton onClick={handleCancel}>
+                {t("interactions.cancel")}
+              </CancelButton>
             </InputActions>
           </div>
 
           {loadingComments ? (
-            <div>טוען תגובות...</div>
+            <div>{t("interactions.loading_comments")}</div>
           ) : (
             <div>
               {comments.slice(0, 3).map((comment) => (
                 <CommentItem key={comment.id}>
-                  <CommentAuthor>משתמש {comment.authorId}</CommentAuthor>
+                  <CommentAuthor>
+                    {t("comments.user_label", { id: comment.authorId })}
+                  </CommentAuthor>
                   <CommentBody>{comment.body}</CommentBody>
                   <CommentTime>
                     {new Date(comment.createdAt).toLocaleString("he-IL")}
@@ -269,7 +275,9 @@ const TestInteractions: React.FC<TestInteractionsProps> = ({
                     padding: "4px 0",
                   }}
                 >
-                  ראה עוד {comments.length - 3} תגובות...
+                  {t("interactions.see_more_comments", {
+                    count: comments.length - 3,
+                  })}
                 </ActionButton>
               )}
             </div>

@@ -46,7 +46,7 @@ const Home: React.FC = () => {
                   fontSize: "14px",
                 }}
               >
-                התחבר
+                {t("homeAuth.login")}
               </Link>
               <Link
                 to="/signup"
@@ -59,19 +59,21 @@ const Home: React.FC = () => {
                   fontSize: "14px",
                 }}
               >
-                הרשם
+                {t("homeAuth.signup")}
               </Link>
             </>
           ) : (
             <>
-              <span style={{ 
-                padding: "8px 12px", 
-                backgroundColor: "#f8f9fa", 
-                borderRadius: "4px",
-                fontSize: "14px",
-                border: "1px solid #dee2e6"
-              }}>
-                שלום {user?.name}
+              <span
+                style={{
+                  padding: "8px 12px",
+                  backgroundColor: "#f8f9fa",
+                  borderRadius: "4px",
+                  fontSize: "14px",
+                  border: "1px solid #dee2e6",
+                }}
+              >
+                {t("homeAuth.hello_name", { name: user?.name ?? "" })}
               </span>
               <button
                 onClick={handleLogout}
@@ -85,7 +87,7 @@ const Home: React.FC = () => {
                   cursor: "pointer",
                 }}
               >
-                התנתק
+                {t("homeAuth.logout")}
               </button>
             </>
           )}

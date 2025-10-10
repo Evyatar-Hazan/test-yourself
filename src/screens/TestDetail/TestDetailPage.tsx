@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import TestComments from "../../components/TestComments/TestComments";
 import { useTestComments } from "../../hooks/useTestComments";
+import { useTranslationTyped } from "../../hooks/useTranslationTyped";
 import { toggleTestLike } from "../../services/api";
 import { getTestById } from "../../utils/helpers";
 
@@ -19,7 +20,7 @@ const BackButton = styled.button`
   border-radius: 4px;
   cursor: pointer;
   margin-bottom: 20px;
-  
+
   &:hover {
     background: #f5f5f5;
   }
@@ -91,7 +92,7 @@ const ActionButton = styled.button`
   cursor: pointer;
   font-size: 16px;
   margin-right: 10px;
-  
+
   &:hover {
     background: #004499;
   }
@@ -117,10 +118,11 @@ const ErrorMessage = styled.div`
 const TestDetailPage: React.FC = () => {
   const { testId } = useParams<{ testId: string }>();
   const navigate = useNavigate();
+  const { t } = useTranslationTyped();
   const [test, setTest] = useState<any>(null); // eslint-disable-line
   const [testLoading, setTestLoading] = useState(true);
   const [testLikes, setTestLikes] = useState<string[]>([]);
-  
+
   const {
     comments,
     loading: commentsLoading,
@@ -129,7 +131,7 @@ const TestDetailPage: React.FC = () => {
     handleUpdateComment,
     handleDeleteComment,
     handleToggleCommentLike,
-    refreshComments,
+    // refreshComments,
   } = useTestComments(testId || "");
 
   // For demo - hardcoded current user ID
@@ -138,7 +140,7 @@ const TestDetailPage: React.FC = () => {
   useEffect(() => {
     const loadTest = async () => {
       if (!testId) return;
-      
+
       try {
         setTestLoading(true);
         const testData = await getTestById(testId);
@@ -180,7 +182,7 @@ const TestDetailPage: React.FC = () => {
   if (testLoading) {
     return (
       <Container>
-        <LoadingSpinner>טוען מבחן...</LoadingSpinner>
+        <LoadingSpinner>{t("testDetail.loading")}</LoadingSpinner>
       </Container>
     );
   }
@@ -188,9 +190,9 @@ const TestDetailPage: React.FC = () => {
   if (!test) {
     return (
       <Container>
-        <ErrorMessage>מבחן לא נמצא</ErrorMessage>
+        <ErrorMessage>{t("testDetail.not_found")}</ErrorMessage>
         <BackButton onClick={() => navigate("/")}>
-          חזרה לדף הבית
+          {t("testDetail.back_to_home")}
         </BackButton>
       </Container>
     );
@@ -199,7 +201,7 @@ const TestDetailPage: React.FC = () => {
   return (
     <Container>
       <BackButton onClick={() => navigate("/")}>
-        ← חזרה לדף הבית
+        {t("testDetail.back_to_home")}
       </BackButton>
 
       <TestCard>
@@ -207,13 +209,18 @@ const TestDetailPage: React.FC = () => {
           <TestTitle>{test.subject}</TestTitle>
           <TestMeta>
             <MetaItem>
-              📅 {new Date(test.takenAt).toLocaleDateString("he-IL")}
+              <span>{t("icons.calendar")}</span>
+              <span>{new Date(test.takenAt).toLocaleDateString("he-IL")}</span>
             </MetaItem>
             <MetaItem>
-              ⏱️ {test.questionsCount} שאלות
+              <span>{t("icons.stopwatch")}</span>
+              <span>{test.questionsCount}</span>
+              <span>{t("tests.questions")}</span>
             </MetaItem>
             <MetaItem>
-              👥 {test.respondentsCount} נבחנים
+              <span>{t("icons.users")}</span>
+              <span>{test.respondentsCount}</span>
+              <span>{t("testDetail.respondents")}</span>
             </MetaItem>
           </TestMeta>
         </TestHeader>
@@ -221,32 +228,30 @@ const TestDetailPage: React.FC = () => {
         <StatsGrid>
           <StatCard>
             <StatValue>{test.averageScore.toFixed(1)}</StatValue>
-            <StatLabel>ציון ממוצע</StatLabel>
+            <StatLabel>{t("tests.average_score")}</StatLabel>
           </StatCard>
           <StatCard>
             <StatValue>{test.averageCorrect.toFixed(1)}</StatValue>
-            <StatLabel>תשובות נכונות ממוצע</StatLabel>
+            <StatLabel>{t("general.average_correct")}</StatLabel>
           </StatCard>
           <StatCard>
             <StatValue>{testLikes.length}</StatValue>
-            <StatLabel>לייקים</StatLabel>
+            <StatLabel>{t("general.likes")}</StatLabel>
           </StatCard>
           <StatCard>
             <StatValue>{comments.length}</StatValue>
-            <StatLabel>תגובות</StatLabel>
+            <StatLabel>{t("general.comments")}</StatLabel>
           </StatCard>
         </StatsGrid>
 
         <div>
           <ActionButton onClick={startTest}>
-            התחל מבחן
+            {t("testDetail.start_test")}
           </ActionButton>
         </div>
       </TestCard>
 
-      {commentsError && (
-        <ErrorMessage>{commentsError}</ErrorMessage>
-      )}
+      {commentsError && <ErrorMessage>{commentsError}</ErrorMessage>}
 
       {!commentsLoading && (
         <TestComments

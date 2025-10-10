@@ -151,7 +151,7 @@ const TestsFeed: React.FC = () => {
                   return `${t("general.average_correct")}: ${averageCorrect}`;
                 })()}
               </p>
-              
+
               <TestInteractions
                 testId={test.id}
                 testLikes={test.likes}

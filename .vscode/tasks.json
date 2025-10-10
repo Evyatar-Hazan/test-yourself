@@ -13,6 +13,15 @@
 				"$tsc"
 			],
 			"group": "build"
+		},
+		{
+			"label": "lint-client",
+			"type": "shell",
+			"command": "npm run -s lint",
+			"problemMatcher": [
+				"$eslint-stylish"
+			],
+			"group": "build"
 		}
 	]
 }

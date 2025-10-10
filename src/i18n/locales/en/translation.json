@@ -1,8 +1,50 @@
+  
 {
   "welcome": "Welcome",
   "app_title": "Test Yourself",
   "change_language": "Change Language",
-  
+  "signup": {
+    "title": "Sign Up",
+    "subtitle": "Join the Test Yourself community",
+    "name_label": "Full Name",
+    "name_placeholder": "Enter your full name",
+    "email_label": "Email address",
+    "email_placeholder": "Enter your email address",
+    "password_label": "Password",
+    "password_placeholder": "Choose a strong password",
+    "confirm_password_label": "Confirm Password",
+    "confirm_password_placeholder": "Enter the password again",
+    "loading": "Signing up...",
+    "submit": "Sign Up",
+    "has_account": "Already have an account? ",
+    "login_here": "Login here",
+    "required_name": "Name is required",
+    "invalid_name": "Name must be at least 2 characters and contain only letters and spaces",
+    "required_email": "Email is required",
+    "invalid_email": "Invalid email address",
+    "required_password": "Password is required",
+    "weak_password": "Password must be at least 8 characters and include uppercase, lowercase, and a number",
+    "required_confirm_password": "Confirm password is required",
+    "passwords_do_not_match": "Passwords do not match"
+  },
+  "login": {
+    "title": "Login",
+    "welcome_back": "Welcome back to Test Yourself",
+    "email_label": "Email address",
+    "email_placeholder": "Enter your email address",
+    "password_label": "Password",
+    "password_placeholder": "Enter your password",
+    "hide_password": "Hide password",
+    "show_password": "Show password",
+    "loading": "Logging in...",
+    "submit": "Login",
+    "forgot_password": "Forgot password?",
+    "no_account": "Don't have an account? ",
+    "signup_here": "Sign up here",
+    "required_email": "Email is required",
+    "invalid_email": "Invalid email address",
+    "required_password": "Password is required"
+  },
   "home": {
     "greeting": "Hello World!",
     "title": "Home",
@@ -12,6 +54,12 @@
     "tests_title": "Tests",
     "comments_title": "Comments",
     "no_more_tests": "No more tests"
+  },
+  "homeAuth": {
+    "login": "Login",
+    "signup": "Sign Up",
+    "hello_name": "Hello {{name}}",
+    "logout": "Logout"
   },
   
   "navigation": {
@@ -45,7 +93,86 @@
     "score": "Score",
     "average_correct": "Average Correct",
     "unknown_user": "Unknown User",
-    "test_taken_at": "Taken on: {{date}}"
+    "test_taken_at": "Taken on: {{date}}",
+    "likes": "Likes",
+    "comments": "Comments"
+  },
+  "verifyEmail": {
+    "title": "Email Verification",
+    "description": "We sent you an email with a verification link. Click the link in the email or enter the code you received below:",
+    "token_label": "Verification Code",
+    "token_placeholder": "Enter the verification code",
+    "verifying": "Verifying...",
+    "verify": "Verify Email",
+    "not_received": "Didn't receive an email?",
+    "help_spam": "Check your spam folder",
+    "help_check_email": "Make sure your email address is correct",
+    "help_try_again": "Try again in a few minutes",
+    "success_title": "Verification completed successfully!",
+    "redirect_info": "You will be redirected to the home page in a few seconds...",
+    "continue": "Continue",
+    "error_title": "Verification Error",
+    "loading_message": "Verifying your email address...",
+    "retry": "Try Again",
+    "back_to_login": "Back to Login"
+  },
+  "forgotPassword": {
+    "email_sent_title": "Check your email",
+    "email_sent_message": "We sent you a password reset link to {{email}}",
+    "back_to_login": "Back to Login",
+    "title": "Forgot Password?",
+    "description": "Enter your email address and we'll send you a reset link",
+    "email_placeholder": "Email address",
+    "sending": "Sending...",
+    "send_link": "Send reset link"
+  },
+  "resetPassword": {
+    "invalid_link_title": "Invalid link",
+    "invalid_link_desc": "The password reset link is invalid or has expired",
+    "request_new_link": "Request a new link",
+    "success_title": "Password reset successfully!",
+    "success_desc": "You can now log in with your new password",
+    "title": "Reset Password",
+    "description": "Enter a new password for your account",
+    "password_placeholder": "New password",
+    "confirm_placeholder": "Confirm password",
+    "resetting": "Resetting...",
+    "reset": "Reset Password"
+  },
+  "comments": {
+    "user_label": "User {{id}}",
+    "updated_suffix": " (updated)",
+    "edit_placeholder": "Edit your comment...",
+    "save": "Save",
+    "cancel": "Cancel",
+    "reply": "Reply",
+    "edit": "Edit",
+    "delete": "Delete",
+    "write_comment": "Write a comment",
+    "main_placeholder": "Share your thoughts about the test...",
+    "submit_comment": "Submit Comment",
+    "title": "Comments",
+    "no_comments": "No comments yet. Be the first to comment!"
+  },
+  "interactions": {
+    "comment_placeholder": "Write a comment...",
+    "send": "Send",
+    "cancel": "Cancel",
+    "loading_comments": "Loading comments...",
+    "take_test": "Test yourself",
+    "see_more_comments": "See {{count}} more comments..."
+  },
+  "icons": {
+    "calendar": "📅",
+    "stopwatch": "⏱️",
+    "users": "👥"
+  },
+  "testDetail": {
+    "not_found": "Test not found",
+    "back_to_home": "Back to Home",
+    "start_test": "Start Test",
+    "loading": "Loading test...",
+    "respondents": "Respondents"
   },
   
   "exam": {

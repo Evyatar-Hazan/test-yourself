@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { AppDispatch } from "../../store";
 import {
   verifyEmail,
   selectAuthLoading,
   selectAuthError,
   clearError,
 } from "../../features/auth/authSlice";
-
+import { AppDispatch } from "../../store";
 
 const VerifyEmail: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -16,6 +16,7 @@ const VerifyEmail: React.FC = () => {
   const [searchParams] = useSearchParams();
   const isLoading = useSelector(selectAuthLoading);
   const error = useSelector(selectAuthError);
+  const { t } = useTranslation();
 
   const [verificationStatus, setVerificationStatus] = useState<
     "pending" | "success" | "error"
@@ -24,7 +25,7 @@ const VerifyEmail: React.FC = () => {
 
   useEffect(() => {
     const token = searchParams.get("token");
-    
+
     if (token) {
       // אימות אוטומטי אם יש token ב-URL
       handleVerification(token);
@@ -35,22 +36,22 @@ const VerifyEmail: React.FC = () => {
     try {
       dispatch(clearError());
       const result = await dispatch(verifyEmail({ token }));
-      
+
       if (verifyEmail.fulfilled.match(result)) {
         setVerificationStatus("success");
-        setMessage(result.payload.message || "המייל אומת בהצלחה!");
-        
+        setMessage(result.payload.message || t("verifyEmail.success_title"));
+
         // נווט לעמוד הראשי אחרי 3 שניות
         setTimeout(() => {
           navigate("/");
         }, 3000);
       } else {
         setVerificationStatus("error");
-        setMessage(result.payload as string || "שגיאה באימות המייל");
+        setMessage((result.payload as string) || t("verifyEmail.error_title"));
       }
-    } catch (error) {
+    } catch {
       setVerificationStatus("error");
-      setMessage("שגיאה באימות המייל");
+      setMessage(t("verifyEmail.error_title"));
     }
   };
 
@@ -68,26 +69,26 @@ const VerifyEmail: React.FC = () => {
       <div className="verify-email-card">
         <div className="verify-email-header">
           <div className="email-icon">📧</div>
-          <h1>אימות כתובת מייל</h1>
+          <h1>{t("verifyEmail.title")}</h1>
         </div>
 
         <div className="verify-email-content">
           {verificationStatus === "pending" && !searchParams.get("token") && (
             <>
-              <p className="description">
-                שלחנו אליך מייל עם קישור לאימות החשבון. לחץ על הקישור במייל או
-                הכנס את הקוד שקיבלת להלן:
-              </p>
+              <p className="description">{t("verifyEmail.description")}</p>
 
-              <form onSubmit={handleManualSubmit} className="manual-verify-form">
+              <form
+                onSubmit={handleManualSubmit}
+                className="manual-verify-form"
+              >
                 <div className="form-group">
-                  <label htmlFor="token">קוד אימות</label>
+                  <label htmlFor="token">{t("verifyEmail.token_label")}</label>
                   <input
                     id="token"
                     type="text"
                     value={manualToken}
                     onChange={(e) => setManualToken(e.target.value)}
-                    placeholder="הכנס את קוד האימות"
+                    placeholder={t("verifyEmail.token_placeholder")}
                     disabled={isLoading}
                   />
                 </div>
@@ -97,16 +98,18 @@ const VerifyEmail: React.FC = () => {
                   className="verify-button"
                   disabled={isLoading || !manualToken.trim()}
                 >
-                  {isLoading ? "מאמת..." : "אמת מייל"}
+                  {isLoading
+                    ? t("verifyEmail.verifying")
+                    : t("verifyEmail.verify")}
                 </button>
               </form>
 
               <div className="help-section">
-                <p>לא קיבלת מייל?</p>
+                <p>{t("verifyEmail.not_received")}</p>
                 <ul>
-                  <li>בדוק את תיקיית הספאם</li>
-                  <li>וודא שכתובת המייל נכונה</li>
-                  <li>נסה שוב בעוד כמה דקות</li>
+                  <li>{t("verifyEmail.help_spam")}</li>
+                  <li>{t("verifyEmail.help_check_email")}</li>
+                  <li>{t("verifyEmail.help_try_again")}</li>
                 </ul>
               </div>
             </>
@@ -115,23 +118,20 @@ const VerifyEmail: React.FC = () => {
           {verificationStatus === "pending" && searchParams.get("token") && (
             <div className="loading-state">
               <div className="spinner"></div>
-              <p>מאמת את כתובת המייל שלך...</p>
+              <p>{t("verifyEmail.loading_message")}</p>
             </div>
           )}
 
           {verificationStatus === "success" && (
             <div className="success-state">
               <div className="success-icon">✅</div>
-              <h2>אימות הושלם בהצלחה!</h2>
+              <h2>{t("verifyEmail.success_title")}</h2>
               <p>{message}</p>
               <p className="redirect-message">
-                אתה מועבר לעמוד הראשי בעוד כמה שניות...
+                {t("verifyEmail.redirect_info")}
               </p>
-              <button
-                className="continue-button"
-                onClick={() => navigate("/")}
-              >
-                המשך לאתר
+              <button className="continue-button" onClick={() => navigate("/")}>
+                {t("verifyEmail.continue")}
               </button>
             </div>
           )}
@@ -139,7 +139,7 @@ const VerifyEmail: React.FC = () => {
           {verificationStatus === "error" && (
             <div className="error-state">
               <div className="error-icon">❌</div>
-              <h2>שגיאה באימות</h2>
+              <h2>{t("verifyEmail.error_title")}</h2>
               <p>{message || error}</p>
               <div className="error-actions">
                 <button
@@ -150,13 +150,13 @@ const VerifyEmail: React.FC = () => {
                     dispatch(clearError());
                   }}
                 >
-                  נסה שוב
+                  {t("verifyEmail.retry")}
                 </button>
                 <button
                   className="back-button"
                   onClick={() => navigate("/login")}
                 >
-                  חזור להתחברות
+                  {t("verifyEmail.back_to_login")}
                 </button>
               </div>
             </div>

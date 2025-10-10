@@ -1,25 +1,20 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-// import Feed from './pages/Feed';
-// import CreateTest from './pages/CreateTest';
-// import SettingsPage from './pages/Settings';
-// import Notifications from './pages/Notifications';
-// import TestDetail from './pages/TestDetail';
-// import BottomTabs from "../components/BottomTabs/BottomTabs";
-// import Drawer from "../components/Drawer/Drawer";
 import Header from "../components/Header/Header";
 import CreateTest from "../screens/CreateTest/CreateTest";
 import TestScreen from "../screens/Exam/TestScreen";
 import Home from "../screens/Home/Home";
-import Profile from "../screens/Profile/Profile";
-import TestDetailPage from "../screens/TestDetail/TestDetailPage";
+import ForgotPassword from "../screens/Login/ForgotPassword";
 import Login from "../screens/Login/Login";
+import ResetPassword from "../screens/Login/ResetPassword";
 import Signup from "../screens/Login/Signup";
 import VerifyEmail from "../screens/Login/VerifyEmail";
-import ForgotPassword from "../screens/Login/ForgotPassword";
-import ResetPassword from "../screens/Login/ResetPassword";
+import Profile from "../screens/Profile/Profile";
+import TestDetailPage from "../screens/TestDetail/TestDetailPage";
 
 const Navigation: React.FC = () => {
+  const { t } = useTranslation();
   return (
     <Router>
       <div
@@ -32,7 +27,7 @@ const Navigation: React.FC = () => {
               path="/"
               element={
                 <>
-                  <Header title="Home" />
+                  <Header title={t("home.title")} />
                   <Home />
                   {/* <BottomTabs /> */}
                 </>
@@ -42,7 +37,7 @@ const Navigation: React.FC = () => {
               path="/profile"
               element={
                 <>
-                  <Header title="פרופיל" showBack />
+                  <Header title={t("navigation.profile")} showBack />
                   <Profile />
                 </>
               }
@@ -51,7 +46,7 @@ const Navigation: React.FC = () => {
               path="/profile/:userId"
               element={
                 <>
-                  <Header title="פרופיל" showBack />
+                  <Header title={t("navigation.profile")} showBack />
                   <Profile />
                 </>
               }
@@ -60,7 +55,7 @@ const Navigation: React.FC = () => {
               path="/exam/:testId"
               element={
                 <>
-                  <Header title="מבחן" showBack />
+                  <Header title={t("exam.test")} showBack />
                   <TestScreen />
                 </>
               }
@@ -77,7 +72,7 @@ const Navigation: React.FC = () => {
               path="/create-test"
               element={
                 <>
-                  <Header title="צור מבחן" showBack />
+                  <Header title={t("navigation.createTest")} showBack />
                   <CreateTest />
                 </>
               }

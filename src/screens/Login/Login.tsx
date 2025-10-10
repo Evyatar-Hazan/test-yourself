@@ -1,10 +1,16 @@
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { AppDispatch } from "../../store";
-import { loginUser, selectAuthLoading, selectAuthError, clearError } from "../../features/auth/authSlice";
+import {
+  loginUser,
+  selectAuthLoading,
+  selectAuthError,
+  clearError,
+} from "../../features/auth/authSlice";
 import { AuthService } from "../../services/authService";
+import { AppDispatch } from "../../store";
 
 // Styled Components
 const LoginContainer = styled.div`
@@ -76,16 +82,20 @@ const FormGroup = styled.div`
 const Input = styled.input<{ error?: boolean }>`
   width: 100%;
   padding: 12px 15px;
-  border: 2px solid ${props => props.error ? '#e74c3c' : '#e1e8ed'};
+  border: 2px solid ${(props) => (props.error ? "#e74c3c" : "#e1e8ed")};
   border-radius: 8px;
   font-size: 1rem;
-  transition: border-color 0.2s, box-shadow 0.2s;
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
   box-sizing: border-box;
 
   &:focus {
     outline: none;
-    border-color: ${props => props.error ? '#e74c3c' : '#667eea'};
-    box-shadow: 0 0 0 3px ${props => props.error ? 'rgba(231, 76, 60, 0.1)' : 'rgba(102, 126, 234, 0.1)'};
+    border-color: ${(props) => (props.error ? "#e74c3c" : "#667eea")};
+    box-shadow: 0 0 0 3px
+      ${(props) =>
+        props.error ? "rgba(231, 76, 60, 0.1)" : "rgba(102, 126, 234, 0.1)"};
   }
 
   &:disabled {
@@ -109,7 +119,7 @@ const PasswordToggle = styled.button`
   color: #666;
   font-size: 1.1rem;
   padding: 5px;
-  
+
   &:hover {
     color: #333;
   }
@@ -125,13 +135,16 @@ const ErrorMessage = styled.span`
 const SubmitButton = styled.button<{ disabled?: boolean }>`
   width: 100%;
   padding: 14px;
-  background: ${props => props.disabled ? '#95a5a6' : 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'};
+  background: ${(props) =>
+    props.disabled
+      ? "#95a5a6"
+      : "linear-gradient(135deg, #667eea 0%, #764ba2 100%)"};
   color: white;
   border: none;
   border-radius: 8px;
   font-size: 1rem;
   font-weight: 600;
-  cursor: ${props => props.disabled ? 'not-allowed' : 'pointer'};
+  cursor: ${(props) => (props.disabled ? "not-allowed" : "pointer")};
   transition: all 0.2s;
   margin-bottom: 20px;
 
@@ -153,7 +166,7 @@ const ForgotPassword = styled.div`
     color: #667eea;
     text-decoration: none;
     font-size: 0.9rem;
-    
+
     &:hover {
       text-decoration: underline;
     }
@@ -169,7 +182,7 @@ const AuthActions = styled.div`
     color: #667eea;
     text-decoration: none;
     font-weight: 500;
-    
+
     &:hover {
       text-decoration: underline;
     }
@@ -181,6 +194,7 @@ const Login: React.FC = () => {
   const navigate = useNavigate();
   const isLoading = useSelector(selectAuthLoading);
   const error = useSelector(selectAuthError);
+  const { t } = useTranslation();
 
   const [formData, setFormData] = useState({
     email: "",
@@ -196,14 +210,14 @@ const Login: React.FC = () => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
-    
-    // ניקוי שגיאות validation כשהמשתמש מתחיל להקליד
+    setFormData((prev) => ({ ...prev, [name]: value }));
+
+    // Clear validation errors when user starts typing
     if (validationErrors[name as keyof typeof validationErrors]) {
-      setValidationErrors(prev => ({ ...prev, [name]: undefined }));
+      setValidationErrors((prev) => ({ ...prev, [name]: undefined }));
     }
-    
-    // ניקוי שגיאות כלליות
+
+    // Clear general errors
     if (error) {
       dispatch(clearError());
     }
@@ -213,13 +227,13 @@ const Login: React.FC = () => {
     const errors: typeof validationErrors = {};
 
     if (!formData.email) {
-      errors.email = "נדרש מייל";
+      errors.email = t("login.required_email");
     } else if (!AuthService.isValidEmail(formData.email)) {
-      errors.email = "כתובת מייל לא תקינה";
+      errors.email = t("login.invalid_email");
     }
 
     if (!formData.password) {
-      errors.password = "נדרשת סיסמה";
+      errors.password = t("login.required_password");
     }
 
     setValidationErrors(errors);
@@ -228,7 +242,7 @@ const Login: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!validateForm()) return;
 
     try {
@@ -245,13 +259,13 @@ const Login: React.FC = () => {
     <LoginContainer>
       <LoginCard>
         <LoginHeader>
-          <h1>התחברות</h1>
-          <p>ברוכים הבאים חזרה ל-Test Yourself</p>
+          <h1>{t("login.title")}</h1>
+          <p>{t("login.welcome_back")}</p>
         </LoginHeader>
 
         <LoginForm onSubmit={handleSubmit}>
           <FormGroup>
-            <label htmlFor="email">כתובת מייל</label>
+            <label htmlFor="email">{t("login.email_label")}</label>
             <Input
               id="email"
               name="email"
@@ -259,7 +273,7 @@ const Login: React.FC = () => {
               value={formData.email}
               onChange={handleChange}
               error={!!validationErrors.email}
-              placeholder="הכנס את כתובת המייל שלך"
+              placeholder={t("login.email_placeholder")}
               autoComplete="email"
               disabled={isLoading}
             />
@@ -269,7 +283,7 @@ const Login: React.FC = () => {
           </FormGroup>
 
           <FormGroup>
-            <label htmlFor="password">סיסמה</label>
+            <label htmlFor="password">{t("login.password_label")}</label>
             <PasswordInputContainer>
               <Input
                 id="password"
@@ -278,14 +292,18 @@ const Login: React.FC = () => {
                 value={formData.password}
                 onChange={handleChange}
                 error={!!validationErrors.password}
-                placeholder="הכנס את הסיסמה שלך"
+                placeholder={t("login.password_placeholder")}
                 autoComplete="current-password"
                 disabled={isLoading}
               />
               <PasswordToggle
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                aria-label={showPassword ? "הסתר סיסמה" : "הצג סיסמה"}
+                aria-label={
+                  showPassword
+                    ? t("login.hide_password")
+                    : t("login.show_password")
+                }
               >
                 {showPassword ? "🙈" : "👁️"}
               </PasswordToggle>
@@ -301,20 +319,17 @@ const Login: React.FC = () => {
             </FormGroup>
           )}
 
-          <SubmitButton
-            type="submit"
-            disabled={isLoading}
-          >
-            {isLoading ? "מתחבר..." : "התחבר"}
+          <SubmitButton type="submit" disabled={isLoading}>
+            {isLoading ? t("login.loading") : t("login.submit")}
           </SubmitButton>
 
           <ForgotPassword>
-            <Link to="/forgot-password">שכחת סיסמה?</Link>
+            <Link to="/forgot-password">{t("login.forgot_password")}</Link>
           </ForgotPassword>
-          
+
           <AuthActions>
-            <span>אין לך חשבון? </span>
-            <Link to="/signup">הירשם כאן</Link>
+            <span>{t("login.no_account")}</span>
+            <Link to="/signup">{t("login.signup_here")}</Link>
           </AuthActions>
         </LoginForm>
       </LoginCard>

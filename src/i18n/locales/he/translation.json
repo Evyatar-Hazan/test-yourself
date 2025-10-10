@@ -1,8 +1,50 @@
+  
 {
   "welcome": "ברוך הבא",
   "app_title": "בחן את עצמך",
   "change_language": "החלפת שפה",
-  
+  "signup": {
+    "title": "הרשמה",
+    "subtitle": "הצטרף לקהילת Test Yourself",
+    "name_label": "שם מלא",
+    "name_placeholder": "הכנס את שמך המלא",
+    "email_label": "כתובת מייל",
+    "email_placeholder": "הכנס את כתובת המייל שלך",
+    "password_label": "סיסמה",
+    "password_placeholder": "בחר סיסמה חזקה",
+    "confirm_password_label": "אמת סיסמה",
+    "confirm_password_placeholder": "הזן את הסיסמה שוב",
+    "loading": "נרשם...",
+    "submit": "הירשם",
+    "has_account": "יש לך כבר חשבון? ",
+    "login_here": "התחבר כאן",
+    "required_name": "נדרש שם",
+    "invalid_name": "שם חייב להכיל לפחות 2 תווים ורק אותיות ורווחים",
+    "required_email": "נדרש מייל",
+    "invalid_email": "כתובת מייל לא תקינה",
+    "required_password": "נדרשת סיסמה",
+    "weak_password": "סיסמה חייבת להכיל לפחות 8 תווים, אות גדולה, אות קטנה ומספר",
+    "required_confirm_password": "נדרש אישור סיסמה",
+    "passwords_do_not_match": "הסיסמאות לא תואמות"
+  },
+  "login": {
+    "title": "התחברות",
+    "welcome_back": "ברוכים הבאים חזרה ל-Test Yourself",
+    "email_label": "כתובת מייל",
+    "email_placeholder": "הכנס את כתובת המייל שלך",
+    "password_label": "סיסמה",
+    "password_placeholder": "הכנס את הסיסמה שלך",
+    "hide_password": "הסתר סיסמה",
+    "show_password": "הצג סיסמה",
+    "loading": "מתחבר...",
+    "submit": "התחבר",
+    "forgot_password": "שכחת סיסמה?",
+    "no_account": "אין לך חשבון? ",
+    "signup_here": "הירשם כאן",
+    "required_email": "נדרש מייל",
+    "invalid_email": "כתובת מייל לא תקינה",
+    "required_password": "נדרשת סיסמה"
+  },
   "home": {
     "greeting": "שלום עולם!",
     "title": "בית",
@@ -12,6 +54,12 @@
     "tests_title": "מבחנים",
     "comments_title": "תגובות",
     "no_more_tests": "אין עוד מבחנים"
+  },
+  "homeAuth": {
+    "login": "התחבר",
+    "signup": "הרשם",
+    "hello_name": "שלום {{name}}",
+    "logout": "התנתק"
   },
   
   "navigation": {
@@ -45,7 +93,86 @@
     "score": "ציון",
     "average_correct": "ממוצע פותרים נכונה",
     "unknown_user": "יוצר לא ידוע",
-    "test_taken_at": "נבחן בתאריך: {{date}}"
+    "test_taken_at": "נבחן בתאריך: {{date}}",
+    "likes": "לייקים",
+    "comments": "תגובות"
+  },
+  "verifyEmail": {
+    "title": "אימות כתובת מייל",
+    "description": "שלחנו אליך מייל עם קישור לאימות החשבון. לחץ על הקישור במייל או הכנס את הקוד שקיבלת להלן:",
+    "token_label": "קוד אימות",
+    "token_placeholder": "הכנס את קוד האימות",
+    "verifying": "מאמת...",
+    "verify": "אמת מייל",
+    "not_received": "לא קיבלת מייל?",
+    "help_spam": "בדוק את תיקיית הספאם",
+    "help_check_email": "וודא שכתובת המייל נכונה",
+    "help_try_again": "נסה שוב בעוד כמה דקות",
+    "success_title": "אימות הושלם בהצלחה!",
+    "redirect_info": "אתה מועבר לעמוד הראשי בעוד כמה שניות...",
+    "continue": "המשך לאתר",
+    "error_title": "שגיאה באימות",
+    "loading_message": "מאמת את כתובת המייל שלך...",
+    "retry": "נסה שוב",
+    "back_to_login": "חזור להתחברות"
+  },
+  "forgotPassword": {
+    "email_sent_title": "בדוק את המייל שלך",
+    "email_sent_message": "שלחנו לך קישור לאיפוס סיסמה לכתובת המייל {{email}}",
+    "back_to_login": "חזור לדף ההתחברות",
+    "title": "שכחת סיסמה?",
+    "description": "הזן את כתובת המייל שלך ונשלח לך קישור לאיפוס הסיסמה",
+    "email_placeholder": "כתובת מייל",
+    "sending": "שולח...",
+    "send_link": "שלח קישור לאיפוס"
+  },
+  "resetPassword": {
+    "invalid_link_title": "קישור לא תקין",
+    "invalid_link_desc": "הקישור לאיפוס הסיסמה לא תקין או פג תוקפו",
+    "request_new_link": "בקש קישור חדש",
+    "success_title": "הסיסמה אופסה בהצלחה!",
+    "success_desc": "כעת תוכל להתחבר עם הסיסמה החדשה",
+    "title": "איפוס סיסמה",
+    "description": "הזן סיסמה חדשה עבור החשבון שלך",
+    "password_placeholder": "סיסמה חדשה",
+    "confirm_placeholder": "אמת סיסמה",
+    "resetting": "מאפס...",
+    "reset": "אפס סיסמה"
+  },
+  "comments": {
+    "user_label": "משתמש {{id}}",
+    "updated_suffix": " (עודכן)",
+    "edit_placeholder": "ערוך את התגובה...",
+    "save": "שמור",
+    "cancel": "ביטול",
+    "reply": "הגב",
+    "edit": "ערוך",
+    "delete": "מחק",
+    "write_comment": "כתוב תגובה",
+    "main_placeholder": "שתף את המחשבות שלך על המבחן...",
+    "submit_comment": "שלח תגובה",
+    "title": "תגובות",
+    "no_comments": "אין עדיין תגובות. היה הראשון להגיב!"
+  },
+  "interactions": {
+    "comment_placeholder": "כתוב תגובה...",
+    "send": "שלח",
+    "cancel": "ביטול",
+    "loading_comments": "טוען תגובות...",
+    "take_test": "בחן את עצמך",
+    "see_more_comments": "ראה עוד {{count}} תגובות..."
+  },
+  "icons": {
+    "calendar": "📅",
+    "stopwatch": "⏱️",
+    "users": "👥"
+  },
+  "testDetail": {
+    "not_found": "מבחן לא נמצא",
+    "back_to_home": "חזרה לדף הבית",
+    "start_test": "התחל מבחן",
+    "loading": "טוען מבחן...",
+    "respondents": "נבחנים"
   },
   
   "exam": {

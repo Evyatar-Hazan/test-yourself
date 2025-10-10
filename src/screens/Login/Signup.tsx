@@ -10,18 +10,17 @@ import {
   Input,
   ErrorMessage,
   SubmitButton,
-  AuthActions
+  AuthActions,
 } from "./Signup.styled";
-import { AppDispatch } from "../../store";
 import {
   registerUser,
   selectAuthLoading,
   selectAuthError,
-  clearError
+  clearError,
 } from "../../features/auth/authSlice";
+import { useTranslationTyped } from "../../hooks/useTranslationTyped";
 import { AuthService } from "../../services/authService";
-
-
+import { AppDispatch } from "../../store";
 
 interface FormData {
   name: string;
@@ -42,6 +41,7 @@ const Signup: React.FC = () => {
   const navigate = useNavigate();
   const isLoading = useSelector(selectAuthLoading);
   const error = useSelector(selectAuthError);
+  const { t } = useTranslationTyped();
 
   const [formData, setFormData] = useState<FormData>({
     name: "",
@@ -50,16 +50,18 @@ const Signup: React.FC = () => {
     confirmPassword: "",
   });
 
-  const [validationErrors, setValidationErrors] = useState<ValidationErrors>({});
+  const [validationErrors, setValidationErrors] = useState<ValidationErrors>(
+    {},
+  );
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
-    
+
     if (validationErrors[name as keyof ValidationErrors]) {
       setValidationErrors((prev) => ({ ...prev, [name]: undefined }));
     }
-    
+
     if (error) {
       dispatch(clearError());
     }
@@ -69,29 +71,27 @@ const Signup: React.FC = () => {
     const errors: ValidationErrors = {};
 
     if (!formData.name.trim()) {
-      errors.name = "נדרש שם";
+      errors.name = t("signup.required_name");
     } else if (!AuthService.isValidName(formData.name)) {
-      errors.name = 
-        "שם חייב להכיל לפחות 2 תווים ורק אותיות ורווחים";
+      errors.name = t("signup.invalid_name");
     }
 
     if (!formData.email) {
-      errors.email = "נדרש מייל";
+      errors.email = t("signup.required_email");
     } else if (!AuthService.isValidEmail(formData.email)) {
-      errors.email = "כתובת מייל לא תקינה";
+      errors.email = t("signup.invalid_email");
     }
 
     if (!formData.password) {
-      errors.password = "נדרשת סיסמה";
+      errors.password = t("signup.required_password");
     } else if (!AuthService.isValidPassword(formData.password)) {
-      errors.password = 
-        "סיסמה חייבת להכיל לפחות 8 תווים, אות גדולה, אות קטנה ומספר";
+      errors.password = t("signup.weak_password");
     }
 
     if (!formData.confirmPassword) {
-      errors.confirmPassword = "נדרש אישור סיסמה";
+      errors.confirmPassword = t("signup.required_confirm_password");
     } else if (formData.password !== formData.confirmPassword) {
-      errors.confirmPassword = "הסיסמאות לא תואמות";
+      errors.confirmPassword = t("signup.passwords_do_not_match");
     }
 
     setValidationErrors(errors);
@@ -129,13 +129,13 @@ const Signup: React.FC = () => {
     <AuthContainer>
       <AuthCard>
         <AuthHeader>
-          <h1>הרשמה</h1>
-          <p>הצטרף לקהילת Test Yourself</p>
+          <h1>{t("signup.title")}</h1>
+          <p>{t("signup.subtitle")}</p>
         </AuthHeader>
 
         <AuthForm onSubmit={handleSubmit}>
           <FormGroup>
-            <label htmlFor="name">שם מלא</label>
+            <label htmlFor="name">{t("signup.name_label")}</label>
             <Input
               id="name"
               name="name"
@@ -143,7 +143,7 @@ const Signup: React.FC = () => {
               value={formData.name}
               onChange={handleChange}
               error={!!validationErrors.name}
-              placeholder="הכנס את שמך המלא"
+              placeholder={t("signup.name_placeholder")}
               autoComplete="name"
               disabled={isLoading}
             />
@@ -153,7 +153,7 @@ const Signup: React.FC = () => {
           </FormGroup>
 
           <FormGroup>
-            <label htmlFor="email">כתובת מייל</label>
+            <label htmlFor="email">{t("signup.email_label")}</label>
             <Input
               id="email"
               name="email"
@@ -161,7 +161,7 @@ const Signup: React.FC = () => {
               value={formData.email}
               onChange={handleChange}
               error={!!validationErrors.email}
-              placeholder="הכנס את כתובת המייל שלך"
+              placeholder={t("signup.email_placeholder")}
               autoComplete="email"
               disabled={isLoading}
             />
@@ -171,7 +171,7 @@ const Signup: React.FC = () => {
           </FormGroup>
 
           <FormGroup>
-            <label htmlFor="password">סיסמה</label>
+            <label htmlFor="password">{t("signup.password_label")}</label>
             <Input
               id="password"
               name="password"
@@ -179,7 +179,7 @@ const Signup: React.FC = () => {
               value={formData.password}
               onChange={handleChange}
               error={!!validationErrors.password}
-              placeholder="בחר סיסמה חזקה"
+              placeholder={t("signup.password_placeholder")}
               autoComplete="new-password"
               disabled={isLoading}
             />
@@ -189,7 +189,9 @@ const Signup: React.FC = () => {
           </FormGroup>
 
           <FormGroup>
-            <label htmlFor="confirmPassword">אמת סיסמה</label>
+            <label htmlFor="confirmPassword">
+              {t("signup.confirm_password_label")}
+            </label>
             <Input
               id="confirmPassword"
               name="confirmPassword"
@@ -197,7 +199,7 @@ const Signup: React.FC = () => {
               value={formData.confirmPassword}
               onChange={handleChange}
               error={!!validationErrors.confirmPassword}
-              placeholder="הזן את הסיסמה שוב"
+              placeholder={t("signup.confirm_password_placeholder")}
               autoComplete="new-password"
               disabled={isLoading}
             />
@@ -213,12 +215,12 @@ const Signup: React.FC = () => {
           )}
 
           <SubmitButton type="submit" disabled={isLoading}>
-            {isLoading ? "נרשם..." : "הירשם"}
+            {isLoading ? t("signup.loading") : t("signup.submit")}
           </SubmitButton>
 
           <AuthActions>
-            <span>יש לך כבר חשבון? </span>
-            <Link to="/login">התחבר כאן</Link>
+            <span>{t("signup.has_account")}</span>
+            <Link to="/login">{t("signup.login_here")}</Link>
           </AuthActions>
         </AuthForm>
       </AuthCard>

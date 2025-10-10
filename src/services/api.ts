@@ -34,7 +34,9 @@ export async function fetchComments(): Promise<Comment[]> {
 }
 
 // Test Comments API
-export async function fetchTestComments(testId: string): Promise<TestComment[]> {
+export async function fetchTestComments(
+  testId: string,
+): Promise<TestComment[]> {
   try {
     const response = await fetch(`${API_BASE_URL}/tests/${testId}/comments`);
     if (!response.ok) {
@@ -61,11 +63,11 @@ export async function addTestComment(
       },
       body: JSON.stringify({ authorId, body, parentId }),
     });
-    
+
     if (!response.ok) {
       throw new Error("Failed to add test comment");
     }
-    
+
     return await response.json();
   } catch (error) {
     console.error("Error adding test comment:", error);
@@ -89,7 +91,7 @@ export async function updateTestComment(
         body: JSON.stringify({ body }),
       },
     );
-    
+
     return response.ok;
   } catch (error) {
     console.error("Error updating test comment:", error);
@@ -108,7 +110,7 @@ export async function deleteTestComment(
         method: "DELETE",
       },
     );
-    
+
     return response.ok;
   } catch (error) {
     console.error("Error deleting test comment:", error);
@@ -132,7 +134,7 @@ export async function toggleTestCommentLike(
         body: JSON.stringify({ userId }),
       },
     );
-    
+
     return response.ok;
   } catch (error) {
     console.error("Error toggling comment like:", error);
@@ -152,7 +154,7 @@ export async function toggleTestLike(
       },
       body: JSON.stringify({ userId }),
     });
-    
+
     return response.ok;
   } catch (error) {
     console.error("Error toggling test like:", error);
