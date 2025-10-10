@@ -1,20 +1,14 @@
 import { Home, PlusCircle, User } from "lucide-react";
 import React from "react";
 import { Link } from "react-router-dom";
+import { FooterBar } from "./BottomTabs.styles";
 import { useTranslationTyped } from "../../hooks/useTranslationTyped";
 
 const BottomTabs: React.FC = () => {
   const { t } = useTranslationTyped();
 
   return (
-    <footer
-      style={{
-        display: "flex",
-        justifyContent: "space-around",
-        padding: 10,
-        borderTop: "1px solid #ccc",
-      }}
-    >
+    <FooterBar>
       <Link to="/">
         <Home /> {t("navigation.feed")}
       </Link>
@@ -24,7 +18,7 @@ const BottomTabs: React.FC = () => {
       <Link to="/profile">
         <User /> {t("navigation.profile")}
       </Link>
-    </footer>
+    </FooterBar>
   );
 };
 

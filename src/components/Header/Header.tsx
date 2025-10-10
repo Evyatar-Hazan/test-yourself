@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { Actions, HeaderBar, Spacer } from "./Header.styles";
 import { useTranslationTyped } from "../../hooks/useTranslationTyped";
 import i18n from "../../i18n";
 
@@ -14,24 +15,11 @@ const Header: React.FC<HeaderProps> = ({ title, showBack, rightAction }) => {
   const { t } = useTranslationTyped();
 
   return (
-    <header
-      style={{
-        display: "flex",
-        justifyContent: "space-between",
-        alignItems: "center",
-        padding: "10px 20px",
-        borderBottom: "1px solid #ccc",
-        backgroundColor: "#fff",
-      }}
-    >
-      {showBack ? (
-        <button onClick={() => navigate(-1)}>←</button>
-      ) : (
-        <div style={{ width: 24 }} />
-      )}
+    <HeaderBar>
+      {showBack ? <button onClick={() => navigate(-1)}>←</button> : <Spacer />}
       <h1>{title}</h1>
 
-      <div style={{ display: "flex", gap: 8 }}>
+      <Actions>
         <button
           onClick={() => i18n.changeLanguage("en")}
           aria-label={t("change_language")}
@@ -44,9 +32,9 @@ const Header: React.FC<HeaderProps> = ({ title, showBack, rightAction }) => {
         >
           HE
         </button>
-      </div>
-      {rightAction ? rightAction : <div style={{ width: 24 }} />}
-    </header>
+      </Actions>
+      {rightAction ? rightAction : <Spacer />}
+    </HeaderBar>
   );
 };
 

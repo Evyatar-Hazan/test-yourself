@@ -22,6 +22,15 @@
 				"$eslint-stylish"
 			],
 			"group": "build"
+		},
+		{
+			"label": "Run ESLint (client)",
+			"type": "shell",
+			"command": "npm run -s lint",
+			"problemMatcher": [
+				"$eslint-stylish"
+			],
+			"group": "build"
 		}
 	]
 }

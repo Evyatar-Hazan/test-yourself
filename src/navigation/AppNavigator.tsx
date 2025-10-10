@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { AppShell, Content } from "./AppNavigator.styles";
 import Header from "../components/Header/Header";
 import { useTranslationTyped } from "../hooks/useTranslationTyped";
 import CreateTest from "../screens/CreateTest/CreateTest";
@@ -17,11 +18,9 @@ const Navigation: React.FC = () => {
   const { t } = useTranslationTyped();
   return (
     <Router>
-      <div
-        style={{ display: "flex", minHeight: "100vh", flexDirection: "row" }}
-      >
+      <AppShell>
         {/* <Drawer /> */}
-        <div style={{ flex: 1, display: "flex", flexDirection: "column" }}>
+        <Content>
           <Routes>
             <Route
               path="/"
@@ -83,8 +82,8 @@ const Navigation: React.FC = () => {
             <Route path="/forgot-password" element={<ForgotPassword />} />
             <Route path="/reset-password" element={<ResetPassword />} />
           </Routes>
-        </div>
-      </div>
+        </Content>
+      </AppShell>
     </Router>
   );
 };

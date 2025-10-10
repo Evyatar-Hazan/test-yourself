@@ -13,7 +13,11 @@ export const ProfileHeader = styled.div`
   margin-bottom: ${(props) => props.theme.spacing.lg};
 
   img {
-    border: 2px solid ${(props) => props.theme.colors.outline};
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid ${(props) => props.theme.colors.outline};
   }
 
   h2 {
@@ -27,6 +31,11 @@ export const ProfileHeader = styled.div`
     margin: ${(props) => props.theme.spacing.xs} 0 0 0;
     color: ${(props) => props.theme.colors.secondary};
     font-size: ${(props) => props.theme.typography.fontSize.sm};
+  }
+
+  @media (max-width: ${(props) => props.theme.breakpoints.sm}px) {
+    flex-direction: column;
+    text-align: center;
   }
 `;
 
@@ -70,9 +79,24 @@ export const TestsList = styled.div`
     border: 1px solid ${(props) => props.theme.colors.outline};
     border-radius: ${(props) => props.theme.radius.md};
     margin-bottom: ${(props) => props.theme.spacing.sm};
+    cursor: pointer;
+    transition:
+      transform 0.2s,
+      box-shadow 0.2s;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
 
     .test-info {
       flex: 1;
+
+      .test-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
 
       h4 {
         margin: 0 0 ${(props) => props.theme.spacing.xs} 0;
@@ -91,6 +115,12 @@ export const TestsList = styled.div`
     .test-actions {
       flex-shrink: 0;
       margin-left: ${(props) => props.theme.spacing.md};
+    }
+
+    .arrow {
+      font-size: 20px;
+      color: ${(props) => props.theme.colors.primary};
+      user-select: none;
     }
 
     @media (max-width: ${(props) => props.theme.breakpoints.sm}px) {

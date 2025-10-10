@@ -1,13 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { List, Nav } from "./Drawer.styles";
 import { useTranslationTyped } from "../../hooks/useTranslationTyped";
 
 const Drawer: React.FC = () => {
   const { t } = useTranslationTyped();
 
   return (
-    <nav style={{ width: 200, borderRight: "1px solid #ccc", padding: 20 }}>
-      <ul style={{ listStyle: "none", padding: 0 }}>
+    <Nav>
+      <List>
         <li>
           <Link to="/">{t("navigation.feed")}</Link>
         </li>
@@ -23,8 +24,8 @@ const Drawer: React.FC = () => {
         <li>
           <Link to="/notifications">{t("navigation.notifications")}</Link>
         </li>
-      </ul>
-    </nav>
+      </List>
+    </Nav>
   );
 };
 

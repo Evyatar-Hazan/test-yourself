@@ -47,6 +47,8 @@ module.exports = [
     rules: {
       'react/react-in-jsx-scope': 'off',
       'react/prop-types': 'off',
+  // Discourage inline styles; prefer styled-components (warn-level during migration)
+  'react/forbid-dom-props': ['warn', { forbid: ['style'] }],
       '@typescript-eslint/no-unused-vars': ['warn'],
       'import/order': [
         'warn',
@@ -81,6 +83,46 @@ module.exports = [
       ],
     },
   },
+  // Enforce styled-components are only defined/used in dedicated style files
+  // Allowed style file patterns: *.styles.ts(x) or *.styled.ts(x)
+  {
+    files: ['src/**/*.{ts,tsx}'],
+    ignores: [
+      'src/**/*.styles.ts',
+      'src/**/*.styles.tsx',
+      'src/**/*.styled.ts',
+      'src/**/*.styled.tsx',
+    ],
+    rules: {
+      // Block importing styled-components in non-style files
+      'no-restricted-imports': [
+        'error',
+        {
+          paths: [
+            {
+              name: 'styled-components',
+              message:
+                'Use styled-components only in a separate style file (*.styles.ts[x] or *.styled.ts[x]).',
+            },
+          ],
+        },
+      ],
+      // Also block creating styled.* tagged templates in non-style files
+      'no-restricted-syntax': [
+        'error',
+        {
+          selector: "TaggedTemplateExpression[tag.object.name='styled']",
+          message:
+            'Define styled components only in a separate style file (*.styles.ts[x] or *.styled.ts[x]).',
+        },
+        {
+          selector: "TaggedTemplateExpression[tag.callee.name='styled']",
+          message:
+            'Define styled components only in a separate style file (*.styles.ts[x] or *.styled.ts[x]).',
+        },
+      ],
+    },
+  },
   {
     files: [
       '.storybook/**/*.{js,jsx,ts,tsx}',
@@ -89,6 +131,30 @@ module.exports = [
     ],
     rules: {
       // Stories and SB config can contain literal strings for docs and demos
+      'i18next/no-literal-string': 'off',
+      // Allow inline styles in stories/demo environments
+      'react/forbid-dom-props': 'off',
+    },
+  },
+  {
+    files: ['src/**/*.d.ts', 'src/theme/**/*.{ts,tsx}'],
+    rules: {
+      // Allow styled-components in theme and type declaration files
+      'no-restricted-imports': 'off',
+      'no-restricted-syntax': 'off',
+      'i18next/no-literal-string': 'off',
+    },
+  },
+  {
+    files: [
+      'src/**/*.styles.{ts,tsx}',
+      'src/**/*.styled.{ts,tsx}',
+    ],
+    rules: {
+      // Allow styled-components here
+      'no-restricted-imports': 'off',
+      'no-restricted-syntax': 'off',
+      // Style files can have literal strings for CSS values
       'i18next/no-literal-string': 'off',
     },
   },

@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { AvatarImg, Row, Username } from "./TestsFeed.extras.styles";
 import { FeedGrid, TestCard } from "./TestsFeed.styles";
 import { fetchTests } from "../../features/tests/testsSlice";
 import { fetchUsers } from "../../features/users/usersSlice";
@@ -60,42 +61,16 @@ const TestsFeed: React.FC = () => {
           return (
             <TestCard
               key={test.id}
-              style={{ cursor: "pointer" }}
               onClick={() => navigate(`/test/${test.id}`)}
             >
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  marginBottom: 8,
-                }}
-              >
+              <Row>
                 {user && user.avatarUrl && (
-                  <img
+                  <AvatarImg
                     src={`http://localhost:3001/public${user.avatarUrl}`}
                     alt={user.name}
-                    style={{
-                      width: 32,
-                      height: 32,
-                      borderRadius: "50%",
-                      marginRight: 8,
-                      objectFit: "cover",
-                      background: "#eee",
-                      cursor: "pointer",
-                      transition: "transform 0.2s, box-shadow 0.2s",
-                    }}
                     onClick={(e) => {
                       e.stopPropagation();
                       navigate(`/profile/${user.id}`);
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.transform = "scale(1.1)";
-                      e.currentTarget.style.boxShadow =
-                        "0 2px 8px rgba(0,0,0,0.2)";
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.transform = "scale(1)";
-                      e.currentTarget.style.boxShadow = "none";
                     }}
                     onError={(e) => {
                       (e.currentTarget as HTMLImageElement).src =
@@ -103,28 +78,17 @@ const TestsFeed: React.FC = () => {
                     }}
                   />
                 )}
-                <span
-                  style={{
-                    fontWeight: 500,
-                    cursor: "pointer",
-                    transition: "color 0.2s",
-                  }}
+                <Username
                   onClick={(e) => {
                     e.stopPropagation();
                     if (user) {
                       navigate(`/profile/${user.id}`);
                     }
                   }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.color = "#007bff";
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.color = "inherit";
-                  }}
                 >
                   {user ? user.name : t("general.unknown_user")}
-                </span>
-              </div>
+                </Username>
+              </Row>
               <h3>{test.subject}</h3>
               <p>
                 {(() => {

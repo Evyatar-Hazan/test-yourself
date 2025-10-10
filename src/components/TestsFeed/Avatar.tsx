@@ -1,4 +1,5 @@
 import React from "react";
+import { Img } from "./Avatar.styles";
 
 interface AvatarProps {
   src: string;
@@ -7,18 +8,7 @@ interface AvatarProps {
 }
 
 const Avatar: React.FC<AvatarProps> = ({ src, alt, size = 40 }) => (
-  <img
-    src={src}
-    alt={alt}
-    style={{
-      width: size,
-      height: size,
-      borderRadius: "50%",
-      objectFit: "cover",
-      border: "2px solid #eee",
-      background: "#fafafa",
-    }}
-  />
+  <Img src={src} alt={alt} size={size} />
 );
 
 export default Avatar;

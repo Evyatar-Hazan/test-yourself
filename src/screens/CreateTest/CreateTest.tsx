@@ -1,6 +1,28 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import {
+  CreateTestContainer,
+  Section,
+  SectionHeader,
+  SectionTitle,
+  FormGroup,
+  Label,
+  Input,
+  TextArea,
+  ErrorMessage,
+  Button as UIButton,
+  TinyButton,
+  QuestionCard,
+  QuestionHeader,
+  QuestionTitle,
+  OptionRow,
+  RadioInput,
+  OptionInput,
+  ActionButtons,
+  AddQuestionButton,
+  Required,
+} from "./CreateTest.styles";
 import { createTest } from "../../features/tests/testsSlice";
 import { useTranslationTyped } from "../../hooks/useTranslationTyped";
 import type { AppDispatch } from "../../store";
@@ -147,7 +169,7 @@ const CreateTest: React.FC = () => {
 
     try {
       const newTest: Omit<Test, "id"> = {
-        ownerId: "current-user", // TODO: Replace with actual user ID from auth
+        ownerId: "current-user",
         subject: formData.subject,
         score: 0,
         takenAt: new Date().toISOString(),
@@ -162,13 +184,8 @@ const CreateTest: React.FC = () => {
         ),
       };
 
-      // שמירת המבחן באמצעות Redux
       await dispatch(createTest(newTest)).unwrap();
-
       alert("המבחן נשמר בהצלחה!");
-      console.log("המבחן נשמר בהצלחה!");
-
-      // ניווט חזרה לדף הבית
       navigate("/");
     } catch (error) {
       console.error("שגיאה ביצירת המבחן:", error);
@@ -180,238 +197,108 @@ const CreateTest: React.FC = () => {
   };
 
   return (
-    <div style={{ padding: "16px", maxWidth: "800px", margin: "0 auto" }}>
+    <CreateTestContainer>
       <form onSubmit={handleSubmit}>
-        {/* Test Basic Info */}
-        <div style={{ marginBottom: "24px" }}>
-          <h2>{t("createTest.basicInfo")}</h2>
+        <Section>
+          <SectionTitle>{t("createTest.basicInfo")}</SectionTitle>
 
-          <div style={{ marginBottom: "16px" }}>
-            <label
-              style={{
-                display: "block",
-                marginBottom: "8px",
-                fontWeight: "bold",
-              }}
-            >
-              {t("createTest.title")}{" "}
-              <span style={{ color: "#e74c3c" }}>*</span>
-            </label>
-            <input
+          <FormGroup>
+            <Label>
+              {t("createTest.title")} <Required>*</Required>
+            </Label>
+            <Input
               type="text"
               value={formData.title}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                 updateFormField("title", e.target.value)
               }
               placeholder={t("createTest.titlePlaceholder")}
-              style={{
-                width: "100%",
-                padding: "12px",
-                border: errors.title ? "2px solid #e74c3c" : "1px solid #ddd",
-                borderRadius: "4px",
-                fontSize: "16px",
-                boxSizing: "border-box",
-              }}
+              hasError={Boolean(errors.title)}
             />
-            {errors.title && (
-              <span style={{ color: "#e74c3c", fontSize: "14px" }}>
-                {errors.title}
-              </span>
-            )}
-          </div>
+            {errors.title && <ErrorMessage>{errors.title}</ErrorMessage>}
+          </FormGroup>
 
-          <div style={{ marginBottom: "16px" }}>
-            <label
-              style={{
-                display: "block",
-                marginBottom: "8px",
-                fontWeight: "bold",
-              }}
-            >
-              {t("createTest.subject")}{" "}
-              <span style={{ color: "#e74c3c" }}>*</span>
-            </label>
-            <input
+          <FormGroup>
+            <Label>
+              {t("createTest.subject")} <Required>*</Required>
+            </Label>
+            <Input
               type="text"
               value={formData.subject}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                 updateFormField("subject", e.target.value)
               }
               placeholder={t("createTest.subjectPlaceholder")}
-              style={{
-                width: "100%",
-                padding: "12px",
-                border: errors.subject ? "2px solid #e74c3c" : "1px solid #ddd",
-                borderRadius: "4px",
-                fontSize: "16px",
-                boxSizing: "border-box",
-              }}
+              hasError={Boolean(errors.subject)}
             />
-            {errors.subject && (
-              <span style={{ color: "#e74c3c", fontSize: "14px" }}>
-                {errors.subject}
-              </span>
-            )}
-          </div>
+            {errors.subject && <ErrorMessage>{errors.subject}</ErrorMessage>}
+          </FormGroup>
 
-          <div style={{ marginBottom: "16px" }}>
-            <label
-              style={{
-                display: "block",
-                marginBottom: "8px",
-                fontWeight: "bold",
-              }}
-            >
-              {t("createTest.description")}
-            </label>
-            <textarea
+          <FormGroup>
+            <Label>{t("createTest.description")}</Label>
+            <TextArea
               value={formData.description}
               onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
                 updateFormField("description", e.target.value)
               }
               placeholder={t("createTest.descriptionPlaceholder")}
               rows={3}
-              style={{
-                width: "100%",
-                padding: "12px",
-                border: "1px solid #ddd",
-                borderRadius: "4px",
-                fontSize: "16px",
-                boxSizing: "border-box",
-                resize: "vertical",
-              }}
             />
-          </div>
-        </div>
+          </FormGroup>
+        </Section>
 
-        {/* Questions */}
-        <div style={{ marginBottom: "24px" }}>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-              marginBottom: "16px",
-            }}
-          >
-            <h2>{t("createTest.questions")}</h2>
-            <button
-              type="button"
-              onClick={addQuestion}
-              style={{
-                padding: "8px 16px",
-                backgroundColor: "#28a745",
-                color: "white",
-                border: "none",
-                borderRadius: "4px",
-                cursor: "pointer",
-                fontSize: "14px",
-              }}
-            >
+        <Section>
+          <SectionHeader>
+            <SectionTitle>{t("createTest.questions")}</SectionTitle>
+            <AddQuestionButton type="button" onClick={addQuestion}>
               {t("createTest.addQuestion")}
-            </button>
-          </div>
+            </AddQuestionButton>
+          </SectionHeader>
 
           {formData.questions.map((question, questionIndex) => (
-            <div
-              key={questionIndex}
-              style={{
-                border: "1px solid #ddd",
-                borderRadius: "8px",
-                padding: "16px",
-                marginBottom: "16px",
-                backgroundColor: "#f9f9f9",
-              }}
-            >
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "flex-start",
-                  marginBottom: "16px",
-                }}
-              >
-                <h3 style={{ margin: 0, fontSize: "18px" }}>
+            <QuestionCard key={questionIndex}>
+              <QuestionHeader>
+                <QuestionTitle>
                   {t("createTest.questionNumber")} {questionIndex + 1}
-                </h3>
+                </QuestionTitle>
                 {formData.questions.length > 1 && (
-                  <button
+                  <TinyButton
                     type="button"
+                    variant="danger"
                     onClick={() => removeQuestion(questionIndex)}
-                    style={{
-                      padding: "4px 8px",
-                      backgroundColor: "#dc3545",
-                      color: "white",
-                      border: "none",
-                      borderRadius: "4px",
-                      cursor: "pointer",
-                      fontSize: "12px",
-                    }}
                   >
                     {t("createTest.remove")}
-                  </button>
+                  </TinyButton>
                 )}
-              </div>
+              </QuestionHeader>
 
-              <div style={{ marginBottom: "16px" }}>
-                <label
-                  style={{
-                    display: "block",
-                    marginBottom: "8px",
-                    fontWeight: "bold",
-                  }}
-                >
-                  {t("createTest.questionText")}{" "}
-                  <span style={{ color: "#e74c3c" }}>*</span>
-                </label>
-                <textarea
+              <FormGroup>
+                <Label>
+                  {t("createTest.questionText")} <Required>*</Required>
+                </Label>
+                <TextArea
                   value={question.question}
                   onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
                     updateQuestion(questionIndex, "question", e.target.value)
                   }
                   placeholder={t("createTest.questionPlaceholder")}
                   rows={2}
-                  style={{
-                    width: "100%",
-                    padding: "12px",
-                    border: errors[`question_${questionIndex}`]
-                      ? "2px solid #e74c3c"
-                      : "1px solid #ddd",
-                    borderRadius: "4px",
-                    fontSize: "16px",
-                    boxSizing: "border-box",
-                    resize: "vertical",
-                  }}
+                  hasError={Boolean(errors[`question_${questionIndex}`])}
                 />
                 {errors[`question_${questionIndex}`] && (
-                  <span style={{ color: "#e74c3c", fontSize: "14px" }}>
+                  <ErrorMessage>
                     {errors[`question_${questionIndex}`]}
-                  </span>
+                  </ErrorMessage>
                 )}
-              </div>
+              </FormGroup>
 
-              <div style={{ marginBottom: "16px" }}>
-                <label
-                  style={{
-                    display: "block",
-                    marginBottom: "8px",
-                    fontWeight: "bold",
-                  }}
-                >
-                  {t("createTest.options")}{" "}
-                  <span style={{ color: "#e74c3c" }}>*</span>
-                </label>
+              <FormGroup>
+                <Label>
+                  {t("createTest.options")} <Required>*</Required>
+                </Label>
                 {question.options.map((option, optionIndex) => (
-                  <div
-                    key={optionIndex}
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      marginBottom: "8px",
-                      gap: "8px",
-                    }}
-                  >
-                    <input
+                  <OptionRow key={optionIndex}>
+                    <RadioInput
                       type="radio"
                       name={`correct_${questionIndex}`}
                       checked={question.correctIndex === optionIndex}
@@ -422,9 +309,8 @@ const CreateTest: React.FC = () => {
                           optionIndex,
                         )
                       }
-                      style={{ cursor: "pointer" }}
                     />
-                    <input
+                    <OptionInput
                       type="text"
                       value={option}
                       onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
@@ -434,68 +320,37 @@ const CreateTest: React.FC = () => {
                           e.target.value,
                         )
                       }
-                      placeholder={`${t("createTest.optionPlaceholder")} ${optionIndex + 1}`}
-                      style={{
-                        flex: 1,
-                        padding: "8px",
-                        border: "1px solid #ddd",
-                        borderRadius: "4px",
-                        fontSize: "14px",
-                      }}
+                      placeholder={`${t("createTest.optionPlaceholder")} ${
+                        optionIndex + 1
+                      }`}
                     />
-                  </div>
+                  </OptionRow>
                 ))}
                 {errors[`options_${questionIndex}`] && (
-                  <span style={{ color: "#e74c3c", fontSize: "14px" }}>
+                  <ErrorMessage>
                     {errors[`options_${questionIndex}`]}
-                  </span>
+                  </ErrorMessage>
                 )}
                 {errors[`correct_${questionIndex}`] && (
-                  <span style={{ color: "#e74c3c", fontSize: "14px" }}>
+                  <ErrorMessage>
                     {errors[`correct_${questionIndex}`]}
-                  </span>
+                  </ErrorMessage>
                 )}
-              </div>
-            </div>
+              </FormGroup>
+            </QuestionCard>
           ))}
-        </div>
+        </Section>
 
-        {/* Action Buttons */}
-        <div
-          style={{ display: "flex", gap: "16px", justifyContent: "flex-end" }}
-        >
-          <button
-            type="button"
-            onClick={handleCancel}
-            style={{
-              padding: "12px 24px",
-              backgroundColor: "#6c757d",
-              color: "white",
-              border: "none",
-              borderRadius: "4px",
-              cursor: "pointer",
-              fontSize: "16px",
-            }}
-          >
+        <ActionButtons>
+          <UIButton type="button" variant="secondary" onClick={handleCancel}>
             {t("createTest.cancel")}
-          </button>
-          <button
-            type="submit"
-            style={{
-              padding: "12px 24px",
-              backgroundColor: "#007bff",
-              color: "white",
-              border: "none",
-              borderRadius: "4px",
-              cursor: "pointer",
-              fontSize: "16px",
-            }}
-          >
+          </UIButton>
+          <UIButton type="submit" variant="primary">
             {t("createTest.create")}
-          </button>
-        </div>
+          </UIButton>
+        </ActionButtons>
       </form>
-    </div>
+    </CreateTestContainer>
   );
 };
 

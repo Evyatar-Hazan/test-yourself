@@ -1,5 +1,20 @@
 import React, { useState, useEffect } from "react";
-import styled from "styled-components";
+import {
+  InteractionsContainer,
+  ActionsGroup,
+  ActionButton,
+  CommentsList,
+  CommentItem,
+  CommentAuthor,
+  CommentBody,
+  CommentTime,
+  CommentInput,
+  InputActions,
+  SubmitButton,
+  CancelButton,
+  LinkButton,
+  ComposeWrapper,
+} from "./TestInteractions.styles";
 import { useTranslationTyped } from "../../hooks/useTranslationTyped";
 import {
   toggleTestLike,
@@ -15,105 +30,6 @@ interface TestInteractionsProps {
   onNavigateToTest: () => void;
   onNavigateToExam: () => void;
 }
-
-const InteractionsContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 12px;
-  padding-top: 12px;
-  border-top: 1px solid #eee;
-  font-size: 14px;
-  color: #666;
-`;
-
-const ActionsGroup = styled.div`
-  display: flex;
-  gap: 16px;
-`;
-
-const ActionButton = styled.button<{ active?: boolean }>`
-  background: none;
-  border: none;
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  cursor: pointer;
-  color: ${(props) => (props.active ? "#e91e63" : "#666")};
-  padding: 4px 8px;
-  border-radius: 4px;
-  transition: all 0.2s;
-
-  &:hover {
-    background-color: #f5f5f5;
-  }
-`;
-
-const CommentsList = styled.div`
-  margin-top: 12px;
-  padding-top: 12px;
-  border-top: 1px solid #eee;
-  max-height: 200px;
-  overflow-y: auto;
-`;
-
-const CommentItem = styled.div`
-  padding: 8px;
-  background: #f9f9f9;
-  border-radius: 4px;
-  margin-bottom: 4px;
-  font-size: 12px;
-`;
-
-const CommentAuthor = styled.div`
-  font-weight: bold;
-  margin-bottom: 2px;
-`;
-
-const CommentBody = styled.div`
-  margin-bottom: 2px;
-`;
-
-const CommentTime = styled.div`
-  color: #666;
-  font-size: 10px;
-`;
-
-const CommentInput = styled.textarea`
-  width: 100%;
-  min-height: 60px;
-  padding: 8px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  resize: vertical;
-  font-family: inherit;
-  margin-bottom: 4px;
-`;
-
-const InputActions = styled.div`
-  display: flex;
-  gap: 8px;
-`;
-
-const SubmitButton = styled.button<{ disabled?: boolean }>`
-  background: ${(props) => (props.disabled ? "#ccc" : "#0066cc")};
-  color: white;
-  border: none;
-  padding: 4px 12px;
-  border-radius: 4px;
-  cursor: ${(props) => (props.disabled ? "not-allowed" : "pointer")};
-  font-size: 12px;
-`;
-
-const CancelButton = styled.button`
-  background: transparent;
-  color: #666;
-  border: 1px solid #ddd;
-  padding: 4px 12px;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 12px;
-`;
 
 const TestInteractions: React.FC<TestInteractionsProps> = ({
   testId,
@@ -228,7 +144,7 @@ const TestInteractions: React.FC<TestInteractionsProps> = ({
 
       {showComments && (
         <CommentsList>
-          <div style={{ marginBottom: "8px" }}>
+          <ComposeWrapper>
             <CommentInput
               value={newComment}
               onChange={(e) => setNewComment(e.target.value)}
@@ -246,7 +162,7 @@ const TestInteractions: React.FC<TestInteractionsProps> = ({
                 {t("interactions.cancel")}
               </CancelButton>
             </InputActions>
-          </div>
+          </ComposeWrapper>
 
           {loadingComments ? (
             <div>{t("interactions.loading_comments")}</div>
@@ -264,21 +180,16 @@ const TestInteractions: React.FC<TestInteractionsProps> = ({
                 </CommentItem>
               ))}
               {comments.length > 3 && (
-                <ActionButton
+                <LinkButton
                   onClick={(e) => {
                     e.stopPropagation();
                     onNavigateToTest();
-                  }}
-                  style={{
-                    color: "#0066cc",
-                    textDecoration: "underline",
-                    padding: "4px 0",
                   }}
                 >
                   {t("interactions.see_more_comments", {
                     count: comments.length - 3,
                   })}
-                </ActionButton>
+                </LinkButton>
               )}
             </div>
           )}
