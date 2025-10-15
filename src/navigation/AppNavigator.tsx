@@ -5,6 +5,7 @@ import Header from "../components/Header/Header";
 import { useTranslationTyped } from "../hooks/useTranslationTyped";
 import CreateTest from "../screens/CreateTest/CreateTest";
 import TestScreen from "../screens/Exam/TestScreen";
+import FollowList from "../screens/FollowList/FollowList";
 import Home from "../screens/Home/Home";
 import ForgotPassword from "../screens/Login/ForgotPassword";
 import Login from "../screens/Login/Login";
@@ -47,6 +48,24 @@ const Navigation: React.FC = () => {
                 <>
                   <Header title={t("navigation.profile")} showBack />
                   <Profile />
+                </>
+              }
+            />
+            <Route
+              path="/profile/:userId/followers"
+              element={
+                <>
+                  <Header title={t("profile.followers")} showBack />
+                  <FollowList type="followers" />
+                </>
+              }
+            />
+            <Route
+              path="/profile/:userId/following"
+              element={
+                <>
+                  <Header title={t("profile.following")} showBack />
+                  <FollowList type="following" />
                 </>
               }
             />

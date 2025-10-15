@@ -49,6 +49,12 @@ export const ProfileHeader = styled.div`
       font-size: ${(props) => props.theme.typography.fontSize.sm};
     }
 
+    .counter.clickable {
+      cursor: pointer;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
     .error-text {
       color: ${(props) => props.theme.colors.danger};
     }

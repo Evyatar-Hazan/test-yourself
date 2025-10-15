@@ -90,7 +90,9 @@
     "followers": "Followers",
     "following": "Following",
     "follow": "Follow",
-    "unfollow": "Unfollow"
+    "unfollow": "Unfollow",
+    "no_followers": "No followers yet",
+    "no_following": "Not following anyone"
   },
   
   "general": {

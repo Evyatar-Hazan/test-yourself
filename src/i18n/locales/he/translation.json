@@ -90,7 +90,9 @@
     "followers": "עוקבים",
     "following": "נעקבים",
     "follow": "עקוב",
-    "unfollow": "בטל מעקב"
+    "unfollow": "בטל מעקב",
+    "no_followers": "אין עוקבים עדיין",
+    "no_following": "לא עוקב אחרי אף אחד"
   },
   
   "general": {

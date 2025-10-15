@@ -130,10 +130,16 @@ const Profile: React.FC = () => {
           <h2>{currentUser.name}</h2>
           <p>{currentUser.email}</p>
           <div className="profile-meta">
-            <span className="counter">
+            <span
+              className="counter clickable"
+              onClick={() => navigate(`/profile/${currentUser.id}/followers`)}
+            >
               {t("profile.followers")}: {followerCount}
             </span>
-            <span className="counter">
+            <span
+              className="counter clickable"
+              onClick={() => navigate(`/profile/${currentUser.id}/following`)}
+            >
               {t("profile.following")}: {followingCount}
             </span>
             {isViewingOtherUser && (
