@@ -8,6 +8,8 @@ export interface User {
   isEmailVerified: boolean;
   createdAt: string;
   lastLoginAt?: string;
+  followers?: ID[];
+  following?: ID[];
 }
 
 // Types for backward compatibility with existing code

@@ -86,7 +86,11 @@
     "view_test": "View Test",
     "my_profile": "My Profile",
     "take_test": "Take Test",
-    "click_to_take": "Click to take the test"
+    "click_to_take": "Click to take the test",
+    "followers": "Followers",
+    "following": "Following",
+    "follow": "Follow",
+    "unfollow": "Unfollow"
   },
   
   "general": {

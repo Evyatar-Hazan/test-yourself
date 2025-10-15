@@ -1,4 +1,8 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import {
+  followUser as followUserApi,
+  unfollowUser as unfollowUserApi,
+} from "../../services/api";
 import { AuthService } from "../../services/authService";
 import {
   AuthState,
@@ -146,6 +150,89 @@ export const confirmPasswordReset = createAsyncThunk(
   },
 );
 
+export const followUser = createAsyncThunk(
+  "auth/followUser",
+  async (targetUserId: string, { getState, rejectWithValue, dispatch }) => {
+    try {
+      const state = getState() as { auth: AuthState };
+      const token = state.auth.token;
+      if (!token) throw new Error("לא מחובר");
+      const result = await followUserApi(targetUserId, token);
+      if (!result) throw new Error("נכשל לעקוב");
+      return result.me;
+    } catch (error) {
+      const message = error instanceof Error ? error.message : "";
+      // נסה לרענן token אם לא תקין ואז לנסות שוב פעם אחת
+      if (
+        message.includes("Token") ||
+        message.includes("token") ||
+        message.includes("Unauthorized") ||
+        message.includes("נדרש token")
+      ) {
+        const refreshResult = await dispatch(refreshAuthToken());
+        if (refreshAuthToken.fulfilled.match(refreshResult)) {
+          const stateAfter = getState() as { auth: AuthState };
+          const newToken = stateAfter.auth.token;
+          if (newToken) {
+            try {
+              const retry = await followUserApi(targetUserId, newToken);
+              if (!retry) throw new Error("נכשל לעקוב");
+              return retry.me;
+            } catch (retryErr) {
+              const retryMsg =
+                retryErr instanceof Error ? retryErr.message : "שגיאה בעקיבה";
+              return rejectWithValue(retryMsg);
+            }
+          }
+        }
+      }
+      return rejectWithValue(message || "שגיאה בעקיבה");
+    }
+  },
+);
+
+export const unfollowUser = createAsyncThunk(
+  "auth/unfollowUser",
+  async (targetUserId: string, { getState, rejectWithValue, dispatch }) => {
+    try {
+      const state = getState() as { auth: AuthState };
+      const token = state.auth.token;
+      if (!token) throw new Error("לא מחובר");
+      const result = await unfollowUserApi(targetUserId, token);
+      if (!result) throw new Error("נכשל בהסרת מעקב");
+      return result.me;
+    } catch (error) {
+      const message = error instanceof Error ? error.message : "";
+      if (
+        message.includes("Token") ||
+        message.includes("token") ||
+        message.includes("Unauthorized") ||
+        message.includes("נדרש token")
+      ) {
+        const refreshResult = await dispatch(refreshAuthToken());
+        if (refreshAuthToken.fulfilled.match(refreshResult)) {
+          const stateAfter = getState() as { auth: AuthState };
+          const newToken = stateAfter.auth.token;
+          if (newToken) {
+            try {
+              const retry = await unfollowUserApi(targetUserId, newToken);
+              if (!retry) throw new Error("נכשל בהסרת מעקב");
+              return retry.me;
+            } catch (retryErr) {
+              const retryMsg =
+                retryErr instanceof Error
+                  ? retryErr.message
+                  : "שגיאה בהסרת מעקב";
+              return rejectWithValue(retryMsg);
+            }
+          }
+        }
+      }
+      return rejectWithValue(message || "שגיאה בהסרת מעקב");
+    }
+  },
+);
+
 export const logoutUser = createAsyncThunk(
   "auth/logout",
   async (_, { rejectWithValue }) => {
@@ -268,6 +355,23 @@ const authSlice = createSlice({
       })
       .addCase(confirmResetPassword.rejected, (state, action) => {
         state.isLoading = false;
+        state.error = action.payload as string;
+      });
+
+    // Follow/Unfollow
+    builder
+      .addCase(followUser.fulfilled, (state, action) => {
+        state.user = action.payload as User;
+        state.error = null;
+      })
+      .addCase(followUser.rejected, (state, action) => {
+        state.error = action.payload as string;
+      })
+      .addCase(unfollowUser.fulfilled, (state, action) => {
+        state.user = action.payload as User;
+        state.error = null;
+      })
+      .addCase(unfollowUser.rejected, (state, action) => {
         state.error = action.payload as string;
       });
 

@@ -37,6 +37,22 @@ export const ProfileHeader = styled.div`
     flex-direction: column;
     text-align: center;
   }
+
+  .profile-meta {
+    display: flex;
+    align-items: center;
+    gap: ${(props) => props.theme.spacing.md};
+    margin-top: ${(props) => props.theme.spacing.sm};
+
+    .counter {
+      color: ${(props) => props.theme.colors.secondary};
+      font-size: ${(props) => props.theme.typography.fontSize.sm};
+    }
+
+    .error-text {
+      color: ${(props) => props.theme.colors.danger};
+    }
+  }
 `;
 
 export const ProfileStats = styled.div`

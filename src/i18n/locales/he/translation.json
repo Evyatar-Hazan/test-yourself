@@ -86,7 +86,11 @@
     "view_test": "צפה במבחן",
     "my_profile": "הפרופיל שלי",
     "take_test": "בצע מבחן",
-    "click_to_take": "לחץ לביצוע המבחן"
+    "click_to_take": "לחץ לביצוע המבחן",
+    "followers": "עוקבים",
+    "following": "נעקבים",
+    "follow": "עקוב",
+    "unfollow": "בטל מעקב"
   },
   
   "general": {

@@ -31,6 +31,24 @@
 				"$eslint-stylish"
 			],
 			"group": "build"
+		},
+		{
+			"label": "Typecheck client",
+			"type": "shell",
+			"command": "npm run -s typecheck",
+			"group": "build"
+		},
+		{
+			"label": "Build client",
+			"type": "shell",
+			"command": "npm run -s build",
+			"group": "build"
+		},
+		{
+			"label": "Install client deps",
+			"type": "shell",
+			"command": "npm ci",
+			"group": "build"
 		}
 	]
 }

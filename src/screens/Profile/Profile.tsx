@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import React, { useState, useEffect, useMemo } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
 
 import {
@@ -12,9 +12,15 @@ import {
 } from "./Profile.extras.styles";
 import { ProfileHeader, TestsList } from "./Profile.styles";
 import Button from "../../components/Button/Button";
-import { selectUsers } from "../../features/users/usersSlice";
+import { selectAuth } from "../../features/auth/authSlice";
+import {
+  followUser as followUserThunk,
+  unfollowUser as unfollowUserThunk,
+} from "../../features/auth/authSlice";
+import { selectUsers, updateUser } from "../../features/users/usersSlice";
 import { useTranslationTyped } from "../../hooks/useTranslationTyped";
-import type { RootState } from "../../store";
+import { fetchUserById } from "../../services/api";
+import type { RootState, AppDispatch } from "../../store";
 import type { TestEntity } from "../../types";
 import {
   calculateUserStatistics,
@@ -28,11 +34,19 @@ const Profile: React.FC = () => {
   const navigate = useNavigate();
   const users = useSelector(selectUsers);
   const { tests } = useSelector((state: RootState) => state.tests);
+  const {
+    user: me,
+    isAuthenticated,
+    isLoading: authLoading,
+    error: authError,
+  } = useSelector(selectAuth);
+  const dispatch = useDispatch<AppDispatch>();
   const [isMobile, setIsMobile] = useState(false);
 
-  // אם לא מועבר userId בURL, נשתמש במשתמש ברירת מחדל
-  const currentUserId = userId || "u1";
-  const isViewingOtherUser = userId && userId !== "u1";
+  // מזהה היוזר להצגה: קודם מזהה מה-URL, אחרת היוזר המחובר, אחרת ברירת מחדל
+  const currentUserId = userId || me?.id || "u1";
+  // האם צופים ביוזר אחר? משווים מול היוזר המחובר אם קיים
+  const isViewingOtherUser = Boolean(userId && userId !== (me?.id || "u1"));
 
   // Hook לזיהוי אם זה מובייל
   useEffect(() => {
@@ -48,6 +62,31 @@ const Profile: React.FC = () => {
 
   // חיפוש המשתמש הנוכחי
   const currentUser = findUserById(currentUserId, users);
+
+  const followerCount = currentUser?.followers?.length ?? 0;
+  const followingCount = currentUser?.following?.length ?? 0;
+  const amIFollowing = useMemo(() => {
+    if (!me || !currentUser) return false;
+    return (me.following ?? []).includes(currentUser.id);
+  }, [me, currentUser]);
+
+  const onToggleFollow = async () => {
+    if (!currentUser) return;
+    if (!me || !isAuthenticated) {
+      navigate("/login");
+      return;
+    }
+    if (amIFollowing) {
+      await dispatch(unfollowUserThunk(currentUser.id));
+    } else {
+      await dispatch(followUserThunk(currentUser.id));
+    }
+    // Refresh viewed user's data so counters update
+    const refreshed = await fetchUserById(currentUser.id);
+    if (refreshed) {
+      dispatch(updateUser(refreshed));
+    }
+  };
 
   // חישוב סטטיסטיקות המשתמש
   const statistics = calculateUserStatistics(currentUserId, tests);
@@ -90,6 +129,27 @@ const Profile: React.FC = () => {
         <div>
           <h2>{currentUser.name}</h2>
           <p>{currentUser.email}</p>
+          <div className="profile-meta">
+            <span className="counter">
+              {t("profile.followers")}: {followerCount}
+            </span>
+            <span className="counter">
+              {t("profile.following")}: {followingCount}
+            </span>
+            {isViewingOtherUser && (
+              <Button
+                variant={amIFollowing ? "secondary" : "primary"}
+                size="sm"
+                onClick={onToggleFollow}
+                disabled={authLoading}
+              >
+                {amIFollowing ? t("profile.unfollow") : t("profile.follow")}
+              </Button>
+            )}
+            {!!authError && (
+              <span className="counter error-text">{authError}</span>
+            )}
+          </div>
         </div>
       </ProfileHeader>
 

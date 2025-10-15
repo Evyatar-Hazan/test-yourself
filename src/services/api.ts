@@ -33,6 +33,105 @@ export async function fetchComments(): Promise<Comment[]> {
   return await getComments();
 }
 
+// Follow system API
+export async function followUser(
+  targetUserId: string,
+  token: string,
+): Promise<{ me: User; target: User } | null> {
+  try {
+    const response = await fetch(
+      `${API_BASE_URL}/users/${targetUserId}/follow`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      },
+    );
+    if (!response.ok) {
+      let message = "Failed to follow";
+      try {
+        const data = await response.json();
+        message = data.message || data.error || message;
+      } catch {
+        // ignore json parse errors
+      }
+      throw new Error(message);
+    }
+    const data = await response.json();
+    return { me: data.me, target: data.target } as { me: User; target: User };
+  } catch (error) {
+    console.error("Error following user:", error);
+    throw error instanceof Error ? error : new Error("Failed to follow");
+  }
+}
+
+export async function unfollowUser(
+  targetUserId: string,
+  token: string,
+): Promise<{ me: User; target: User } | null> {
+  try {
+    const response = await fetch(
+      `${API_BASE_URL}/users/${targetUserId}/follow`,
+      {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      },
+    );
+    if (!response.ok) {
+      let message = "Failed to unfollow";
+      try {
+        const data = await response.json();
+        message = data.message || data.error || message;
+      } catch {
+        // ignore json parse errors
+      }
+      throw new Error(message);
+    }
+    const data = await response.json();
+    return { me: data.me, target: data.target } as { me: User; target: User };
+  } catch (error) {
+    console.error("Error unfollowing user:", error);
+    throw error instanceof Error ? error : new Error("Failed to unfollow");
+  }
+}
+
+export async function fetchUserById(userId: string): Promise<User | null> {
+  try {
+    const response = await fetch(`${API_BASE_URL}/users/${userId}`);
+    if (!response.ok) return null;
+    return (await response.json()) as User;
+  } catch (error) {
+    console.error("Error fetching user by id:", error);
+    return null;
+  }
+}
+
+export async function fetchFollowers(userId: string) {
+  try {
+    const response = await fetch(`${API_BASE_URL}/users/${userId}/followers`);
+    if (!response.ok) throw new Error("Failed to fetch followers");
+    return await response.json();
+  } catch (error) {
+    console.error("Error fetching followers:", error);
+    return [];
+  }
+}
+
+export async function fetchFollowing(userId: string) {
+  try {
+    const response = await fetch(`${API_BASE_URL}/users/${userId}/following`);
+    if (!response.ok) throw new Error("Failed to fetch following");
+    return await response.json();
+  } catch (error) {
+    console.error("Error fetching following:", error);
+    return [];
+  }
+}
+
 // Test Comments API
 export async function fetchTestComments(
   testId: string,
@@ -173,6 +272,11 @@ export const api = {
   deleteTestComment,
   toggleTestCommentLike,
   toggleTestLike,
+  followUser,
+  unfollowUser,
+  fetchFollowers,
+  fetchFollowing,
+  fetchUserById,
 };
 
 export default api;
