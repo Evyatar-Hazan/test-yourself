@@ -16,7 +16,8 @@ export const AvatarImg = styled.img`
   border-radius: 50%;
   margin-right: 8px;
   object-fit: cover;
-  background: #eee;
+  background: ${(p) =>
+    `color-mix(in srgb, ${p.theme.colors.text} 10%, transparent)`};
   cursor: pointer;
   transition:
     transform 0.2s,
@@ -24,7 +25,8 @@ export const AvatarImg = styled.img`
 
   &:hover {
     transform: scale(1.1);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 8px
+      ${(p) => `color-mix(in srgb, ${p.theme.colors.text} 20%, transparent)`};
   }
 `;
 
@@ -34,6 +36,6 @@ export const Username = styled.span`
   transition: color 0.2s;
 
   &:hover {
-    color: #007bff;
+    color: ${(p) => p.theme.colors.primary};
   }
 `;

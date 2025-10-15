@@ -8,22 +8,24 @@ export const Container = styled.div`
 
 export const BackButton = styled.button`
   background: transparent;
-  border: 1px solid #ddd;
+  border: 1px solid ${(p) => p.theme.colors.outline};
   padding: 8px 16px;
   border-radius: 4px;
   cursor: pointer;
   margin-bottom: 20px;
 
   &:hover {
-    background: #f5f5f5;
+    background: ${(p) =>
+      `color-mix(in srgb, ${p.theme.colors.text} 5%, transparent)`};
   }
 `;
 
 export const TestCard = styled.div`
-  background: white;
+  background: ${(p) => p.theme.colors.surface};
   border-radius: 12px;
   padding: 24px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 8px
+    ${(p) => `color-mix(in srgb, ${p.theme.colors.text} 10%, transparent)`};
   margin-bottom: 20px;
 `;
 
@@ -32,7 +34,7 @@ export const TestHeader = styled.div`
 `;
 
 export const TestTitle = styled.h1`
-  color: #333;
+  color: ${(p) => p.theme.colors.text};
   margin-bottom: 8px;
 `;
 
@@ -40,7 +42,8 @@ export const TestMeta = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 16px;
-  color: #666;
+  color: ${(p) =>
+    `color-mix(in srgb, ${p.theme.colors.text} 60%, transparent)`};
   font-size: 14px;
 `;
 
@@ -58,7 +61,8 @@ export const StatsGrid = styled.div`
 `;
 
 export const StatCard = styled.div`
-  background: #f8f9fa;
+  background: ${(p) =>
+    `color-mix(in srgb, ${p.theme.colors.text} 3%, transparent)`};
   padding: 16px;
   border-radius: 8px;
   text-align: center;
@@ -67,18 +71,19 @@ export const StatCard = styled.div`
 export const StatValue = styled.div`
   font-size: 24px;
   font-weight: bold;
-  color: #0066cc;
+  color: ${(p) => p.theme.colors.primary};
 `;
 
 export const StatLabel = styled.div`
   font-size: 12px;
-  color: #666;
+  color: ${(p) =>
+    `color-mix(in srgb, ${p.theme.colors.text} 60%, transparent)`};
   margin-top: 4px;
 `;
 
 export const ActionButton = styled.button`
-  background: #0066cc;
-  color: white;
+  background: ${(p) => p.theme.colors.primary};
+  color: ${(p) => p.theme.colors.surface};
   border: none;
   padding: 12px 24px;
   border-radius: 8px;
@@ -87,7 +92,8 @@ export const ActionButton = styled.button`
   margin-right: 10px;
 
   &:hover {
-    background: #004499;
+    background: ${(p) =>
+      `color-mix(in srgb, ${p.theme.colors.primary} 75%, black)`};
   }
 `;
 
@@ -97,12 +103,14 @@ export const LoadingSpinner = styled.div`
   align-items: center;
   height: 200px;
   font-size: 18px;
-  color: #666;
+  color: ${(p) =>
+    `color-mix(in srgb, ${p.theme.colors.text} 60%, transparent)`};
 `;
 
 export const ErrorMessage = styled.div`
-  background: #f8d7da;
-  color: #721c24;
+  background: ${(p) =>
+    `color-mix(in srgb, ${p.theme.colors.danger} 10%, transparent)`};
+  color: ${(p) => p.theme.colors.danger};
   padding: 16px;
   border-radius: 8px;
   margin-bottom: 20px;

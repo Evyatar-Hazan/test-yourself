@@ -5,15 +5,20 @@ export const AuthContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(
+    135deg,
+    ${(p) => p.theme.colors.primary} 0%,
+    ${(p) => p.theme.colors.secondary} 100%
+  );
   padding: 20px;
   direction: rtl;
 `;
 
 export const AuthCard = styled.div`
-  background: white;
+  background: ${(p) => p.theme.colors.surface};
   border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 30px
+    ${(p) => `color-mix(in srgb, ${p.theme.colors.text} 10%, transparent)`};
   overflow: hidden;
   width: 100%;
   max-width: 400px;
@@ -32,8 +37,12 @@ export const AuthCard = styled.div`
 `;
 
 export const AuthHeader = styled.div`
-  background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
-  color: white;
+  background: linear-gradient(
+    135deg,
+    ${(p) => p.theme.colors.success} 0%,
+    ${(p) => p.theme.colors.primary} 100%
+  );
+  color: ${(p) => p.theme.colors.surface};
   padding: 30px 20px;
   text-align: center;
 
@@ -61,7 +70,7 @@ export const FormGroup = styled.div`
     display: block;
     margin-bottom: 5px;
     font-weight: 500;
-    color: #333;
+    color: ${(p) => p.theme.colors.text};
     font-size: 0.95rem;
   }
 `;
@@ -69,7 +78,9 @@ export const FormGroup = styled.div`
 export const Input = styled.input<{ error?: boolean }>`
   width: 100%;
   padding: 12px 15px;
-  border: 2px solid ${(props) => (props.error ? "#e74c3c" : "#e1e8ed")};
+  border: 2px solid
+    ${(props) =>
+      props.error ? props.theme.colors.danger : props.theme.colors.outline};
   border-radius: 8px;
   font-size: 1rem;
   transition:
@@ -79,20 +90,23 @@ export const Input = styled.input<{ error?: boolean }>`
 
   &:focus {
     outline: none;
-    border-color: ${(props) => (props.error ? "#e74c3c" : "#28a745")};
+    border-color: ${(props) =>
+      props.error ? props.theme.colors.danger : props.theme.colors.success};
     box-shadow: 0 0 0 3px
       ${(props) =>
-        props.error ? "rgba(231, 76, 60, 0.1)" : "rgba(40, 167, 69, 0.1)"};
+        props.error
+          ? `color-mix(in srgb, ${props.theme.colors.danger} 10%, transparent)`
+          : `color-mix(in srgb, ${props.theme.colors.success} 10%, transparent)`};
   }
 
   &:disabled {
-    background-color: #f8f9fa;
+    background-color: ${(p) => p.theme.colors.surface};
     cursor: not-allowed;
   }
 `;
 
 export const ErrorMessage = styled.span`
-  color: #e74c3c;
+  color: ${(p) => p.theme.colors.danger};
   font-size: 0.85rem;
   margin-top: 5px;
   display: block;
@@ -103,9 +117,9 @@ export const SubmitButton = styled.button<{ disabled?: boolean }>`
   padding: 14px;
   background: ${(props) =>
     props.disabled
-      ? "#95a5a6"
-      : "linear-gradient(135deg, #28a745 0%, #20c997 100%)"};
-  color: white;
+      ? props.theme.colors.secondary
+      : `linear-gradient(135deg, ${props.theme.colors.success} 0%, ${props.theme.colors.primary} 100%)`};
+  color: ${(p) => p.theme.colors.surface};
   border: none;
   border-radius: 8px;
   font-size: 1rem;
@@ -116,7 +130,8 @@ export const SubmitButton = styled.button<{ disabled?: boolean }>`
 
   &:hover:not(:disabled) {
     transform: translateY(-1px);
-    box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
+    box-shadow: 0 4px 15px
+      ${(p) => `color-mix(in srgb, ${p.theme.colors.success} 30%, transparent)`};
   }
 
   &:active:not(:disabled) {
@@ -127,10 +142,10 @@ export const SubmitButton = styled.button<{ disabled?: boolean }>`
 export const AuthActions = styled.div`
   text-align: center;
   padding-top: 20px;
-  border-top: 1px solid #e1e8ed;
+  border-top: 1px solid ${(p) => p.theme.colors.outline};
 
   a {
-    color: #28a745;
+    color: ${(p) => p.theme.colors.success};
     text-decoration: none;
     font-weight: 500;
 

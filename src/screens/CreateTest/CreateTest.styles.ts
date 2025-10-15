@@ -125,6 +125,9 @@ export const Button = styled.button<{
   }};
 
   color: ${({ variant }) => (variant === "warning" ? "#000000" : "#ffffff")};
+  /* Use theme tokens for text color */
+  color: ${({ variant, theme }) =>
+    variant === "warning" ? theme.colors.text : theme.colors.surface};
 
   &:hover {
     opacity: 0.9;
@@ -158,7 +161,9 @@ export const QuestionCard = styled.div`
   padding: 16px;
   margin-bottom: 16px;
   background-color: ${({ theme }) => theme.colors.surface};
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px
+    ${({ theme }) =>
+      `color-mix(in srgb, ${theme.colors.text} 10%, transparent)`};
 `;
 
 export const QuestionHeader = styled.div`

@@ -16,9 +16,10 @@ export const FeedGrid = styled.div`
 `;
 
 export const TestCard = styled.div`
-  border: 1px solid #ccc;
+  border: 1px solid ${(p) => p.theme.colors.outline};
   border-radius: 8px;
   padding: 16px;
-  background: #fff;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  background: ${(p) => p.theme.colors.surface};
+  box-shadow: 0 2px 8px
+    ${(p) => `color-mix(in srgb, ${p.theme.colors.text} 4%, transparent)`};
 `;

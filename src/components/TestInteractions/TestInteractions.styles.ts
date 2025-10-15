@@ -6,9 +6,10 @@ export const InteractionsContainer = styled.div`
   align-items: center;
   margin-top: 12px;
   padding-top: 12px;
-  border-top: 1px solid #eee;
+  border-top: 1px solid ${(p) => p.theme.colors.outline};
   font-size: 14px;
-  color: #666;
+  color: ${(p) =>
+    `color-mix(in srgb, ${p.theme.colors.text} 60%, transparent)`};
 `;
 
 export const ActionsGroup = styled.div`
@@ -23,27 +24,32 @@ export const ActionButton = styled.button<{ active?: boolean }>`
   align-items: center;
   gap: 4px;
   cursor: pointer;
-  color: ${(props) => (props.active ? "#e91e63" : "#666")};
+  color: ${(props) =>
+    props.active
+      ? props.theme.colors.danger
+      : `color-mix(in srgb, ${props.theme.colors.text} 60%, transparent)`};
   padding: 4px 8px;
   border-radius: 4px;
   transition: all 0.2s;
 
   &:hover {
-    background-color: #f5f5f5;
+    background-color: ${(p) =>
+      `color-mix(in srgb, ${p.theme.colors.text} 5%, transparent)`};
   }
 `;
 
 export const CommentsList = styled.div`
   margin-top: 12px;
   padding-top: 12px;
-  border-top: 1px solid #eee;
+  border-top: 1px solid ${(p) => p.theme.colors.outline};
   max-height: 200px;
   overflow-y: auto;
 `;
 
 export const CommentItem = styled.div`
   padding: 8px;
-  background: #f9f9f9;
+  background: ${(p) =>
+    `color-mix(in srgb, ${p.theme.colors.text} 5%, transparent)`};
   border-radius: 4px;
   margin-bottom: 4px;
   font-size: 12px;
@@ -59,7 +65,8 @@ export const CommentBody = styled.div`
 `;
 
 export const CommentTime = styled.div`
-  color: #666;
+  color: ${(p) =>
+    `color-mix(in srgb, ${p.theme.colors.text} 60%, transparent)`};
   font-size: 10px;
 `;
 
@@ -67,7 +74,7 @@ export const CommentInput = styled.textarea`
   width: 100%;
   min-height: 60px;
   padding: 8px;
-  border: 1px solid #ddd;
+  border: 1px solid ${(p) => p.theme.colors.outline};
   border-radius: 4px;
   resize: vertical;
   font-family: inherit;
@@ -80,8 +87,11 @@ export const InputActions = styled.div`
 `;
 
 export const SubmitButton = styled.button<{ disabled?: boolean }>`
-  background: ${(props) => (props.disabled ? "#ccc" : "#0066cc")};
-  color: white;
+  background: ${(props) =>
+    props.disabled
+      ? `color-mix(in srgb, ${props.theme.colors.text} 30%, transparent)`
+      : props.theme.colors.primary};
+  color: ${(p) => p.theme.colors.surface};
   border: none;
   padding: 4px 12px;
   border-radius: 4px;
@@ -91,8 +101,9 @@ export const SubmitButton = styled.button<{ disabled?: boolean }>`
 
 export const CancelButton = styled.button`
   background: transparent;
-  color: #666;
-  border: 1px solid #ddd;
+  color: ${(p) =>
+    `color-mix(in srgb, ${p.theme.colors.text} 60%, transparent)`};
+  border: 1px solid ${(p) => p.theme.colors.outline};
   padding: 4px 12px;
   border-radius: 4px;
   cursor: pointer;
@@ -100,7 +111,7 @@ export const CancelButton = styled.button`
 `;
 
 export const LinkButton = styled(ActionButton)`
-  color: #0066cc;
+  color: ${(p) => p.theme.colors.primary};
   text-decoration: underline;
   padding: 4px 0;
 `;

@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const CommentsContainer = styled.div`
   padding: 20px;
-  background: #f9f9f9;
+  background: ${(p) => p.theme.colors.surface};
   border-radius: 8px;
   margin-top: 20px;
 `;
@@ -11,9 +11,9 @@ export const CommentItem = styled.div<{ level: number }>`
   margin-left: ${(props) => props.level * 30}px;
   margin-bottom: 15px;
   padding: 15px;
-  background: white;
+  background: ${(p) => p.theme.colors.surface};
   border-radius: 8px;
-  border: 1px solid #e0e0e0;
+  border: 1px solid ${(p) => p.theme.colors.outline};
 `;
 
 export const CommentHeader = styled.div`
@@ -25,12 +25,13 @@ export const CommentHeader = styled.div`
 
 export const AuthorInfo = styled.div`
   font-weight: bold;
-  color: #333;
+  color: ${(p) => p.theme.colors.text};
 `;
 
 export const CommentTime = styled.div`
   font-size: 12px;
-  color: #666;
+  color: ${(p) =>
+    `color-mix(in srgb, ${p.theme.colors.text} 60%, transparent)`};
 `;
 
 export const CommentBody = styled.div`
@@ -45,23 +46,29 @@ export const CommentActions = styled.div`
 `;
 
 export const ActionButton = styled.button<{ active?: boolean }>`
-  background: ${(props) => (props.active ? "#0066cc" : "transparent")};
-  color: ${(props) => (props.active ? "white" : "#0066cc")};
-  border: 1px solid #0066cc;
+  background: ${(props) =>
+    props.active ? props.theme.colors.primary : "transparent"};
+  color: ${(props) =>
+    props.active ? props.theme.colors.surface : props.theme.colors.primary};
+  border: 1px solid ${(p) => p.theme.colors.primary};
   padding: 5px 10px;
   border-radius: 4px;
   cursor: pointer;
   font-size: 12px;
 
   &:hover {
-    background: ${(props) => (props.active ? "#004499" : "#f0f8ff")};
+    background: ${(props) =>
+      props.active
+        ? `color-mix(in srgb, ${props.theme.colors.primary} 80%, transparent)`
+        : `color-mix(in srgb, ${props.theme.colors.primary} 10%, transparent)`};
   }
 `;
 
 export const ReplyForm = styled.div`
   margin-top: 10px;
   padding: 10px;
-  background: #f5f5f5;
+  background: ${(p) =>
+    `color-mix(in srgb, ${p.theme.colors.text} 5%, transparent)`};
   border-radius: 4px;
 `;
 
@@ -69,7 +76,7 @@ export const TextArea = styled.textarea`
   width: 100%;
   min-height: 80px;
   padding: 10px;
-  border: 1px solid #ddd;
+  border: 1px solid ${(p) => p.theme.colors.outline};
   border-radius: 4px;
   resize: vertical;
   font-family: inherit;
@@ -82,57 +89,63 @@ export const FormActions = styled.div`
 `;
 
 export const SubmitButton = styled.button`
-  background: #0066cc;
-  color: white;
+  background: ${(p) => p.theme.colors.primary};
+  color: ${(p) => p.theme.colors.surface};
   border: none;
   padding: 8px 16px;
   border-radius: 4px;
   cursor: pointer;
 
   &:hover {
-    background: #004499;
+    background: ${(p) =>
+      `color-mix(in srgb, ${p.theme.colors.primary} 85%, black)`};
   }
 
   &:disabled {
-    background: #ccc;
+    background: ${(p) =>
+      `color-mix(in srgb, ${p.theme.colors.text} 30%, transparent)`};
     cursor: not-allowed;
   }
 `;
 
 export const CancelButton = styled.button`
   background: transparent;
-  color: #666;
-  border: 1px solid #ddd;
+  color: ${(p) =>
+    `color-mix(in srgb, ${p.theme.colors.text} 60%, transparent)`};
+  border: 1px solid ${(p) => p.theme.colors.outline};
   padding: 8px 16px;
   border-radius: 4px;
   cursor: pointer;
 
   &:hover {
-    background: #f5f5f5;
+    background: ${(p) =>
+      `color-mix(in srgb, ${p.theme.colors.text} 5%, transparent)`};
   }
 `;
 
 export const MainCommentForm = styled.div`
   margin-bottom: 20px;
   padding: 15px;
-  background: white;
+  background: ${(p) => p.theme.colors.surface};
   border-radius: 8px;
-  border: 1px solid #e0e0e0;
+  border: 1px solid ${(p) => p.theme.colors.outline};
 `;
 
 export const TestLikeSection = styled.div`
   margin-bottom: 20px;
   padding: 15px;
-  background: white;
+  background: ${(p) => p.theme.colors.surface};
   border-radius: 8px;
-  border: 1px solid #e0e0e0;
+  border: 1px solid ${(p) => p.theme.colors.outline};
   text-align: center;
 `;
 
 export const LikeButton = styled.button<{ liked: boolean }>`
-  background: ${(props) => (props.liked ? "#ff6b6b" : "transparent")};
-  color: ${(props) => (props.liked ? "white" : "#ff6b6b")};
-  border: 2px solid #ff6b6b;
+  background: ${(props) =>
+    props.liked ? props.theme.colors.danger : "transparent"};
+  color: ${(props) =>
+    props.liked ? props.theme.colors.surface : props.theme.colors.danger};
+  border: 2px solid ${(p) => p.theme.colors.danger};
   padding: 10px 20px;
   border-radius: 20px;
   cursor: pointer;
@@ -143,12 +156,16 @@ export const LikeButton = styled.button<{ liked: boolean }>`
   margin: 0 auto;
 
   &:hover {
-    background: ${(props) => (props.liked ? "#ff5252" : "#fff5f5")};
+    background: ${(props) =>
+      props.liked
+        ? `color-mix(in srgb, ${props.theme.colors.danger} 85%, black)`
+        : `color-mix(in srgb, ${props.theme.colors.danger} 10%, transparent)`};
   }
 `;
 
 export const NoComments = styled.p`
   text-align: center;
-  color: #666;
+  color: ${(p) =>
+    `color-mix(in srgb, ${p.theme.colors.text} 60%, transparent)`};
   padding: 20px;
 `;

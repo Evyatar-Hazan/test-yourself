@@ -19,40 +19,41 @@ export const Actions = styled.div`
 
 export const Pill = styled.span`
   padding: 8px 12px;
-  background-color: #f8f9fa;
+  background-color: ${(p) =>
+    `color-mix(in srgb, ${p.theme.colors.text} 3%, transparent)`};
   border-radius: 4px;
   font-size: 14px;
-  border: 1px solid #dee2e6;
+  border: 1px solid ${(p) => p.theme.colors.outline};
 `;
 
 const BaseLink = styled(Link)`
   padding: 8px 16px;
-  color: white;
+  color: ${(p) => p.theme.colors.surface};
   text-decoration: none;
   border-radius: 4px;
   font-size: 14px;
 `;
 
 export const SecondaryLink = styled(BaseLink)`
-  background-color: #6c757d;
+  background-color: ${(p) => p.theme.colors.secondary};
 `;
 
 export const InfoLink = styled(BaseLink)`
-  background-color: #17a2b8;
+  background-color: ${(p) => p.theme.colors.primary};
 `;
 
 export const SuccessLink = styled(BaseLink)`
-  background-color: #28a745;
+  background-color: ${(p) => p.theme.colors.success};
 `;
 
 export const PrimaryLink = styled(BaseLink)`
-  background-color: #007bff;
+  background-color: ${(p) => p.theme.colors.primary};
 `;
 
 export const DangerButton = styled.button`
   padding: 8px 16px;
-  background-color: #dc3545;
-  color: white;
+  background-color: ${(p) => p.theme.colors.danger};
+  color: ${(p) => p.theme.colors.surface};
   border: none;
   border-radius: 4px;
   font-size: 14px;

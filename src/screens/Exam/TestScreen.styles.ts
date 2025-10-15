@@ -112,7 +112,9 @@ export const ProgressBar = styled.div`
   border-radius: ${({ theme }: { theme: AppTheme }) => theme.radius.pill};
   overflow: hidden;
   margin-bottom: ${({ theme }: { theme: AppTheme }) => theme.spacing.md};
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: inset 0 2px 4px
+    ${({ theme }: { theme: AppTheme }) =>
+      `color-mix(in srgb, ${theme.colors.text} 10%, transparent)`};
 
   @media (max-width: ${({ theme }: { theme: AppTheme }) =>
       theme.breakpoints.sm}px) {
@@ -154,15 +156,23 @@ export const QuestionCard = styled.div`
   padding: ${({ theme }: { theme: AppTheme }) => theme.spacing.xl};
   margin-bottom: ${({ theme }: { theme: AppTheme }) => theme.spacing.xl};
   box-shadow:
-    0 4px 6px -1px rgba(0, 0, 0, 0.1),
-    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    0 4px 6px -1px
+      ${({ theme }: { theme: AppTheme }) =>
+        `color-mix(in srgb, ${theme.colors.text} 10%, transparent)`},
+    0 2px 4px -1px
+      ${({ theme }: { theme: AppTheme }) =>
+        `color-mix(in srgb, ${theme.colors.text} 6%, transparent)`};
   transition: all 0.3s ease;
   position: relative;
 
   &:hover {
     box-shadow:
-      0 10px 15px -3px rgba(0, 0, 0, 0.1),
-      0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      0 10px 15px -3px
+        ${({ theme }: { theme: AppTheme }) =>
+          `color-mix(in srgb, ${theme.colors.text} 10%, transparent)`},
+      0 4px 6px -2px
+        ${({ theme }: { theme: AppTheme }) =>
+          `color-mix(in srgb, ${theme.colors.text} 5%, transparent)`};
     transform: translateY(-2px);
   }
 
@@ -191,13 +201,15 @@ export const QuestionNumber = styled.div`
   width: 40px;
   height: 40px;
   background: ${({ theme }: { theme: AppTheme }) => theme.colors.primary};
-  color: white;
+  color: ${({ theme }: { theme: AppTheme }) => theme.colors.surface};
   border-radius: ${({ theme }: { theme: AppTheme }) => theme.radius.round};
   font-weight: ${({ theme }: { theme: AppTheme }) =>
     theme.typography.fontWeight.bold};
   font-size: 1rem;
   margin-bottom: ${({ theme }: { theme: AppTheme }) => theme.spacing.lg};
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px
+    ${({ theme }: { theme: AppTheme }) =>
+      `color-mix(in srgb, ${theme.colors.text} 10%, transparent)`};
 
   @media (max-width: ${({ theme }: { theme: AppTheme }) =>
       theme.breakpoints.md}px) {
@@ -390,7 +402,7 @@ export const SubmitButton = styled.button<{ disabled?: boolean }>`
     disabled
       ? theme.colors.outline
       : `linear-gradient(135deg, ${theme.colors.primary}, ${theme.colors.success})`};
-  color: white;
+  color: ${({ theme }: { theme: AppTheme }) => theme.colors.surface};
   border: none;
   border-radius: ${({ theme }: { theme: AppTheme }) => theme.radius.lg};
   padding: ${({ theme }: { theme: AppTheme }) =>
@@ -400,13 +412,17 @@ export const SubmitButton = styled.button<{ disabled?: boolean }>`
     theme.typography.fontWeight.bold};
   cursor: ${({ disabled }) => (disabled ? "not-allowed" : "pointer")};
   transition: all 0.3s ease;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 6px -1px
+    ${({ theme }: { theme: AppTheme }) =>
+      `color-mix(in srgb, ${theme.colors.text} 10%, transparent)`};
   min-width: 250px;
   letter-spacing: 0.5px;
 
   &:hover:not(:disabled) {
     transform: translateY(-3px);
-    box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 10px 20px -5px
+      ${({ theme }: { theme: AppTheme }) =>
+        `color-mix(in srgb, ${theme.colors.text} 20%, transparent)`};
   }
 
   &:active:not(:disabled) {
@@ -462,7 +478,9 @@ export const ResultsContainer = styled.div`
   border-radius: ${({ theme }: { theme: AppTheme }) => theme.radius.lg};
   padding: ${({ theme }: { theme: AppTheme }) => theme.spacing.xl};
   margin-bottom: ${({ theme }: { theme: AppTheme }) => theme.spacing.xl};
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 15px -3px
+    ${({ theme }: { theme: AppTheme }) =>
+      `color-mix(in srgb, ${theme.colors.text} 10%, transparent)`};
 `;
 
 export const ScoreCard = styled.div<{ score: number }>`
@@ -483,7 +501,9 @@ export const ScoreCard = styled.div<{ score: number }>`
   padding: ${({ theme }: { theme: AppTheme }) => theme.spacing.xl};
   text-align: center;
   margin-bottom: ${({ theme }: { theme: AppTheme }) => theme.spacing.xl};
-  box-shadow: 0 8px 16px -4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 16px -4px
+    ${({ theme }: { theme: AppTheme }) =>
+      `color-mix(in srgb, ${theme.colors.text} 10%, transparent)`};
 
   @media (max-width: ${({ theme }: { theme: AppTheme }) =>
       theme.breakpoints.md}px) {
@@ -504,7 +524,9 @@ export const ScoreDisplay = styled.h3`
     theme.typography.fontWeight.bold};
   color: ${({ theme }: { theme: AppTheme }) => theme.colors.text};
   margin: 0 0 ${({ theme }: { theme: AppTheme }) => theme.spacing.lg} 0;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-shadow: 0 2px 4px
+    ${({ theme }: { theme: AppTheme }) =>
+      `color-mix(in srgb, ${theme.colors.text} 10%, transparent)`};
 
   @media (max-width: ${({ theme }: { theme: AppTheme }) =>
       theme.breakpoints.lg}px) {
@@ -626,17 +648,21 @@ export const ReviewCard = styled.div<{ isCorrect: boolean }>`
   border: 2px solid
     ${({ theme, isCorrect }: { theme: AppTheme; isCorrect: boolean }) =>
       isCorrect ? theme.colors.success : theme.colors.danger};
-  border-radius: ${({ theme }: { theme: AppTheme }) => theme.radius.lg};
+  color: ${({ theme }: { theme: AppTheme }) => theme.colors.surface};
   padding: ${({ theme }: { theme: AppTheme }) => theme.spacing.xl};
   margin-bottom: ${({ theme }: { theme: AppTheme }) => theme.spacing.xl};
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px
+    ${({ theme }: { theme: AppTheme }) =>
+      `color-mix(in srgb, ${theme.colors.text} 10%, transparent)`};
 
   @media (max-width: ${({ theme }: { theme: AppTheme }) =>
       theme.breakpoints.md}px) {
     padding: ${({ theme }: { theme: AppTheme }) => theme.spacing.lg};
     margin-bottom: ${({ theme }: { theme: AppTheme }) => theme.spacing.lg};
   }
-
+  box-shadow: 0 4px 6px -1px
+    ${({ theme }: { theme: AppTheme }) =>
+      `color-mix(in srgb, ${theme.colors.text} 10%, transparent)`};
   @media (max-width: ${({ theme }: { theme: AppTheme }) =>
       theme.breakpoints.sm}px) {
     padding: ${({ theme }: { theme: AppTheme }) => theme.spacing.md};
@@ -704,13 +730,15 @@ export const ResultBadge = styled.div<{ isCorrect: boolean }>`
     theme: AppTheme;
     isCorrect: boolean;
   }) => (isCorrect ? theme.colors.success : theme.colors.danger)};
-  color: white;
+  color: ${({ theme }: { theme: AppTheme }) => theme.colors.surface};
   border-radius: ${({ theme }: { theme: AppTheme }) => theme.radius.pill};
   font-weight: ${({ theme }: { theme: AppTheme }) =>
     theme.typography.fontWeight.bold};
   font-size: 1rem;
   margin-top: ${({ theme }: { theme: AppTheme }) => theme.spacing.lg};
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px
+    ${({ theme }: { theme: AppTheme }) =>
+      `color-mix(in srgb, ${theme.colors.text} 10%, transparent)`};
 
   @media (max-width: ${({ theme }: { theme: AppTheme }) =>
       theme.breakpoints.md}px) {
